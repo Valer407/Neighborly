@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neighborly</title>
+    <link href="~/css/output.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white border-b border-gray-200 py-4 sticky top-0 z-50">
+            <div class="neighborly-container mx-auto px-4 max-w-screen-xl">
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <a href="/" class="flex items-center space-x-2 flex-shrink-0 max-w-[150px]">
+                        <div class="header-logo h-16 w-16 text-neighborly-600">
+                            <img src="/assets/logo.png" alt="Neighborly Logo" class="h-full w-full object-contain">
+                        </div>
+                        <span class="text-xl font-bold text-neighborly-600">Neighborly</span>
+                    </a>
+
+                    <!-- Log in and register -->
+                    <div class="flex items-center gap-4">
+                        <!-- Log in -->
+                        <a href="/logowanie">
+                            <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 text-neighborly-600 bg-transparent">
+                                Zaloguj się
+                            </button>
+                        </a>
+
+                        <!-- REgister -->
+                        <a href="/rejestracja">
+                            <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
+                                Zarejestruj się
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow">
+            @RenderBody()
+        </main>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-10">
+    <div class="neighborly-container">
+        <div class="flex flex-col md:flex-row justify-between">
+            
+            <!-- Logo -->
+            <div class="mb-6 md:mb-0">
+                <a href="/" class="flex items-center space-x-2">
+                    <div class="footer-logo h-12 w-12 text-white">
+                        <img src="/assets/logo.png" alt="Neighborly Logo" class="h-full w-full object-contain">
+                    </div>
+                    <span class="text-xl font-bold">Neighborly</span>
+                </a>
+                <p class="mt-2 text-gray-400 max-w-xs">
+                    Platforma łącząca mieszkańców, którzy chcą pomagać sobie nawzajem w codziennych sprawach.
+                </p>
+            </div>
+            
+            <!-- Linki w stopce -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                
+                <!-- Listings -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Ogłoszenia</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="text-gray-400 hover:text-white transition-colors">Przeglądaj ogłoszenia</a></li>
+                        <li><a href="/nowe-ogloszenie" class="text-gray-400 hover:text-white transition-colors">Dodaj ogłoszenie</a></li>
+                        <li><a href="/" class="text-gray-400 hover:text-white transition-colors">Popularne kategorie</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Account -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Konto</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/logowanie" class="text-gray-400 hover:text-white transition-colors">Zaloguj się</a></li>
+                        <li><a href="/rejestracja" class="text-gray-400 hover:text-white transition-colors">Zarejestruj się</a></li>
+                        <li><a href="/profil" class="text-gray-400 hover:text-white transition-colors">Mój profil</a></li>
+                    </ul>
+                </div>
+                
+                <!-- About us -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">O nas</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Jak to działa</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Kontakt</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Polityka prywatności</a></li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2025 Neighborly. Wszystkie prawa zastrzeżone.</p>
+        </div>
+    </div>
+</footer>
+    </div>
+</body>
+</html>

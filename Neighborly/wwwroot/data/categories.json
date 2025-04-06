@@ -1,0 +1,11 @@
+[
+    { "id": "1", "name": "Zakupy", "icon": "ShoppingBag" },
+    { "id": "2", "name": "Naprawy", "icon": "Wrench" },
+    { "id": "3", "name": "Opieka nad zwierzętami", "icon": "Cat" },
+    { "id": "4", "name": "Transport", "icon": "Car" },
+    { "id": "5", "name": "Korepetycje", "icon": "Book" },
+    { "id": "6", "name": "Pomoc technologiczna", "icon": "Smartphone" },
+    { "id": "7", "name": "Gotowanie", "icon": "Utensils" },
+    { "id": "8", "name": "Ogród i rośliny", "icon": "Leaf" },
+    { "id": "9", "name": "Opieka nad dziećmi", "icon": "Baby" }
+  ]

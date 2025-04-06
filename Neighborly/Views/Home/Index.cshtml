@@ -1,0 +1,193 @@
+﻿@{
+    ViewBag.Title = "Strona Główna";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <!-- Hero Section -->
+<section class="bg-neighborly-600 text-white py-20">
+    <div class="neighborly-container text-center max-w-4xl mx-auto px-4">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Znajdź pomoc sąsiedzką w swojej okolicy</h1>
+        <p class="text-lg mb-10">
+           Połącz się z sąsiadami, którzy chcą pomagać sobie nawzajem w codziennych sprawach. Od zakupów po naprawy domowe - wszystko w zasięgu ręki.
+        </p>
+
+        <div class="bg-white rounded-lg p-6 shadow-lg max-w-2xl mx-auto">
+            <div class="flex flex-col md:flex-row gap-4 items-center">
+                <div class="relative w-full md:flex-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-6 w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                    </svg>
+                    <input type="text" placeholder="Twoja lokalizacja" class="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-800 ring-offset-background placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neighborly-500 focus-visible:ring-offset-2 pl-10" />
+                </div>
+                <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-neighborly-500 text-white hover:bg-neighborly-400 h-10 px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                    Szukaj
+                </button>
+            </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row justify-center mt-10 gap-4">
+            <a href="/nowe-ogloszenie" class="inline-flex items-center justify-center bg-white text-neighborly-600 border border-white py-2 px-4 rounded-md hover:bg-gray-100">Zaoferuj pomoc</a>
+            <a href="/" class="inline-flex items-center justify-center bg-neighborly-500 text-white py-2 px-4 rounded-md hover:bg-neighborly-400">Szukaj pomocy</a>
+        </div>
+    </div>
+</section>
+<!-- How it works section -->
+<section class="py-16 bg-gray-50">
+    <div class="neighborly-container mx-auto max-w-6xl px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Jak to działa?</h2>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Wybierz lokalizację -->
+            <div class="bg-white p-6 rounded-lg shadow-sm text-center">
+                <div class="w-16 h-16 bg-neighborly-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-neighborly-600">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Wybierz lokalizację</h3>
+                <p class="text-gray-600">Określ swoją lokalizację, aby znaleźć ogłoszenia i sąsiadów w Twojej okolicy.</p>
+            </div>
+            
+            <!-- Przeglądaj ogłoszenia -->
+            <div class="bg-white p-6 rounded-lg shadow-sm text-center">
+                <div class="w-16 h-16 bg-neighborly-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-neighborly-600">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Przeglądaj ogłoszenia</h3>
+                <p class="text-gray-600">Znajdź sąsiadów, którzy potrzebują pomocy lub oferują swoje wsparcie w różnych kategoriach.</p>
+            </div>
+            
+            <!-- Nawiąż kontakt -->
+            <div class="bg-white p-6 rounded-lg shadow-sm text-center">
+                <div class="w-16 h-16 bg-neighborly-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-neighborly-600">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Nawiąż kontakt</h3>
+                <p class="text-gray-600">Skontaktuj się z wybraną osobą, ustal szczegóły i korzystaj z sąsiedzkiej pomocy.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@model List<Neighborly.Models.Category>
+<!-- Kategorie -->
+<section class="py-16">
+    <div class="neighborly-container">
+        <h2 class="text-3xl font-bold text-center mb-12">Przeglądaj ogłoszenia</h2>
+        <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
+            Znajdź sąsiadów, którzy potrzebują pomocy lub oferują swoje wsparcie w różnych kategoriach
+        </p>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            @foreach (var category in Model)
+            {
+                <a href="@Url.Action("Category", "Categories", new { id = category.Id })" class="bg-white p-6 rounded-lg shadow-sm text-center hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-neighborly-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        @Html.Raw(category.IconSvg)
+                    </div>
+                    <h3 class="font-medium">@category.Name</h3>
+                </a>
+            }
+        </div>
+
+        <div class="text-center mt-8">
+            <a href="@Url.Action("Index", "Listings")">
+                <button class="bg-primary text-white py-2 px-4 rounded-md hover:bg-primary/90 transition-colors">Zobacz wszystkie ogłoszenia</button>
+            </a>
+        </div>
+    </div>
+</section>
+<!-- Dlaczego warto korzystać z Neighborly? -->
+<section class="py-16 bg-gray-50">
+    <div class="neighborly-container">
+        <h2 class="text-3xl font-bold text-center mb-12">Dlaczego warto korzystać z Neighborly?</h2>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Buduj społeczność -->
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="w-12 h-12 bg-neighborly-100 rounded-full flex items-center justify-center mb-4 text-neighborly-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Buduj społeczność</h3>
+                <p class="text-gray-600">Poznaj swoich sąsiadów i buduj silniejszą społeczność lokalną opartą na wzajemnym wsparciu.</p>
+            </div>
+
+            <!-- Oszczędzaj czas i pieniądze -->
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="w-12 h-12 bg-neighborly-100 rounded-full flex items-center justify-center mb-4 text-neighborly-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-flame-icon lucide-flame">
+                        <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Oszczędzaj czas i pieniądze</h3>
+                <p class="text-gray-600">Korzystaj z pomocy sąsiedzkiej zamiast płacić za profesjonalne usługi lub tracić czas na samodzielne wykonanie zadań.</p>
+            </div>
+
+            <!-- Bezpieczeństwo -->
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="w-12 h-12 bg-neighborly-100 rounded-full flex items-center justify-center mb-4 text-neighborly-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-icon lucide-shield">
+                        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Bezpieczeństwo</h3>
+                <p class="text-gray-600">System ocen i opinii pomaga budować zaufanie i zapewnia bezpieczne korzystanie z platformy.</p>
+            </div>
+
+            <!-- Wygoda -->
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="w-12 h-12 bg-neighborly-100 rounded-full flex items-center justify-center mb-4 text-neighborly-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-credit-card-icon lucide-credit-card">
+                        <rect width="20" height="14" x="2" y="5" rx="2"/>
+                        <line x1="2" x2="22" y1="10" y2="10"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Wygoda</h3>
+                <p class="text-gray-600">Łatwy dostęp do pomocy w zasięgu ręki - znajdź wsparcie kiedy tylko go potrzebujesz.</p>
+            </div>
+
+            <!-- Dziel się umiejętnościami -->
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="w-12 h-12 bg-neighborly-100 rounded-full flex items-center justify-center mb-4 text-neighborly-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hand-heart-icon lucide-hand-heart">
+                        <path d="M11 14h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 16"/>
+                        <path d="m7 20 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/>
+                        <path d="m2 15 6 6"/>
+                        <path d="M19.5 8.5c.7-.7 1.5-1.6 1.5-2.7A2.73 2.73 0 0 0 16 4a2.78 2.78 0 0 0-5 1.8c0 1.2.8 2 1.5 2.8L16 12Z"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Dziel się umiejętnościami</h3>
+                <p class="text-gray-600">Wykorzystaj swoje talenty i umiejętności, by pomóc innym i jednocześnie rozwijać się.</p>
+            </div>
+
+            <!-- Ekologia -->
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="w-12 h-12 bg-neighborly-100 rounded-full flex items-center justify-center mb-4 text-neighborly-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sprout-icon lucide-sprout">
+                        <path d="M7 20h10"/>
+                        <path d="M10 20c5.5-2.5.8-6.4 3-10"/>
+                        <path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/>
+                        <path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Ekologia</h3>
+                <p class="text-gray-600">Wspieraj zrównoważony rozwój poprzez współdzielenie zasobów i ograniczanie konsumpcji.</p>
+            </div>
+        </div>
+    </div>
+</section>
