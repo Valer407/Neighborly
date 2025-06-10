@@ -1,0 +1,93 @@
+@{
+    ViewBag.Title = "Rejestracja";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neighborly</title>
+    <link href="~/css/output.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100">
+<div class="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+    <div class="w-full max-w-md">
+        <!-- Logo + nagłówek -->
+        <div class="text-center mb-8">
+            <a href="/" class="inline-flex items-center justify-center">
+                <div class="h-12 w-12 text-neighborly-600">
+                    <img src="/assets/logo.png" class="h-full w-full object-contain" alt="Neighborly Logo">
+                </div>
+            </a>
+            <h1 class="mt-4 text-2xl font-bold text-gray-900">Zarejestruj się w Neighborly</h1>
+            <p class="mt-2 text-gray-600">Stwórz konto, aby dołączyć do sąsiedzkiej społeczności!</p>
+        </div>
+
+        <!-- Karta rejestracji -->
+        <div class="rounded-lg border bg-card text-card-foreground shadow">
+            <form method="post" class="space-y-6 px-6 pt-6">
+                <!-- Imię -->
+                <div class="space-y-2">
+                    <label for="firstName" class="text-sm font-medium">Imię</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Jan"
+                           class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neighborly-500 disabled:opacity-50" />
+                </div>
+
+                <!-- Nazwisko -->
+                <div class="space-y-2">
+                    <label for="lastName" class="text-sm font-medium">Nazwisko</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Kowalski"
+                           class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neighborly-500 disabled:opacity-50" />
+                </div>
+
+                <!-- Email -->
+                <div class="space-y-2">
+                    <label for="email" class="text-sm font-medium">Adres email</label>
+                    <input type="email" id="email" name="email" placeholder="jan.kowalski@email.com"
+                           class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neighborly-500 disabled:opacity-50" />
+                </div>
+
+                <!-- Hasło -->
+                <div class="space-y-2">
+                    <label for="password" class="text-sm font-medium">Hasło</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••"
+                           class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neighborly-500 disabled:opacity-50" />
+                </div>
+
+                <!-- Potwierdzenie hasła -->
+                <div class="space-y-2">
+                    <label for="confirmPassword" class="text-sm font-medium">Potwierdź hasło</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••"
+                           class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neighborly-500 disabled:opacity-50" />
+                </div>
+
+                <!-- Zgody -->
+                <div class="flex items-center space-x-2">
+                    <input id="agreeTerms" name="agreeTerms" type="checkbox" value="1"
+                           class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50" />
+                    <label for="agreeTerms" class="text-sm font-medium">
+                        Akceptuję
+                        <a href="/regulamin" class="text-neighborly-600 hover:text-neighborly-700 hover:underline">regulamin</a>
+                        oraz
+                        <a href="/polityka" class="text-neighborly-600 hover:text-neighborly-700 hover:underline">politykę prywatności</a>
+                    </label>
+                </div>
+
+                <!-- Przycisk -->
+                <button type="submit"
+                        class="w-full h-10 bg-neighborly-600 hover:bg-neighborly-700 text-white font-medium rounded-md transition">
+                    Zarejestruj się
+                </button>
+            </form>
+
+            <!-- Stopka -->
+            <div class="px-6 py-4 text-center text-sm text-muted-foreground">
+                Masz już konto?
+                <a href="/Account/Login" class="font-medium text-neighborly-600 hover:text-neighborly-700">Zaloguj się</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

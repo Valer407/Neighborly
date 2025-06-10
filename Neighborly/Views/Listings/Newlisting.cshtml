@@ -1,0 +1,126 @@
+@{
+    ViewBag.Title = "Dodaj ogłoszenie";
+    Layout = "~/Views/Shared/Listings_layout.cshtml";
+}
+
+<main class="neighborly-container py-6">
+    <div class="flex flex-col gap-6">
+        <h1 class="text-3xl font-bold text-gray-900">Dodaj ogłoszenie</h1>
+
+        <form method="post" enctype="multipart/form-data" class="space-y-6">
+            <!-- Informacje -->
+            <div class="rounded-lg border bg-card text-card-foreground shadow">
+                <div class="card-header flex flex-col gap-1 p-6">
+                    <h2 class="text-lg font-semibold">Informacje</h2>
+                </div>
+                <div class="card-content space-y-4 px-6 pb-6">
+                    <!-- Tytuł -->
+                    <div class="space-y-2">
+                        <label for="title" class="text-sm font-medium leading-none">Tytuł</label>
+                        <input id="title" name="title" type="text"
+                            class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
+                            placeholder="W czym możesz pomóc lub czego potrzebujesz?" />
+                    </div>
+
+                    <!-- Opis -->
+                    <div class="space-y-2">
+                        <label for="description" class="text-sm font-medium leading-none">Opis</label>
+                        <textarea id="description" name="description"
+                            class="flex min-h-[80px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
+                            placeholder="Opisz jak najdokładniej czego potrzebujesz lub co oferujesz..."></textarea>
+                    </div>
+
+                    <!-- Kategoria -->
+                    <div class="space-y-2">
+                        <label for="category" class="text-sm font-medium leading-none">Kategoria</label>
+                        <select id="category" name="category"
+                            class="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50">
+                            <option value="">Wybierz kategorię</option>
+                            <option value="zakupy">Zakupy</option>
+                            <option value="naprawy">Naprawy</option>
+                            <option value="transport">Transport</option>
+                            <option value="zwierzeta">Opieka nad zwierzętami</option>
+                            <option value="dzieci">Opieka nad dziećmi</option>
+                            <option value="ogrod">Ogród i rośliny</option>
+                            <option value="gotowanie">Gotowanie</option>
+                            <option value="korepetycje">Korepetycje</option>
+                            <option value="technologia">Pomoc technologiczna</option>
+                        </select>
+                    </div>
+
+                    <!-- Typ ogłoszenia -->
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-none">Typ ogłoszenia</label>
+                        <div class="flex gap-6">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="type" value="offer" class="accent-neighborly-600" />
+                                Oferuję pomoc
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="type" value="request" class="accent-neighborly-600" />
+                                Szukam pomocy
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lokalizacja -->
+            <div class="rounded-lg border bg-card text-card-foreground shadow">
+                <div class="card-header flex flex-col gap-1 p-6">
+                    <h2 class="text-lg font-semibold">Lokalizacja</h2>
+                </div>
+                <div class="card-content space-y-4 px-6 pb-6">
+                    <div class="space-y-2">
+                        <label for="city" class="text-sm font-medium">Miasto</label>
+                        <select id="city" name="city"
+                            class="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50">
+                            <option value="">Wybierz miasto</option>
+                            <option value="Warszawa">Warszawa</option>
+                            <option value="Kraków">Kraków</option>
+                            <option value="Poznań">Poznań</option>
+                            <option value="Gdańsk">Gdańsk</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="district" class="text-sm font-medium">Dzielnica</label>
+                        <input id="district" name="district" type="text"
+                            class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
+                            placeholder="np. Mokotów" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mapa -->
+            <div class="rounded-lg border bg-card text-card-foreground shadow">
+                <div class="card-header flex flex-col gap-1 p-6">
+                    <h2 class="text-lg font-semibold">Lokalizacja na mapie</h2>
+                </div>
+                <div class="card-content px-6 pb-6">
+                    <p class="text-sm text-muted-foreground">Mapa zostanie zintegrowana z Google Maps API</p>
+                </div>
+            </div>
+
+            <!-- Zdjęcia -->
+            <div class="rounded-lg border bg-card text-card-foreground shadow">
+                <div class="card-header flex flex-col gap-1 p-6">
+                    <h2 class="text-lg font-semibold">Zdjęcia</h2>
+                </div>
+                <div class="card-content space-y-4 px-6 pb-6">
+                    <input type="file" name="images" multiple
+                        class="block w-full text-sm text-muted-foreground file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-accent file:text-accent-foreground hover:file:bg-accent/90" />
+                    <p class="text-sm text-muted-foreground">Obsługiwane formaty: JPG, PNG, maks. rozmiar: 5MB</p>
+                </div>
+            </div>
+
+            <!-- Przycisk -->
+            <div class="flex justify-end">
+                <button type="submit"
+                    class="bg-primary text-white px-6 py-2 rounded-md hover:bg-primary/90 transition-colors">
+                    Dodaj ogłoszenie
+                </button>
+            </div>
+        </form>
+    </div>
+</main>

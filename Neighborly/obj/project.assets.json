@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Nowy folder (5)\\Neighborly\\Neighborly\\Neighborly.csproj",
+      "projectUniqueName": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\Neighborly.csproj",
       "projectName": "Neighborly",
-      "projectPath": "D:\\Nowy folder (5)\\Neighborly\\Neighborly\\Neighborly.csproj",
+      "projectPath": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\Neighborly.csproj",
       "packagesPath": "C:\\Users\\Valer407\\.nuget\\packages\\",
-      "outputPath": "D:\\Nowy folder (5)\\Neighborly\\Neighborly\\obj\\",
+      "outputPath": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
