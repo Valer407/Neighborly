@@ -1,0 +1,45 @@
+@model Neighborly.Models.CategoryViewModel
+
+<!-- Tło i wyśrodkowanie -->
+<div id="addCategoryModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
+    <div class="relative bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+        <!-- Przycisk zamknięcia (X) -->
+        <button type="button" onclick="closeModal()" class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18" />
+                <path d="M6 6l12 12" />
+            </svg>
+            <span class="sr-only">Zamknij</span>
+        </button>
+
+        <h2 class="text-lg font-semibold leading-none tracking-tight mb-4">Dodaj nową kategorię</h2>
+
+        <form asp-action="AddCategory" asp-controller="Admin" method="post" class="space-y-4">
+            <div>
+                <label asp-for="Id" class="text-sm font-medium leading-none">ID kategorii</label>
+                <input asp-for="Id" class="flex h-10 w-full rounded-md border border-gray-300 px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary" placeholder="np. transport" required />
+                <span asp-validation-for="Id" class="text-sm text-red-600"></span>
+            </div>
+
+            <div>
+                <label asp-for="Name" class="text-sm font-medium leading-none">Nazwa kategorii</label>
+                <input asp-for="Name" class="flex h-10 w-full rounded-md border border-gray-300 px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary" placeholder="np. Transport" required />
+                <span asp-validation-for="Name" class="text-sm text-red-600"></span>
+            </div>
+
+            <div>
+                <label asp-for="IconSvg" class="text-sm font-medium leading-none">Ikona SVG (tekst)</label>
+                <textarea asp-for="IconSvg" rows="4" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary" placeholder="&lt;svg&gt;...&lt;/svg&gt;" required></textarea>
+                <span asp-validation-for="IconSvg" class="text-sm text-red-600"></span>
+            </div>
+
+            <div class="pt-2">
+                <button type="submit" class="w-full inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2">Dodaj kategorię</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
