@@ -7,7 +7,7 @@ namespace Neighborly.Controllers
         // Panel administratora
         public IActionResult Index()
         {
-            // TODO: Pobierz wszystkie ogłoszenia z bazy danych
+            // TODO: Pobierz wszystkie ogłoszenia z bazy danych ok
             /*var sampleListings = new List<AdminListingViewModel>
             {
                 new AdminListingViewModel
