@@ -1,3 +1,4 @@
+@using Microsoft.AspNetCore.Http
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,25 +49,48 @@
             <path d="M8 6h13"></path>
         </svg>
     </a>
-
-    <!-- New listing -->
-    <a href="/Listings/NewListing" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 hover:bg-accent hover:text-accent-foreground h-10 w-10">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus h-5 w-5">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M8 12h8"></path>
-            <path d="M12 8v8"></path>
-        </svg>
-    </a>
-
-    <!-- Log in -->
-    <a href="~/Account/Login" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-white hover:bg-primary/90 h-10 px-4 py-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 h-4 w-4">
-            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-            <polyline points="10 17 15 12 10 7"></polyline>
-            <line x1="15" x2="3" y1="12" y2="12"></line>
-        </svg>
-        Zaloguj się
-    </a>
+     @if (Context.Session.GetInt32("UserId") != null)
+    {
+        <!-- New listing -->
+        <a href="/Listings/NewListing" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 hover:bg-accent hover:text-accent-foreground h-10 w-10">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus h-5 w-5">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M8 12h8"></path>
+                <path d="M12 8v8"></path>
+            </svg>
+        </a>
+        <!-- Notifications -->
+        <a class="inline-flex items-center justify-center gap-2 whitespace-nowrap ink-0 hover:bg-accent hover:text-accent-foreground h-10 w-10" href="/powiadomienia">
+            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9z" />
+                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+            </svg>
+        </a>
+        <!-- Chat -->
+        <a class="inline-flex items-center justify-center gap-2 whitespace-nowrap ink-0 hover:bg-accent hover:text-accent-foreground h-10 w-10" href="/chat">
+            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+            </svg>
+        </a>
+        <!-- Account -->
+        <a href="~/Account/MyAccount" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 hover:bg-accent hover:text-accent-foreground h-10 w-10">
+            <svg class="lucide lucide-user h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+        </a>
+    }
+    else
+    {
+        <a href="~/Account/Login" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-white hover:bg-primary/90 h-10 px-4 py-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 h-4 w-4">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                <polyline points="10 17 15 12 10 7"></polyline>
+                <line x1="15" x2="3" y1="12" y2="12"></line>
+            </svg>
+            Zaloguj się
+        </a>
+    }
 </nav>
 
                 <!-- Mobile button -->
@@ -108,40 +132,38 @@
                         </svg>
                         Ogłoszenia
                     </a>
-                    <a href="~/Listings/Create" class="flex items-center px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-50" onclick="toggleMenu()">
-                        <svg class="lucide lucide-circle-plus mr-3 h-5 w-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M8 12h8"></path>
-                            <path d="M12 8v8"></path>
-                        </svg>
-                        Dodaj ogłoszenie
-                    </a>
-                    @if (User.Identity.IsAuthenticated)
+                     @if (Context.Session.GetInt32("UserId") != null)
                     {
-                        <a href="~/Notifications/Index" class="flex items-center px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-50" onclick="toggleMenu()">
-                            <svg class="mr-3 h-5 w-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <!-- Kod SVG ikony dzwonka -->
+                         <a href="~/Listings/Create" class="flex items-center px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-50" onclick="toggleMenu()">
+                            <svg class="lucide lucide-circle-plus mr-3 h-5 w-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M8 12h8"></path>
+                                <path d="M12 8v8"></path>
+                            </svg>
+                            Dodaj ogłoszenie
+                        </a>
+                        <a class="flex items-center px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-50" href="/powiadomienia" onclick="toggleMenu()">
+                            <svg class="lucide lucide-user mr-3 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9z" />
+                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
                             </svg>
                             Powiadomienia
                         </a>
-                        <a href="~/Profile/Index" class="flex items-center px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-50" onclick="toggleMenu()">
-                            <svg class="mr-3 h-5 w-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <!-- Kod SVG ikony użytkownika -->
+                        <a class="flex items-center px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-50" href="/chat" onclick="toggleMenu()">
+                            <svg class="lucide lucide-user mr-3 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
                             </svg>
-                            Profil
+                            Wiadomości
+                        </a>
+                        <a href="~/Account/MyAccount" class="flex items-center px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-50" onclick="toggleMenu()">
+                            <svg class="lucide lucide-user mr-3 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            Moje konto
                         </a>
                     }
-                    else
-                    {
-                        <a href="~/Account/Login" class="flex items-center px-3 py-2 text-base font-medium text-neighborly-600 rounded-md hover:bg-gray-50" onclick="toggleMenu()" xmlns="http://www.w3.org/2000/svg">
-                            <svg class="lucide lucide-log-in mr-3 h-5 w-5 text-neighborly-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-                                <polyline points="10 17 15 12 10 7"></polyline>
-                                <line x1="15" x2="3" y1="12" y2="12"></line>
-                            </svg>
-                            Zaloguj się
-                        </a>
-                    }
+                    
                 </div>
             </div>
         </div>

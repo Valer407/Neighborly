@@ -53,6 +53,36 @@ namespace Neighborly.Data
                 .HasForeignKey(x => x.BlockedId)
                 .OnDelete(DeleteBehavior.Restrict); // Nie usuwać zablokowanego automatycznie
 
+            modelBuilder.Entity<Listings>()
+                .HasOne(l => l.User)
+                .WithMany(u => u.Listings)
+                .HasForeignKey(l => l.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Listings>()
+                .HasOne(l => l.Category)
+                .WithMany()
+                .HasForeignKey(l => l.CategoryId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Listings>()
+                .HasOne(l => l.ListingType)
+                .WithMany()
+                .HasForeignKey(l => l.ListingTypeId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Listings>()
+                .HasOne(l => l.City)
+                .WithMany()
+                .HasForeignKey(l => l.CityId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Listings>()
+                .HasOne(l => l.District)
+                .WithMany()
+                .HasForeignKey(l => l.DistrictId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             base.OnModelCreating(modelBuilder);
         }
     }

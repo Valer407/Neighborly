@@ -43,5 +43,19 @@ namespace Neighborly.Models.DBModels
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime UpdatedAt { get; set; }
+                [ForeignKey("UserId")]
+        public User User { get; set; }
+
+        [ForeignKey("CategoryId")]
+        public Categories Category { get; set; }
+
+        [ForeignKey("ListingTypeId")]
+        public Listing_types ListingType { get; set; }
+
+        [ForeignKey("CityId")]
+        public Cities City { get; set; }
+
+        [ForeignKey("DistrictId")]
+        public Distircts District { get; set; }
     }
 }

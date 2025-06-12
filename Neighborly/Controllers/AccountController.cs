@@ -29,15 +29,27 @@ namespace Neighborly.Controllers
             if (userId == null)
                 return RedirectToAction("Login");
 
-            var user = _context.Users
-                .Include(u => u.Listings)
-                    .ThenInclude(l => l.Category)
-                .FirstOrDefault(u => u.UserId == userId.Value);
+            var listings = _context.Listings
+                .Where(l => l.UserId == userId.Value)
+                .Include(l => l.City)
+                .Include(l => l.District)
+                .Include(l => l.ListingType)
+                .Select(l => new Neighborly.Models.ListingViewModel
+                {
+                    Id = l.ListingId,
+                    Title = l.Title,
+                    Description = l.Description,
+                    CreatedAt = l.CreatedAt,
+                    Type = l.ListingType.Name,
+                    Location = new Neighborly.Models.LocationViewModel
+                    {
+                        City = l.City.Name,
+                        District = l.District.Name
+                    }
+                })
+                .ToList();
 
-            if (user == null)
-                return RedirectToAction("Login");
-
-            return View(user);
+            return View(listings);
         }
         // POST: /Account/Login
         [HttpPost]

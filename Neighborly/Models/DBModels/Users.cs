@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace Neighborly.Models.DBModels
 {
@@ -40,8 +41,8 @@ namespace Neighborly.Models.DBModels
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime CreatedAt { get; set; }
-
         public DateTime? LastLogin { get; set; }
+        public ICollection<Listings> Listings { get; set; }
     }
 
 
