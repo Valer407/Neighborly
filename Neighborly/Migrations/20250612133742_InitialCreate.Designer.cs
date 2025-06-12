@@ -12,8 +12,8 @@ using Neighborly.Data;
 namespace Neighborly.Migrations
 {
     [DbContext(typeof(NeighborlyContext))]
-    [Migration("20250612131041_ThirdCreate")]
-    partial class ThirdCreate
+    [Migration("20250612133742_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -713,7 +713,7 @@ namespace Neighborly.Migrations
                     b.HasOne("Neighborly.Models.DBModels.Categories", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Neighborly.Models.DBModels.Cities", "City")
@@ -725,13 +725,13 @@ namespace Neighborly.Migrations
                     b.HasOne("Neighborly.Models.DBModels.Distircts", "District")
                         .WithMany()
                         .HasForeignKey("DistrictId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Neighborly.Models.DBModels.Listing_types", "ListingType")
                         .WithMany()
                         .HasForeignKey("ListingTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Neighborly.Models.DBModels.User", "User")

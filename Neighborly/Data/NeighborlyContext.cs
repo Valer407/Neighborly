@@ -63,13 +63,13 @@ namespace Neighborly.Data
                 .HasOne(l => l.Category)
                 .WithMany()
                 .HasForeignKey(l => l.CategoryId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict); 
 
             modelBuilder.Entity<Listings>()
                 .HasOne(l => l.ListingType)
                 .WithMany()
                 .HasForeignKey(l => l.ListingTypeId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict); 
 
             modelBuilder.Entity<Listings>()
                 .HasOne(l => l.City)
@@ -81,7 +81,7 @@ namespace Neighborly.Data
                 .HasOne(l => l.District)
                 .WithMany()
                 .HasForeignKey(l => l.DistrictId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict); 
 
             base.OnModelCreating(modelBuilder);
         }
