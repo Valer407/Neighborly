@@ -12,8 +12,8 @@ using Neighborly.Data;
 namespace Neighborly.Migrations
 {
     [DbContext(typeof(NeighborlyContext))]
-    [Migration("20250612135007_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250612140406_update3")]
+    partial class update3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
