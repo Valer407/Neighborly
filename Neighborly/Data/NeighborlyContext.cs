@@ -5,26 +5,26 @@ namespace Neighborly.Data
 {
     public class NeighborlyContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
-        public DbSet<Categories> Categories { get; set; }
-        public DbSet<Listing_types> Listing_Types { get; set; }
-        public DbSet<Cities> Cities { get; set; }
-        public DbSet<Distircts> Districts { get; set; }
-        public DbSet<Listings> Listings { get; set; }
-        public DbSet<Listing_images> Listing_Images { get; set; }
-        public DbSet<Chats> Chats { get; set; }
-        public DbSet<Messages> Messages { get; set; }
-        public DbSet<User_ratings> User_Ratings { get; set; }
-        public DbSet<Reports> Reports { get; set; }
-        public DbSet<Favourites> Favourites { get; set; }
-        public DbSet<User_sessions> User_Sessions { get; set; }
-        public DbSet<ListingView> ListingViews { get; set; }
-        public DbSet<UserNotification> UserNotifications { get; set; }
-        public DbSet<BlockedUser> BlockedUsers { get; set; }
-        public DbSet<Feedback> Feedbacks { get; set; }
-        public DbSet<ListingPromotion> ListingPromotions { get; set; }
-        public DbSet<Payment> Payments { get; set; }
-        public DbSet<Role> Roles { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Categories> Categories { get; set; }
+    public DbSet<Listing_types> Listing_Types { get; set; }
+    public DbSet<Cities> Cities { get; set; }
+    public DbSet<Distircts> Districts { get; set; }
+    public DbSet<Listings> Listings { get; set; }
+    public DbSet<Listing_images> Listing_Images { get; set; }
+    public DbSet<Chats> Chats { get; set; }
+    public DbSet<Messages> Messages { get; set; }
+    public DbSet<User_ratings> User_Ratings { get; set; }
+    public DbSet<Reports> Reports { get; set; }
+    public DbSet<Favourites> Favourites { get; set; }
+    public DbSet<User_sessions> User_Sessions { get; set; }
+    public DbSet<ListingView> ListingViews { get; set; }
+    public DbSet<UserNotification> UserNotifications { get; set; }
+    public DbSet<BlockedUser> BlockedUsers { get; set; }
+    public DbSet<Feedback> Feedbacks { get; set; }
+    public DbSet<ListingPromotion> ListingPromotions { get; set; }
+    public DbSet<Payment> Payments { get; set; }
+    public DbSet<Role> Roles { get; set; }
 
         public NeighborlyContext(DbContextOptions options) : base(options)
         {
@@ -82,7 +82,18 @@ namespace Neighborly.Data
                 .WithMany()
                 .HasForeignKey(l => l.DistrictId)
                 .OnDelete(DeleteBehavior.Restrict); 
+            modelBuilder.Entity<Favourites>()
+                .HasOne(f => f.User)
+                .WithMany()
+                .HasForeignKey(f => f.UserId)
+                .OnDelete(DeleteBehavior.Restrict); // 👈 konieczne!
 
+            modelBuilder.Entity<Favourites>()
+                .HasOne(f => f.Listing)
+                .WithMany()
+                .HasForeignKey(f => f.ListingId)
+                .OnDelete(DeleteBehavior.Cascade); // może pozostać, jeśli chcesz usuwać ogłoszenia z ulubionych
+                
             base.OnModelCreating(modelBuilder);
         }
     }

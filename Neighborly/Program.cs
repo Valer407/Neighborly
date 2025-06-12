@@ -39,6 +39,7 @@ using (var scope = app.Services.CreateScope())
             {
                 foreach (var cat in categories)
                 {
+                    cat.CategoryId = 0;
                     cat.IconSvg = Icons.GetIcon(cat.Icon);
                 }
                 context.Categories.AddRange(categories);

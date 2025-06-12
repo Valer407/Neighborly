@@ -12,8 +12,8 @@ using Neighborly.Data;
 namespace Neighborly.Migrations
 {
     [DbContext(typeof(NeighborlyContext))]
-    [Migration("20250612140406_update3")]
-    partial class update3
+    [Migration("20250612144134_FixedCascadeIssue")]
+    partial class FixedCascadeIssue
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -663,7 +663,7 @@ namespace Neighborly.Migrations
                     b.HasOne("Neighborly.Models.DBModels.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Listing");

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Neighborly.Migrations
 {
     /// <inheritdoc />
-    public partial class Database_Port : Migration
+    public partial class FixedCascadeIssue : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,9 @@ namespace Neighborly.Migrations
                 {
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Icon = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IconSvg = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,31 +82,6 @@ namespace Neighborly.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Listing_Types", x => x.ListingTypeId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Listings",
-                columns: table => new
-                {
-                    ListingId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-                    ListingTypeId = table.Column<int>(type: "int", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CityId = table.Column<int>(type: "int", nullable: false),
-                    DistrictId = table.Column<int>(type: "int", nullable: false),
-                    Latitude = table.Column<float>(type: "real", nullable: false),
-                    Longitude = table.Column<float>(type: "real", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Listings", x => x.ListingId);
                 });
 
             migrationBuilder.CreateTable(
@@ -247,28 +224,6 @@ namespace Neighborly.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ListingPromotions",
-                columns: table => new
-                {
-                    PromotionId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ListingId = table.Column<int>(type: "int", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ListingPromotions", x => x.PromotionId);
-                    table.ForeignKey(
-                        name: "FK_ListingPromotions_Listings_ListingId",
-                        column: x => x.ListingId,
-                        principalTable: "Listings",
-                        principalColumn: "ListingId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "BlockedUsers",
                 columns: table => new
                 {
@@ -287,6 +242,105 @@ namespace Neighborly.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_BlockedUsers_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Feedbacks",
+                columns: table => new
+                {
+                    FeedbackId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    Message = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Feedbacks", x => x.FeedbackId);
+                    table.ForeignKey(
+                        name: "FK_Feedbacks_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Payments",
+                columns: table => new
+                {
+                    PaymentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Currency = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    PaidAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payments", x => x.PaymentId);
+                    table.ForeignKey(
+                        name: "FK_Payments_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Listings",
+                columns: table => new
+                {
+                    ListingId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    ListingTypeId = table.Column<int>(type: "int", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CityId = table.Column<int>(type: "int", nullable: false),
+                    DistrictId = table.Column<int>(type: "int", nullable: false),
+                    Latitude = table.Column<float>(type: "real", nullable: false),
+                    Longitude = table.Column<float>(type: "real", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Listings", x => x.ListingId);
+                    table.ForeignKey(
+                        name: "FK_Listings_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Listings_Cities_CityId",
+                        column: x => x.CityId,
+                        principalTable: "Cities",
+                        principalColumn: "CityId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Listings_Districts_DistrictId",
+                        column: x => x.DistrictId,
+                        principalTable: "Districts",
+                        principalColumn: "DistrictId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Listings_Listing_Types_ListingTypeId",
+                        column: x => x.ListingTypeId,
+                        principalTable: "Listing_Types",
+                        principalColumn: "ListingTypeId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Listings_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
@@ -315,28 +369,29 @@ namespace Neighborly.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Feedbacks",
+                name: "ListingPromotions",
                 columns: table => new
                 {
-                    FeedbackId = table.Column<int>(type: "int", nullable: false)
+                    PromotionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: true),
-                    Message = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    ListingId = table.Column<int>(type: "int", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Feedbacks", x => x.FeedbackId);
+                    table.PrimaryKey("PK_ListingPromotions", x => x.PromotionId);
                     table.ForeignKey(
-                        name: "FK_Feedbacks_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId");
+                        name: "FK_ListingPromotions_Listings_ListingId",
+                        column: x => x.ListingId,
+                        principalTable: "Listings",
+                        principalColumn: "ListingId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -366,29 +421,6 @@ namespace Neighborly.Migrations
                         principalColumn: "UserId");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Payments",
-                columns: table => new
-                {
-                    PaymentId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Currency = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PaidAt = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Payments", x => x.PaymentId);
-                    table.ForeignKey(
-                        name: "FK_Payments_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_BlockedUsers_BlockedId",
                 table: "BlockedUsers",
@@ -415,6 +447,31 @@ namespace Neighborly.Migrations
                 column: "ListingId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Listings_CategoryId",
+                table: "Listings",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Listings_CityId",
+                table: "Listings",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Listings_DistrictId",
+                table: "Listings",
+                column: "DistrictId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Listings_ListingTypeId",
+                table: "Listings",
+                column: "ListingTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Listings_UserId",
+                table: "Listings",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ListingViews_ListingId",
                 table: "ListingViews",
                 column: "ListingId");
@@ -437,13 +494,7 @@ namespace Neighborly.Migrations
                 name: "BlockedUsers");
 
             migrationBuilder.DropTable(
-                name: "Categories");
-
-            migrationBuilder.DropTable(
                 name: "Chats");
-
-            migrationBuilder.DropTable(
-                name: "Districts");
 
             migrationBuilder.DropTable(
                 name: "Favourites");
@@ -453,9 +504,6 @@ namespace Neighborly.Migrations
 
             migrationBuilder.DropTable(
                 name: "Listing_Images");
-
-            migrationBuilder.DropTable(
-                name: "Listing_Types");
 
             migrationBuilder.DropTable(
                 name: "ListingPromotions");
@@ -485,13 +533,22 @@ namespace Neighborly.Migrations
                 name: "UserNotifications");
 
             migrationBuilder.DropTable(
-                name: "Cities");
-
-            migrationBuilder.DropTable(
                 name: "Listings");
 
             migrationBuilder.DropTable(
+                name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Districts");
+
+            migrationBuilder.DropTable(
+                name: "Listing_Types");
+
+            migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Cities");
         }
     }
 }

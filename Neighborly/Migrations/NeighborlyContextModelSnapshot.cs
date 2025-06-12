@@ -660,7 +660,7 @@ namespace Neighborly.Migrations
                     b.HasOne("Neighborly.Models.DBModels.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Listing");
