@@ -12,15 +12,15 @@ using Neighborly.Data;
 namespace Neighborly.Migrations
 {
     [DbContext(typeof(NeighborlyContext))]
-    [Migration("20250611093017_Database_Port")]
-    partial class Database_Port
+    [Migration("20250612135007_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.17")
+                .HasAnnotation("ProductVersion", "9.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -47,14 +47,25 @@ namespace Neighborly.Migrations
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("Relational:JsonPropertyName", "id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
+
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasAnnotation("Relational:JsonPropertyName", "icon");
+
+                    b.Property<string>("IconSvg")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(255)")
+                        .HasAnnotation("Relational:JsonPropertyName", "name");
 
                     b.HasKey("CategoryId");
 
@@ -338,6 +349,16 @@ namespace Neighborly.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ListingId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("DistrictId");
+
+                    b.HasIndex("ListingTypeId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Listings");
                 });
@@ -687,6 +708,49 @@ namespace Neighborly.Migrations
                     b.Navigation("Viewer");
                 });
 
+            modelBuilder.Entity("Neighborly.Models.DBModels.Listings", b =>
+                {
+                    b.HasOne("Neighborly.Models.DBModels.Categories", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Neighborly.Models.DBModels.Cities", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Neighborly.Models.DBModels.Distircts", "District")
+                        .WithMany()
+                        .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Neighborly.Models.DBModels.Listing_types", "ListingType")
+                        .WithMany()
+                        .HasForeignKey("ListingTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Neighborly.Models.DBModels.User", "User")
+                        .WithMany("Listings")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("City");
+
+                    b.Navigation("District");
+
+                    b.Navigation("ListingType");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Neighborly.Models.DBModels.Payment", b =>
                 {
                     b.HasOne("Neighborly.Models.DBModels.User", "User")
@@ -696,6 +760,11 @@ namespace Neighborly.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Neighborly.Models.DBModels.User", b =>
+                {
+                    b.Navigation("Listings");
                 });
 #pragma warning restore 612, 618
         }
