@@ -1,4 +1,4 @@
 [
-  { "id": "1", "name": "Oferuję pomoc" },
-  { "id": "2", "name": "Szukam pomocy" }
+  { "id": 1, "name": "Oferuję pomoc" },
+  { "id": 2, "name": "Szukam pomocy" }
 ]

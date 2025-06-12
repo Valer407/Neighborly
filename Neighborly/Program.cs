@@ -45,6 +45,7 @@ using (var scope = app.Services.CreateScope())
             {
                 foreach (var cat in categories)
                 {
+                    cat.CategoryId = 0;
                     cat.IconSvg = Icons.GetIcon(cat.Icon);
                 }
                 context.Categories.AddRange(categories);
@@ -62,6 +63,10 @@ using (var scope = app.Services.CreateScope())
             var types = JsonSerializer.Deserialize<List<Listing_types>>(jsonData);
             if (types != null)
             {
+                foreach (var lt in types)
+                {
+                    lt.ListingTypeId = 0;
+                }
                 context.Listing_Types.AddRange(types);
                 context.SaveChanges();
             }

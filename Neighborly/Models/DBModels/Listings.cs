@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 namespace Neighborly.Models.DBModels
 {
     public class Listings
@@ -38,24 +39,27 @@ namespace Neighborly.Models.DBModels
         [MaxLength(50)]
         public string Status { get; set; } = "active";
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime CreatedAt { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime UpdatedAt { get; set; }
-                [ForeignKey("UserId")]
+        [ForeignKey("UserId")]
+        [ValidateNever]
         public User User { get; set; }
 
         [ForeignKey("CategoryId")]
+        [ValidateNever]
         public Categories Category { get; set; }
 
         [ForeignKey("ListingTypeId")]
+        [ValidateNever]
         public Listing_types ListingType { get; set; }
 
         [ForeignKey("CityId")]
+        [ValidateNever]
         public Cities City { get; set; }
 
         [ForeignKey("DistrictId")]
+        [ValidateNever]
         public Distircts District { get; set; }
     }
 }
