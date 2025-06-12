@@ -30,7 +30,44 @@ namespace Neighborly.Controllers
                 }
             }
 
-            return View(categories);
+            var listings = _context.Listings
+                .Include(l => l.City)
+                .Include(l => l.District)
+                .Include(l => l.User)
+                .Include(l => l.ListingType)
+                .Select(l => new ListingCardViewModel
+                {
+                    Id = l.ListingId,
+                    Title = l.Title,
+                    Description = l.Description,
+                    CreatedAt = l.CreatedAt,
+                    Type = l.ListingType.Name == "Oferuję pomoc" ? "offer" : "request",
+                    ImageUrl = _context.Listing_Images
+                        .Where(i => i.ListingId == l.ListingId)
+                        .OrderBy(i => i.SortOrder)
+                        .Select(i => i.Url)
+                        .FirstOrDefault(),
+                    Location = new LocationViewModel
+                    {
+                        City = l.City.Name,
+                        District = l.District.Name
+                    },
+                    User = new ListingCardUserViewModel
+                    {
+                        Name = l.User.FirstName + " " + l.User.LastName,
+                        Avatar = l.User.AvatarUrl,
+                        Rating = l.User.RatingAvg
+                    }
+                })
+                .ToList();
+
+            var viewModel = new ListingsIndexViewModel
+            {
+                Categories = categories,
+                Listings = listings
+            };
+
+            return View(viewModel);
         }
 
         // GET: /Listings/NewListing

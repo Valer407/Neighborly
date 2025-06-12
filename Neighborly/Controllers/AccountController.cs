@@ -40,7 +40,7 @@ namespace Neighborly.Controllers
                     Title = l.Title,
                     Description = l.Description,
                     CreatedAt = l.CreatedAt,
-                    Type = l.ListingType.Name,
+                    Type = l.ListingType.Name == "Oferuję pomoc" ? "offer" : "request",
                     Location = new global::Neighborly.Models.LocationViewModel
                     {
                         City = l.City.Name,

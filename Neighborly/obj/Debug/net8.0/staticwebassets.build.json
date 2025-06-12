@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Vf0t3uKbDaTVBcZz7ki/vV1j8cZw4IoIMm6/3R/Hhdc=",
+  "Hash": "Tp6wele36i1APxWdYYGzb0tJt6oS6QALL2EGU9xWQXA=",
   "Source": "Neighborly",
   "BasePath": "_content/Neighborly",
   "Mode": "Default",
@@ -1307,6 +1307,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\wwwroot\\uploads\\listings\\e6b9c43c-b903-463b-8192-9ad31fb06880.png",
+      "SourceId": "Neighborly",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\wwwroot\\",
+      "BasePath": "_content/Neighborly",
+      "RelativePath": "uploads/listings/e6b9c43c-b903-463b-8192-9ad31fb06880.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\listings\\e6b9c43c-b903-463b-8192-9ad31fb06880.png"
     }
   ]
 }
