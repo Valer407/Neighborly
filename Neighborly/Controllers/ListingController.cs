@@ -80,17 +80,7 @@ namespace Neighborly.Controllers
 
             City = City?.Trim();
             District = District?.Trim();
-
-            if (!categoryOk || !typeOk || string.IsNullOrEmpty(City) || string.IsNullOrEmpty(District))
-            {
-                ModelState.AddModelError(string.Empty, "Niepoprawne dane lokalizacji lub kategorii.");
-                ViewBag.Categories = _context.Categories.OrderBy(c => c.Name).ToList();
-                ViewBag.ListingTypes = _context.Listing_Types.OrderBy(t => t.Name).ToList();
-                return View(listing);
-            }
-
-            var cityEntity = _context.Cities.FirstOrDefault(c => c.Name == City);
-            if (cityEntity == null)
+            @@namespace Neighborly.Controllers
             {
                 cityEntity = new Cities { Name = City };
                 _context.Cities.Add(cityEntity);
@@ -116,6 +106,7 @@ namespace Neighborly.Controllers
             }
 
             listing.UserId = user.UserId;
+            listing.User = user;
             listing.CreatedAt = DateTime.UtcNow;
             listing.UpdatedAt = DateTime.UtcNow;
             listing.Latitude = 0;

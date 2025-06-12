@@ -45,10 +45,24 @@ using (var scope = app.Services.CreateScope())
             {
                 foreach (var cat in categories)
                 {
-                    cat.CategoryId = 0;
                     cat.IconSvg = Icons.GetIcon(cat.Icon);
                 }
                 context.Categories.AddRange(categories);
+                context.SaveChanges();
+            }
+        }
+    }
+
+    if (!context.Listing_Types.Any())
+    {
+        var jsonFile = Path.Combine(app.Environment.WebRootPath, "data", "listing_types.json");
+        if (File.Exists(jsonFile))
+        {
+            var jsonData = File.ReadAllText(jsonFile);
+            var types = JsonSerializer.Deserialize<List<Listing_types>>(jsonData);
+            if (types != null)
+            {
+                context.Listing_Types.AddRange(types);
                 context.SaveChanges();
             }
         }
