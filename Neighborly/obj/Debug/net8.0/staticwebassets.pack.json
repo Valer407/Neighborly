@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\Neighborly.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\wwwroot\\assets\\default-avatar.png",
+      "PackagePath": "staticwebassets\\assets\\default-avatar.png"
+    },
+    {
       "Id": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\wwwroot\\assets\\logo.png",
       "PackagePath": "staticwebassets\\assets\\logo.png"
     },

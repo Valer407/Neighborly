@@ -22,7 +22,23 @@ namespace Neighborly.Controllers
         {
             return View();
         }
+        public IActionResult MyAccount()
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
 
+            if (userId == null)
+                return RedirectToAction("Login");
+
+            var user = _context.Users
+                .Include(u => u.Listings)
+                    .ThenInclude(l => l.Category)
+                .FirstOrDefault(u => u.UserId == userId.Value);
+
+            if (user == null)
+                return RedirectToAction("Login");
+
+            return View(user);
+        }
         // POST: /Account/Login
         [HttpPost]
         public IActionResult Login(string email, string password, bool remember)
@@ -85,6 +101,7 @@ namespace Neighborly.Controllers
                 FirstName = firstName,
                 LastName = lastName,
                 Email = email,
+                AvatarUrl = "/assets/default-avatar.png",
                 CreatedAt = DateTime.UtcNow
             };
             user.PasswordHash = _hasher.HashPassword(user, password);

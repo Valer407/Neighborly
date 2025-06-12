@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "gQGuBFyMg2Zj61hQTfY/CdzDgj5shrHYSJC1EovxbKY=",
+  "Hash": "GlpHYALb8W6k0oKD5RM9oCHXpqnEgjzPlWru6MZIO2o=",
   "Source": "Neighborly",
   "BasePath": "_content/Neighborly",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Neighborly.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\wwwroot\\assets\\default-avatar.png",
+      "SourceId": "Neighborly",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\wwwroot\\",
+      "BasePath": "_content/Neighborly",
+      "RelativePath": "assets/default-avatar.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\default-avatar.png"
     },
     {
       "Identity": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\wwwroot\\assets\\logo.png",
