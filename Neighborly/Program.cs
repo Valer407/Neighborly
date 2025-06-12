@@ -4,7 +4,13 @@ using Neighborly.Models.DBModels;
 using Neighborly.Models;
 using System.Text.Json;
 using System.IO;
+using System.Globalization;
 var builder = WebApplication.CreateBuilder(args);
+
+// Ensure invariant culture for decimal parsing
+var culture = new CultureInfo("en-US");
+CultureInfo.DefaultThreadCurrentCulture = culture;
+CultureInfo.DefaultThreadCurrentUICulture = culture;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
