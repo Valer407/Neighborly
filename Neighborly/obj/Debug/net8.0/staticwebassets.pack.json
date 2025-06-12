@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets\\data\\categories.json"
     },
     {
+      "Id": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\wwwroot\\data\\listing_types.json",
+      "PackagePath": "staticwebassets\\data\\listing_types.json"
+    },
+    {
       "Id": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },

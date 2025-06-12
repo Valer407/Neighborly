@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "GlpHYALb8W6k0oKD5RM9oCHXpqnEgjzPlWru6MZIO2o=",
+  "Hash": "Vf0t3uKbDaTVBcZz7ki/vV1j8cZw4IoIMm6/3R/Hhdc=",
   "Source": "Neighborly",
   "BasePath": "_content/Neighborly",
   "Mode": "Default",
@@ -167,6 +167,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\data\\categories.json"
+    },
+    {
+      "Identity": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\wwwroot\\data\\listing_types.json",
+      "SourceId": "Neighborly",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\wwwroot\\",
+      "BasePath": "_content/Neighborly",
+      "RelativePath": "data/listing_types.json",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\data\\listing_types.json"
     },
     {
       "Identity": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\wwwroot\\favicon.ico",
