@@ -4,16 +4,20 @@ using Neighborly.Data;
 using Neighborly.Models.DBModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace Neighborly.Controllers
 {
     public class ListingsController : Controller
     {
         private readonly NeighborlyContext _context;
+        private readonly IWebHostEnvironment _env;
 
-        public ListingsController(NeighborlyContext context)
+        public ListingsController(NeighborlyContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
         public IActionResult Index()
         {
@@ -41,10 +45,16 @@ namespace Neighborly.Controllers
         // POST: /Listings/NewListing
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult NewListing(Listings listing, string City, string District)
+        public IActionResult NewListing(Listings listing, string City, string District, List<IFormFile> images)
         {
             ModelState.Remove("CityId");
             ModelState.Remove("DistrictId");
+            ModelState.Remove("UserId");
+            ModelState.Remove("User");
+            ModelState.Remove("Category");
+            ModelState.Remove("ListingType");
+            ModelState.Remove("City");
+            ModelState.Remove("District");
 
             if (!ModelState.IsValid)
             {
@@ -113,6 +123,41 @@ namespace Neighborly.Controllers
 
             _context.Listings.Add(listing);
             _context.SaveChanges();
+
+            if (images != null && images.Count > 0)
+            {
+                var uploadPath = Path.Combine(_env.WebRootPath, "uploads", "listings");
+                if (!Directory.Exists(uploadPath))
+                {
+                    Directory.CreateDirectory(uploadPath);
+                }
+
+                int order = 0;
+                foreach (var file in images)
+                {
+                    if (file.Length == 0) continue;
+
+                    var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+                    if (ext != ".jpg" && ext != ".jpeg" && ext != ".png") continue;
+                    if (file.Length > 5 * 1024 * 1024) continue; // 5MB limit
+
+                    var fileName = $"{Guid.NewGuid()}{ext}";
+                    var filePath = Path.Combine(uploadPath, fileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+
+                    var img = new Listing_images
+                    {
+                        ListingId = listing.ListingId,
+                        Url = $"/uploads/listings/{fileName}",
+                        SortOrder = order++
+                    };
+                    _context.Listing_Images.Add(img);
+                }
+                _context.SaveChanges();
+            }
 
             return RedirectToAction("Index", "Listings");
         }
