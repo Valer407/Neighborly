@@ -75,7 +75,7 @@ namespace Neighborly.Data
                 .HasOne(l => l.City)
                 .WithMany()
                 .HasForeignKey(l => l.CityId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Listings>()
                 .HasOne(l => l.District)

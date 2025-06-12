@@ -34,14 +34,14 @@ namespace Neighborly.Controllers
                 .Include(l => l.City)
                 .Include(l => l.District)
                 .Include(l => l.ListingType)
-                .Select(l => new Neighborly.Models.ListingViewModel
+                .Select(l => new global::Neighborly.Models.ListingViewModel
                 {
                     Id = l.ListingId,
                     Title = l.Title,
                     Description = l.Description,
                     CreatedAt = l.CreatedAt,
                     Type = l.ListingType.Name,
-                    Location = new Neighborly.Models.LocationViewModel
+                    Location = new global::Neighborly.Models.LocationViewModel
                     {
                         City = l.City.Name,
                         District = l.District.Name

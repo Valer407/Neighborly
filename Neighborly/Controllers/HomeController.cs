@@ -1,29 +1,31 @@
 using Microsoft.AspNetCore.Mvc;
 using Neighborly.Models;
+using Neighborly.Models.DBModels;
+using Neighborly.Data;
 using System.Diagnostics;
-using System.Text.Json;
-using System.Collections.Generic;
-using System.IO;
 
 namespace Neighborly.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly NeighborlyContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, NeighborlyContext context)
         {
             _logger = logger;
+            _context = context;
         }
+
         public IActionResult Index()
         {
-            var jsonFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "data", "categories.json");
-            var jsonData = System.IO.File.ReadAllText(jsonFilePath);
-            var categories = JsonSerializer.Deserialize<List<Category>>(jsonData);
-
+            var categories = _context.Categories.ToList();
             foreach (var category in categories)
             {
-                category.IconSvg = Icons.GetIcon(category.Icon);
+                if (string.IsNullOrEmpty(category.IconSvg))
+                {
+                    category.IconSvg = Icons.GetIcon(category.Icon);
+                }
             }
 
             return View(categories);
@@ -36,7 +38,12 @@ namespace Neighborly.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(
+                new Neighborly.Models.ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                }
+            );
         }
     }
 }

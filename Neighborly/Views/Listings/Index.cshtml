@@ -1,5 +1,4 @@
-@model List<Neighborly.Models.Category>
-
+@model List<Neighborly.Models.DBModels.Categories>
 @{
     ViewBag.Title = "Ogłoszenia";
     Layout = "~/Views/Shared/Listings_layout.cshtml";
@@ -18,7 +17,7 @@
                             @foreach (var category in Model)
                             {
                                 <a class="inline-flex items-center gap-2 whitespace-nowrap rounded-md h-10 px-4 py-2 w-full justify-start flex items-center hover:bg-accent hover:text-accent-foreground transition-colors"
-                                   href="@Url.Action("Szczegoly", "Kategorie", new { id = category.Id })">
+                                   href="@Url.Action("Szczegoly", "Kategorie", new { id = category.CategoryId })">
                                     <span class="mr-2 h-4 w-4 text-neighborly-500">
                                         @Html.Raw(category.IconSvg.Replace("h-8 w-8", "h-4 w-4").Replace("text-neighborly-600", "text-neighborly-500"))
                                     </span>

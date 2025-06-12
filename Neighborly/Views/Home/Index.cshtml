@@ -79,7 +79,7 @@
     </div>
 </section>
 
-@model List<Neighborly.Models.Category>
+@model List<Neighborly.Models.DBModels.Categories>
 <!-- Kategorie -->
 <section class="py-16">
     <div class="neighborly-container">
@@ -91,7 +91,7 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             @foreach (var category in Model)
             {
-                <a href="@Url.Action("Category", "Categories", new { id = category.Id })" class="bg-white p-6 rounded-lg shadow-sm text-center hover:shadow-md transition-shadow">
+                <a href="@Url.Action("Category", "Categories", new { id = category.CategoryId })" class="bg-white p-6 rounded-lg shadow-sm text-center hover:shadow-md transition-shadow">
                     <div class="w-12 h-12 bg-neighborly-100 rounded-full flex items-center justify-center mx-auto mb-3">
                         @Html.Raw(category.IconSvg)
                     </div>
