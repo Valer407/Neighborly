@@ -107,6 +107,8 @@ namespace Neighborly.Controllers
 
             listing.CityId = cityEntity.CityId;
             listing.DistrictId = districtEntity.DistrictId;
+            listing.UserId = user.UserId;
+            listing.User = user;
 
             if (!TryValidateModel(listing))
             {
@@ -115,8 +117,6 @@ namespace Neighborly.Controllers
                 return View(listing);
             }
 
-            listing.UserId = user.UserId;
-            listing.User = user;
             listing.CreatedAt = DateTime.UtcNow;
             listing.UpdatedAt = DateTime.UtcNow;
             listing.Latitude = 0;
