@@ -1,16 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Neighborly.Data;
+using Neighborly.Models.DBModels;
+using Microsoft.AspNetCore.Http;
 
 namespace Neighborly.Controllers
 {
     public class AccountController : Controller
     {
-        //private readonly ApplicationDbContext _context;
+        private readonly NeighborlyContext _context;
+        private readonly PasswordHasher<User> _hasher = new PasswordHasher<User>();
 
-        // to do 
-        // public AccountController(ApplicationDbContext context)
-        //{
-        //    _context = context;
-        //}
+        public AccountController(NeighborlyContext context)
+        {
+            _context = context;
+        }
 
         // GET: /Account/Login
         public IActionResult Login()
@@ -20,25 +25,32 @@ namespace Neighborly.Controllers
 
         // POST: /Account/Login
         [HttpPost]
-        public IActionResult Login(string email, string password)
+        public IActionResult Login(string email, string password, bool remember)
         {
-            // TODO: sprawdzenie użytkownika w bazie danych
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             {
                 ModelState.AddModelError(string.Empty, "Email i hasło są wymagane.");
                 return View();
             }
 
-            // TODO: znajdź użytkownika po email i sprawdź poprawność hasła
-            bool isValidUser = false; // <- tu sprawdzanie z bazy
-
-            if (!isValidUser)
+            var user = _context.Users.FirstOrDefault(u => u.Email == email && u.IsActive);
+            if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "Nieprawidłowy email lub hasło.");
                 return View();
             }
 
-            // TODO: ustaw cookie / sesję / logowanie
+            var result = _hasher.VerifyHashedPassword(user, user.PasswordHash, password);
+            if (result == PasswordVerificationResult.Failed)
+            {
+                ModelState.AddModelError(string.Empty, "Nieprawidłowy email lub hasło.");
+                return View();
+            }
+
+            HttpContext.Session.SetInt32("UserId", user.UserId);
+            user.LastLogin = DateTime.UtcNow;
+            _context.SaveChanges();
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -58,16 +70,30 @@ namespace Neighborly.Controllers
             if (password != confirmPassword)
                 ModelState.AddModelError("confirmPassword", "Hasła nie są zgodne.");
 
-            // TODO: sprawdzenie w bazie czy użytkownik już istnieje
-            //var existingUser = _context.Users.FirstOrDefault(u => u.Email == email);
-            //if (existingUser != null)
-                //ModelState.AddModelError("email", "Użytkownik z takim adresem email już istnieje.");
+            if (_context.Users.Any(u => u.Email == email))
+                ModelState.AddModelError("email", "Użytkownik z takim adresem email już istnieje.");
 
             if (!ModelState.IsValid)
                 return View();
 
-            // TODO: zapis nowego użytkownika do bazy
+            var user = new User
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Email = email,
+                CreatedAt = DateTime.UtcNow
+            };
+            user.PasswordHash = _hasher.HashPassword(user, password);
 
+            _context.Users.Add(user);
+            _context.SaveChanges();
+
+            return RedirectToAction("Login");
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("UserId");
             return RedirectToAction("Login");
         }
     }
