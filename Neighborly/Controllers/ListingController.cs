@@ -116,6 +116,7 @@ namespace Neighborly.Controllers
             }
 
             listing.UserId = user.UserId;
+            listing.User = user;
             listing.CreatedAt = DateTime.UtcNow;
             listing.UpdatedAt = DateTime.UtcNow;
             listing.Latitude = 0;

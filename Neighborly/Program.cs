@@ -53,6 +53,21 @@ using (var scope = app.Services.CreateScope())
             }
         }
     }
+
+    if (!context.Listing_Types.Any())
+    {
+        var jsonFile = Path.Combine(app.Environment.WebRootPath, "data", "listing_types.json");
+        if (File.Exists(jsonFile))
+        {
+            var jsonData = File.ReadAllText(jsonFile);
+            var types = JsonSerializer.Deserialize<List<Listing_types>>(jsonData);
+            if (types != null)
+            {
+                context.Listing_Types.AddRange(types);
+                context.SaveChanges();
+            }
+        }
+    }
 }
 
 // Configure the HTTP request pipeline.
