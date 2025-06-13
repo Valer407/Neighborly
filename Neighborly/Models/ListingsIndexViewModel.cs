@@ -24,6 +24,7 @@ namespace Neighborly.Models
 
     public class ListingCardUserViewModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Avatar { get; set; }
         public float Rating { get; set; }

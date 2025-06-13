@@ -54,6 +54,7 @@ namespace Neighborly.Controllers
                     },
                     User = new ListingCardUserViewModel
                     {
+                        Id = l.User.UserId,
                         Name = l.User.FirstName + " " + l.User.LastName,
                         Avatar = l.User.AvatarUrl,
                         Rating = l.User.RatingAvg
@@ -65,6 +66,54 @@ namespace Neighborly.Controllers
             {
                 Categories = categories,
                 Listings = listings
+            };
+
+            return View(viewModel);
+        }
+        [HttpGet]
+        [Route("ogloszenie/{id}")]
+        public IActionResult Details(int id)
+        {
+            var listing = _context.Listings
+                .Include(l => l.City)
+                .Include(l => l.District)
+                .Include(l => l.User)
+                .Include(l => l.ListingType)
+                .Include(l => l.Category)
+                .FirstOrDefault(l => l.ListingId == id);
+
+            if (listing == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new ListingDetailsViewModel
+            {
+                Listing = new ListingDetails
+                {
+                    Id = listing.ListingId,
+                    Title = listing.Title,
+                    Description = listing.Description,
+                    CreatedAt = listing.CreatedAt,
+                    Type = listing.ListingType.Name == "Oferuję pomoc" ? "offer" : "request",
+                    Category = listing.Category.Name,
+                    ImageUrl = _context.Listing_Images
+                        .Where(i => i.ListingId == listing.ListingId)
+                        .OrderBy(i => i.SortOrder)
+                        .Select(i => i.Url)
+                        .FirstOrDefault(),
+                    Location = new LocationViewModel
+                    {
+                        City = listing.City.Name,
+                        District = listing.District.Name
+                    },
+                    User = new ListingCardUserViewModel
+                    {
+                        Name = listing.User.FirstName + " " + listing.User.LastName,
+                        Avatar = listing.User.AvatarUrl,
+                        Rating = listing.User.RatingAvg
+                    }
+                }
             };
 
             return View(viewModel);
