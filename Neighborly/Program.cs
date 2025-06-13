@@ -7,12 +7,12 @@ using System.IO;
 using System.Globalization;
 var builder = WebApplication.CreateBuilder(args);
 
-// Ensure invariant culture for decimal parsing
+
 var culture = new CultureInfo("en-US");
 CultureInfo.DefaultThreadCurrentCulture = culture;
 CultureInfo.DefaultThreadCurrentUICulture = culture;
 
-// Add services to the container.
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddSession(options =>
@@ -28,7 +28,7 @@ builder.Services.AddDbContext<NeighborlyContext>(options =>
 
 var app = builder.Build();
 
-// Ensure database and seed categories from JSON if needed
+
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<NeighborlyContext>();
@@ -74,11 +74,9 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
