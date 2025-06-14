@@ -32,6 +32,8 @@ namespace Neighborly.Controllers
             }
 
             var user = _context.Users
+                .Include(u => u.City)
+                .Include(u => u.District)
                 .FirstOrDefault(u => u.UserId == id.Value && u.IsActive);
             if (user == null)
             {

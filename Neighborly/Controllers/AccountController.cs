@@ -95,7 +95,10 @@ namespace Neighborly.Controllers
             if (userId == null)
                 return RedirectToAction("Login");
 
-            var user = _context.Users.FirstOrDefault(u => u.UserId == userId.Value);
+            var user = _context.Users
+                .Include(u => u.City)
+                .Include(u => u.District)
+                .FirstOrDefault(u => u.UserId == userId.Value);
             if (user == null)
                 return RedirectToAction("Login");
 
@@ -105,8 +108,8 @@ namespace Neighborly.Controllers
                 LastName = user.LastName,
                 Email = user.Email,
                 AvatarUrl = string.IsNullOrEmpty(user.AvatarUrl) ? "/assets/default-avatar.png" : user.AvatarUrl,
-                City = user.City,
-                District = user.District,
+                City = user.City?.Name,
+                District = user.District?.Name,
                 About = user.About
             };
 
@@ -132,10 +135,44 @@ namespace Neighborly.Controllers
             user.FirstName = model.FirstName ?? user.FirstName;
             user.LastName = model.LastName ?? user.LastName;
             user.Email = model.Email ?? user.Email;
-            user.City = model.City;
-            user.District = model.District;
             user.About = model.About;
+            var cityName = model.City?.Trim();
+            var districtName = model.District?.Trim();
 
+            Cities? cityEntity = null;
+            Distircts? districtEntity = null;
+
+            if (!string.IsNullOrEmpty(cityName))
+            {
+                cityEntity = _context.Cities.FirstOrDefault(c => c.Name == cityName);
+                if (cityEntity == null)
+                {
+                    cityEntity = new Cities { Name = cityName };
+                    _context.Cities.Add(cityEntity);
+                    _context.SaveChanges();
+                }
+                user.CityId = cityEntity.CityId;
+            }
+            else
+            {
+                user.CityId = null;
+            }
+
+            if (!string.IsNullOrEmpty(districtName) && cityEntity != null)
+            {
+                districtEntity = _context.Districts.FirstOrDefault(d => d.Name == districtName && d.CityId == cityEntity.CityId);
+                if (districtEntity == null)
+                {
+                    districtEntity = new Distircts { Name = districtName, CityId = cityEntity.CityId };
+                    _context.Districts.Add(districtEntity);
+                    _context.SaveChanges();
+                }
+                user.DistrictId = districtEntity.DistrictId;
+            }
+            else
+            {
+                user.DistrictId = null;
+            }
             if (avatar != null && avatar.Length > 0)
             {
                 var ext = Path.GetExtension(avatar.FileName).ToLowerInvariant();
@@ -173,7 +210,10 @@ namespace Neighborly.Controllers
                     return RedirectToAction("Login");
             }
 
-            var user = _context.Users.FirstOrDefault(u => u.UserId == id.Value);
+            var user = _context.Users
+                .Include(u => u.City)
+                .Include(u => u.District)
+                .FirstOrDefault(u => u.UserId == id.Value);
             if (user == null)
                 return NotFound();
 
