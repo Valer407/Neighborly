@@ -8,6 +8,7 @@ using System.Linq;
 
 namespace Neighborly.Controllers
 {
+    [Route("profil")]
     public class ProfileController : Controller
     {
         private readonly NeighborlyContext _context;
@@ -17,8 +18,7 @@ namespace Neighborly.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        [Route("profil/{id?}")]
+        [HttpGet("/profil/{id:int?}")]
         public IActionResult Index(int? id)
         {
             if (!id.HasValue)
@@ -31,7 +31,10 @@ namespace Neighborly.Controllers
                 id = sessionId.Value;
             }
 
-            var user = _context.Users.FirstOrDefault(u => u.UserId == id.Value && u.IsActive);
+            var user = _context.Users
+                .Include(u => u.City)
+                .Include(u => u.District)
+                .FirstOrDefault(u => u.UserId == id.Value && u.IsActive);
             if (user == null)
             {
                 return NotFound();
@@ -94,7 +97,10 @@ namespace Neighborly.Controllers
                     Avatar = user.AvatarUrl,
                     Verified = false,
                     Rating = user.RatingAvg,
-                    MemberSince = user.CreatedAt
+                    MemberSince = user.CreatedAt,
+                    About = user.About ?? string.Empty,
+                    City = user.City ?? string.Empty,
+                    District = user.District ?? string.Empty
                 },
                 Listings = listings,
                 Reviews = reviews

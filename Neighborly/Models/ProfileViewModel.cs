@@ -18,6 +18,9 @@ namespace Neighborly.Models
         public bool Verified { get; set; }
         public float Rating { get; set; }
         public DateTime MemberSince { get; set; }
+        public string About { get; set; }
+        public string City { get; set; }
+        public string District { get; set; }
     }
 
     public class ProfileReviewViewModel

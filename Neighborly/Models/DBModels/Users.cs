@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
-
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 namespace Neighborly.Models.DBModels
 {
     public class User
@@ -36,9 +36,8 @@ namespace Neighborly.Models.DBModels
         [MaxLength(255)]
         public string? District { get; set; }
 
-        [MaxLength(1024)]
         public string? About { get; set; }
-        
+
         [Range(0, 5)]
         public float RatingAvg { get; set; } = 0;
 
