@@ -8,6 +8,7 @@ namespace Neighborly.Models
     {
         public List<Categories> Categories { get; set; }
         public List<ListingCardViewModel> Listings { get; set; }
+        public string SearchQuery { get; set; }
     }
 
     public class ListingCardViewModel

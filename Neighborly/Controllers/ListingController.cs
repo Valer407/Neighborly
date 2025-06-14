@@ -19,7 +19,7 @@ namespace Neighborly.Controllers
             _context = context;
             _env = env;
         }
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
             var categories = _context.Categories.ToList();
             foreach (var category in categories)
@@ -30,11 +30,19 @@ namespace Neighborly.Controllers
                 }
             }
 
-            var listings = _context.Listings
+            var listingsQuery = _context.Listings
                 .Include(l => l.City)
                 .Include(l => l.District)
                 .Include(l => l.User)
                 .Include(l => l.ListingType)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                listingsQuery = listingsQuery.Where(l => l.Title.Contains(search) || l.Description.Contains(search));
+            }
+
+            var listings = listingsQuery
                 .Select(l => new ListingCardViewModel
                 {
                     Id = l.ListingId,
@@ -65,7 +73,8 @@ namespace Neighborly.Controllers
             var viewModel = new ListingsIndexViewModel
             {
                 Categories = categories,
-                Listings = listings
+                Listings = listings,
+                SearchQuery = search
             };
 
             return View(viewModel);
