@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -20,21 +21,24 @@
                     </a>
 
                     <!-- Log in and register -->
-                    <div class="flex items-center gap-4">
-                        <!-- Log in -->
-                        <a href="~/Account/Login">
-                            <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 text-neighborly-600 bg-transparent">
-                                Zaloguj się
-                            </button>
-                        </a>
-
-                        <!-- REgister -->
-                        <a href="/Account/Register">
-                            <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
-                                Zarejestruj się
-                            </button>
-                        </a>
-                    </div>
+                    @if (Context.Session.GetInt32("UserId") == null)
+                    {
+                        <div class="flex items-center gap-4">
+                            <!-- Log in -->
+                            <a href="~/Account/Login">
+                                <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 text-neighborly-600 bg-transparent">
+                                    Zaloguj się
+                                </button>
+                            </a>
+                             <!-- Register -->
+                            <a href="/Account/Register">
+                                <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
+                                    Zarejestruj się
+                                </button>
+                            </a>
+                        </div>
+                    }
+                        
                 </div>
             </div>
         </header>

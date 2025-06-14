@@ -277,14 +277,16 @@ namespace Neighborly.Migrations
                 {
                     b.Property<int>("ListingTypeId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("Relational:JsonPropertyName", "id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ListingTypeId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(255)")
+                        .HasAnnotation("Relational:JsonPropertyName", "name");
 
                     b.HasKey("ListingTypeId");
 
@@ -306,7 +308,6 @@ namespace Neighborly.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -339,7 +340,6 @@ namespace Neighborly.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
