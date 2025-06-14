@@ -278,6 +278,7 @@ namespace Neighborly.Controllers
 
             return RedirectToAction("Index", "Listings");
         }
+
         [HttpGet]
         [Route("edytuj-ogloszenie/{id}")]
         public IActionResult Edit(int id)

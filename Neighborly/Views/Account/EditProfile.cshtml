@@ -22,6 +22,7 @@
             </div>
             <div class="p-6 pt-0">
               <form asp-action="EditProfile" asp-controller="Account" method="post" enctype="multipart/form-data" class="space-y-6">
+                @Html.AntiForgeryToken()
                 <div class="flex items-center gap-6">
                   <div class="relative flex h-24 w-24 shrink-0 overflow-hidden rounded-full">
                     <img src="@Model.AvatarUrl" alt="Podgląd zdjęcia" class="aspect-square h-full w-full" />
