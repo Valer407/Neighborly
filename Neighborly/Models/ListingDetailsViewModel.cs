@@ -5,6 +5,7 @@ namespace Neighborly.Models
     public class ListingDetailsViewModel
     {
         public ListingDetails Listing { get; set; }
+        public bool IsFavorite { get; set; }
     }
 
     public class ListingDetails

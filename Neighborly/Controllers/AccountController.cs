@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Neighborly.Data;
 using Neighborly.Models.DBModels;
 using Microsoft.AspNetCore.Http;
+using Neighborly.Models;
 
 namespace Neighborly.Controllers
 {
@@ -35,14 +36,14 @@ namespace Neighborly.Controllers
                 .Include(l => l.City)
                 .Include(l => l.District)
                 .Include(l => l.ListingType)
-                .Select(l => new global::Neighborly.Models.ListingViewModel
+                .Select(l => new ListingViewModel
                 {
                     Id = l.ListingId,
                     Title = l.Title,
                     Description = l.Description,
                     CreatedAt = l.CreatedAt,
                     Type = l.ListingType.Name == "Oferuję pomoc" ? "offer" : "request",
-                    Location = new global::Neighborly.Models.LocationViewModel
+                    Location = new LocationViewModel
                     {
                         City = l.City.Name,
                         District = l.District.Name
@@ -50,7 +51,36 @@ namespace Neighborly.Controllers
                 })
                 .ToList();
 
-            return View(listings);
+             var favorites = _context.Favourites
+                .Where(f => f.UserId == userId.Value)
+                .Include(f => f.Listing)
+                    .ThenInclude(l => l.City)
+                .Include(f => f.Listing)
+                    .ThenInclude(l => l.District)
+                .Include(f => f.Listing)
+                    .ThenInclude(l => l.ListingType)
+                .Select(f => new ListingViewModel
+                {
+                    Id = f.Listing.ListingId,
+                    Title = f.Listing.Title,
+                    Description = f.Listing.Description,
+                    CreatedAt = f.Listing.CreatedAt,
+                    Type = f.Listing.ListingType.Name == "Oferuję pomoc" ? "offer" : "request",
+                    Location = new LocationViewModel
+                    {
+                        City = f.Listing.City.Name,
+                        District = f.Listing.District.Name
+                    }
+                })
+                .ToList();
+
+            var model = new MyAccountViewModel
+            {
+                Listings = listings,
+                Favorites = favorites
+            };
+
+            return View(model);
         }
         // POST: /Account/Login
         [HttpPost]

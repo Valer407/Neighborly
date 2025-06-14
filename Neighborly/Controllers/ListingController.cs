@@ -87,6 +87,12 @@ namespace Neighborly.Controllers
                 return NotFound();
             }
 
+            var userId = HttpContext.Session.GetInt32("UserId");
+            bool isFav = false;
+            if (userId != null)
+            {
+                isFav = _context.Favourites.Any(f => f.UserId == userId.Value && f.ListingId == id);
+            }
             var viewModel = new ListingDetailsViewModel
             {
                 Listing = new ListingDetails
@@ -113,7 +119,8 @@ namespace Neighborly.Controllers
                         Avatar = listing.User.AvatarUrl,
                         Rating = listing.User.RatingAvg
                     }
-                }
+                },
+                IsFavorite = isFav
             };
 
             return View(viewModel);
@@ -248,7 +255,7 @@ namespace Neighborly.Controllers
 
             return RedirectToAction("Index", "Listings");
         }
-                [HttpPost]
+         [HttpPost]
         [Route("listings/favorite/{id}")]
         public IActionResult Favorite(int id)
         {
@@ -258,20 +265,27 @@ namespace Neighborly.Controllers
                 return Unauthorized();
             }
 
-            var exists = _context.Favourites.Any(f => f.UserId == userId.Value && f.ListingId == id);
-            if (!exists)
+            var fav = _context.Favourites.FirstOrDefault(f => f.UserId == userId.Value && f.ListingId == id);
+            bool nowFav;
+            if (fav == null)
             {
-                var fav = new Favourites
+                fav = new Favourites
                 {
                     UserId = userId.Value,
                     ListingId = id,
                     CreatedAt = DateTime.UtcNow
                 };
                 _context.Favourites.Add(fav);
-                _context.SaveChanges();
+                nowFav = true;
             }
+            else
+            {
+                _context.Favourites.Remove(fav);
+                nowFav = false;
+            }
+            _context.SaveChanges();
 
-            return Ok();
+            return Json(new { isFavorite = nowFav });
         }
     }
 }
