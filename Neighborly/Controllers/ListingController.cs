@@ -19,7 +19,7 @@ namespace Neighborly.Controllers
             _context = context;
             _env = env;
         }
-        public IActionResult Index(string search)
+        public IActionResult Index(string search, string type)
         {
             var categories = _context.Categories.ToList();
             foreach (var category in categories)
@@ -40,6 +40,18 @@ namespace Neighborly.Controllers
             if (!string.IsNullOrWhiteSpace(search))
             {
                 listingsQuery = listingsQuery.Where(l => l.Title.Contains(search) || l.Description.Contains(search));
+            }
+
+            if (!string.IsNullOrWhiteSpace(type))
+            {
+                if (type == "offer")
+                {
+                    listingsQuery = listingsQuery.Where(l => l.ListingType.Name == "Oferuję pomoc");
+                }
+                else if (type == "request")
+                {
+                    listingsQuery = listingsQuery.Where(l => l.ListingType.Name == "Szukam pomocy");
+                }
             }
 
             var listings = listingsQuery
@@ -69,6 +81,7 @@ namespace Neighborly.Controllers
                     }
                 })
                 .ToList();
+          ViewBag.SelectedType = type;
 
             var viewModel = new ListingsIndexViewModel
             {

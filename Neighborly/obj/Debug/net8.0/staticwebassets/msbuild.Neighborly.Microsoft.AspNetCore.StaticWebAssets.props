@@ -1088,8 +1088,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\listings\648629bd-d39b-4c68-8fb5-d9a90984878e.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
-=======
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\listings\7d0321f3-e033-4aef-8fd2-42d101a1abc8.png))">
       <SourceType>Package</SourceType>
       <SourceId>Neighborly</SourceId>
@@ -1106,7 +1104,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\listings\7d0321f3-e033-4aef-8fd2-42d101a1abc8.png))</OriginalItemSpec>
     </StaticWebAsset>
->>>>>>> 9521213b569429a06cbae61ec19b31ebb4a431df
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\listings\cdb1ed78-c5ad-4439-b8b2-39336dc2b174.jpeg))">
+      <SourceType>Package</SourceType>
+      <SourceId>Neighborly</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Neighborly</BasePath>
+      <RelativePath>uploads/listings/cdb1ed78-c5ad-4439-b8b2-39336dc2b174.jpeg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\listings\cdb1ed78-c5ad-4439-b8b2-39336dc2b174.jpeg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\listings\e6b9c43c-b903-463b-8192-9ad31fb06880.png))">
       <SourceType>Package</SourceType>
       <SourceId>Neighborly</SourceId>
