@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Neighborly.Controllers
 {
+
     public class AccountController : Controller
     {
         private readonly NeighborlyContext _context;
@@ -127,7 +128,7 @@ namespace Neighborly.Controllers
 
             return Redirect("/");
         }
-
+//logout
         public IActionResult Logout()
         {
             HttpContext.Session.Remove("UserId");
