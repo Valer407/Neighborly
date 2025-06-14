@@ -132,7 +132,7 @@ namespace Neighborly.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Remove("UserId");
-            return RedirectToAction("Login");
+            return RedirectToAction("Index", "Home");
         }
 
         private void LoginSuccessful(User user)

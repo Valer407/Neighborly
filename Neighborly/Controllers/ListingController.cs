@@ -119,37 +119,6 @@ namespace Neighborly.Controllers
             return View(viewModel);
         }
 
-        //filter button
-        public async Task<IActionResult> Index(string? type, string? location)
-        {
-            var listings = _context.Listings
-                .Include(l => l.User)
-                .Include(l => l.City)
-                .Include(l => l.Category)
-                .Include(l => l.District)
-                .AsQueryable();
-
-            if (!string.IsNullOrWhiteSpace(type))
-            {
-                listings = listings.Where(l => l.ListingType.Name == type);
-            }
-
-            if (!string.IsNullOrWhiteSpace(location))
-            {
-                listings = listings.Where(l =>
-                    l.City.Name.Contains(location) ||
-                    l.District.Name.Contains(location));
-            }
-
-            var model = new ListingsIndexViewModel
-            {
-                Listings = await listings.ToListAsync(),
-                Categories = await _context.Categories.ToListAsync()
-            };
-
-            return View(model);
-        }
-
         // GET: /Listings/NewListing
         [HttpGet]
         public IActionResult NewListing()
