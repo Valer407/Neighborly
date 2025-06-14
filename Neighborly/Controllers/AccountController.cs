@@ -105,8 +105,8 @@ namespace Neighborly.Controllers
                 LastName = user.LastName,
                 Email = user.Email,
                 AvatarUrl = string.IsNullOrEmpty(user.AvatarUrl) ? "/assets/default-avatar.png" : user.AvatarUrl,
-                City = user.City?.Name ?? string.Empty,
-                District = user.District?.Name ?? string.Empty,
+                City = user.City?.Name ?? string.Empty,           // <- OK
+                District = user.District?.Name ?? string.Empty,   // <- OK
                 About = user.About
             };
 

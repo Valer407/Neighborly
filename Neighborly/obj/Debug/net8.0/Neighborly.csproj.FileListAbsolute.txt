@@ -30,7 +30,6 @@ d:\Nowy folder (5)\Neighborly\Neighborly\obj\Debug\net8.0\Neighborly.genruntimec
 d:\Nowy folder (5)\Neighborly\Neighborly\obj\Debug\net8.0\ref\Neighborly.dll
 d:\Nowy folder (5)\Neighborly\Neighborly\bin\Debug\net8.0\package-lock.json
 d:\Nowy folder (5)\Neighborly\Neighborly\bin\Debug\net8.0\package.json
-C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Neighborly.staticwebassets.runtime.json
 C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Neighborly.dll
 C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Neighborly.pdb
 C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
@@ -386,10 +385,15 @@ C:\Users\marci\Documents\Porjekt_Dotnet\Neighborly\Neighborly\obj\Debug\net8.0\r
 C:\Users\marci\Documents\Porjekt_Dotnet\Neighborly\Neighborly\obj\Debug\net8.0\Neighborly.pdb
 C:\Users\marci\Documents\Porjekt_Dotnet\Neighborly\Neighborly\obj\Debug\net8.0\Neighborly.genruntimeconfig.cache
 C:\Users\marci\Documents\Porjekt_Dotnet\Neighborly\Neighborly\obj\Debug\net8.0\ref\Neighborly.dll
+C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
 C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\appsettings.json
 C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\package-lock.json
 C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\package.json
+C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Neighborly.staticwebassets.runtime.json
 C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Neighborly.exe
 C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Neighborly.deps.json
 C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Neighborly.runtimeconfig.json
@@ -405,11 +409,7 @@ C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Micr
 C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
 C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
 C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
-C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
-C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
-C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Microsoft.Extensions.Caching.Abstractions.dll
-C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
 C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
 C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Microsoft.Identity.Client.dll
 C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
