@@ -38,10 +38,10 @@
                                         </div>
                                     </div>
                                     <div class="flex space-x-2">
-                                        <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-transparent hover:bg-gray-100 h-9 w-9">
+                                         <button id="like-button" data-listing-id="@Model.Listing.Id" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-transparent hover:bg-gray-100 h-9 w-9">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart h-5 w-5"><path d="M19.5 12.572 12 21.35l-7.5-8.778A5.374 5.374 0 0 1 12 5.002a5.374 5.374 0 0 1 7.5 7.57Z"/></svg>
                                         </button>
-                                        <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-transparent hover:bg-gray-100 h-9 w-9">
+                                          <button id="share-button" data-link="@Url.Action("Details", "Listings", new { id = Model.Listing.Id }, Context.Request.Scheme)" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-transparent hover:bg-gray-100 h-9 w-9">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-share h-5 w-5"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"></polyline><line x1="12" x2="12" y1="2" y2="15"></line></svg>
                                         </button>
                                     </div>
@@ -125,3 +125,19 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('like-button').addEventListener('click', async function () {
+        const id = this.dataset.listingId;
+        await fetch(`/listings/favorite/${id}`, { method: 'POST' });
+    });
+
+    document.getElementById('share-button').addEventListener('click', async function () {
+        const link = this.dataset.link;
+        try {
+            await navigator.clipboard.writeText(link);
+            alert('Skopiowano link do schowka');
+        } catch (e) {
+            console.error(e);
+        }
+    });
+</script>

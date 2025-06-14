@@ -248,5 +248,30 @@ namespace Neighborly.Controllers
 
             return RedirectToAction("Index", "Listings");
         }
+                [HttpPost]
+        [Route("listings/favorite/{id}")]
+        public IActionResult Favorite(int id)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var exists = _context.Favourites.Any(f => f.UserId == userId.Value && f.ListingId == id);
+            if (!exists)
+            {
+                var fav = new Favourites
+                {
+                    UserId = userId.Value,
+                    ListingId = id,
+                    CreatedAt = DateTime.UtcNow
+                };
+                _context.Favourites.Add(fav);
+                _context.SaveChanges();
+            }
+
+            return Ok();
+        }
     }
 }
