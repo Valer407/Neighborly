@@ -1,4 +1,4 @@
-@model List<Neighborly.Models.ListingViewModel>
+@model Neighborly.Models.MyAccountViewModel
 @{
     ViewData["Title"] = "Moje konto";
     Layout = "~/Views/Shared/Listings_layout.cshtml";
@@ -35,13 +35,13 @@
         <div id="listings" class="mt-6" role="tabpanel">
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
                 <div class="flex flex-col space-y-1.5 p-6">
-                    <h3 class="text-2xl font-semibold leading-none tracking-tight">Moje ogłoszenia (@Model.Count)</h3>
+                    <h3 class="text-2xl font-semibold leading-none tracking-tight">Moje ogłoszenia (@Model.Listings.Count)</h3>
                 </div>
                 <div class="p-6 pt-0">
-                    @if (Model.Any())
+                    @if (Model.Listings.Any())
                     {
                         <div class="space-y-4">
-                        @foreach (var listing in Model)
+                        @foreach (var listing in Model.Listings)
                         {
                             <div class="border rounded-lg p-4 hover:bg-gray-50">
                                 <div class="flex justify-between items-start">
@@ -90,6 +90,52 @@
                 </div>
             </div>
         </div>
+            <div class="rounded-lg border bg-card text-card-foreground shadow-sm mt-6">
+                <div class="flex flex-col space-y-1.5 p-6">
+                    <h3 class="text-2xl font-semibold leading-none tracking-tight">Ulubione (@Model.Favorites.Count)</h3>
+                </div>
+                <div class="p-6 pt-0">
+                    @if (Model.Favorites.Any())
+                    {
+                        <div class="space-y-4">
+                        @foreach (var listing in Model.Favorites)
+                        {
+                            <div class="border rounded-lg p-4 hover:bg-gray-50">
+                                <div class="flex justify-between items-start">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <h3 class="font-semibold text-lg">@listing.Title</h3>
+                                            <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 @(listing.Type == "offer" ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground")">
+                                                @(listing.Type == "offer" ? "Oferuję pomoc" : "Szukam pomocy")
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-600 mb-2">@listing.Description</p>
+                                        <div class="text-sm text-gray-500">
+                                            <span>Dodano: @listing.CreatedAt.ToString("dd.MM.yyyy")</span>
+                                            <span class="mx-2">•</span>
+                                            <span>@listing.Location.District, @listing.Location.City</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2 ml-4">
+                                        <a href="/ogloszenie/@listing.Id" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye h-4 w-4"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-8">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart h-12 w-12 text-gray-400 mx-auto mb-4"><path d="M19.5 12.572 12 21.35l-7.5-8.778A5.374 5.374 0 0 1 12 5.002a5.374 5.374 0 0 1 7.5 7.57Z"/></svg>
+                            <h3 class="text-lg font-medium text-gray-900 mb-2">Brak ulubionych</h3>
+                            <p class="text-gray-500 mb-4">Polub ogłoszenie, aby je tutaj zobaczyć.</p>
+                        </div>
+                    }
+                </div>
+            </div>
 
         <div id="messages" class="mt-6" role="tabpanel">
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm">

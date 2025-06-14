@@ -19,7 +19,7 @@ namespace Neighborly.Controllers
             _context = context;
             _env = env;
         }
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
             var categories = _context.Categories.ToList();
             foreach (var category in categories)
@@ -30,11 +30,19 @@ namespace Neighborly.Controllers
                 }
             }
 
-            var listings = _context.Listings
+            var listingsQuery = _context.Listings
                 .Include(l => l.City)
                 .Include(l => l.District)
                 .Include(l => l.User)
                 .Include(l => l.ListingType)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                listingsQuery = listingsQuery.Where(l => l.Title.Contains(search) || l.Description.Contains(search));
+            }
+
+            var listings = listingsQuery
                 .Select(l => new ListingCardViewModel
                 {
                     Id = l.ListingId,
@@ -65,7 +73,8 @@ namespace Neighborly.Controllers
             var viewModel = new ListingsIndexViewModel
             {
                 Categories = categories,
-                Listings = listings
+                Listings = listings,
+                SearchQuery = search
             };
 
             return View(viewModel);
@@ -87,6 +96,12 @@ namespace Neighborly.Controllers
                 return NotFound();
             }
 
+            var userId = HttpContext.Session.GetInt32("UserId");
+            bool isFav = false;
+            if (userId != null)
+            {
+                isFav = _context.Favourites.Any(f => f.UserId == userId.Value && f.ListingId == id);
+            }
             var viewModel = new ListingDetailsViewModel
             {
                 Listing = new ListingDetails
@@ -113,7 +128,8 @@ namespace Neighborly.Controllers
                         Avatar = listing.User.AvatarUrl,
                         Rating = listing.User.RatingAvg
                     }
-                }
+                },
+                IsFavorite = isFav
             };
 
             return View(viewModel);
@@ -247,6 +263,38 @@ namespace Neighborly.Controllers
             }
 
             return RedirectToAction("Index", "Listings");
+        }
+         [HttpPost]
+        [Route("listings/favorite/{id}")]
+        public IActionResult Favorite(int id)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var fav = _context.Favourites.FirstOrDefault(f => f.UserId == userId.Value && f.ListingId == id);
+            bool nowFav;
+            if (fav == null)
+            {
+                fav = new Favourites
+                {
+                    UserId = userId.Value,
+                    ListingId = id,
+                    CreatedAt = DateTime.UtcNow
+                };
+                _context.Favourites.Add(fav);
+                nowFav = true;
+            }
+            else
+            {
+                _context.Favourites.Remove(fav);
+                nowFav = false;
+            }
+            _context.SaveChanges();
+
+            return Json(new { isFavorite = nowFav });
         }
     }
 }
