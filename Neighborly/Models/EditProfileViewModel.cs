@@ -10,7 +10,7 @@ namespace Neighborly.Models
         public string? Email { get; set; }
         public string? AvatarUrl { get; set; }
         public string? City { get; set; }
-        public string? District { get; set; }
+        public string District { get; set; }
         public string? About { get; set; }
     }
 }

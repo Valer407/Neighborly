@@ -8,6 +8,8 @@ namespace Neighborly.Models
         public ProfileUserViewModel User { get; set; }
         public List<ListingCardViewModel> Listings { get; set; }
         public List<ProfileReviewViewModel> Reviews { get; set; }
+
+        
     }
 
     public class ProfileUserViewModel

@@ -87,8 +87,7 @@ namespace Neighborly.Controllers
             return View(model);
         }
         
-
-        // GET: /Account/EditProfile
+// GET: /Account/EditProfile
         public IActionResult EditProfile()
         {
             var userId = HttpContext.Session.GetInt32("UserId");
@@ -178,18 +177,23 @@ namespace Neighborly.Controllers
             if (user == null)
                 return NotFound();
 
-            var model = new UserProfileViewModel
+            var model = new ProfileViewModel
             {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                AvatarUrl = string.IsNullOrEmpty(user.AvatarUrl) ? "/assets/default-avatar.png" : user.AvatarUrl,
-                City = user.City,
-                District = user.District,
-                About = user.About
+                User = new ProfileUserViewModel
+                {
+                    Id = user.UserId,
+                    Name = user.FirstName + " " + user.LastName,
+                    Avatar = user.AvatarUrl,
+                    Verified = false,
+                    Rating = user.RatingAvg,
+                    MemberSince = user.CreatedAt,
+                    About = user.About ?? string.Empty,
+                    City = user.City ?? string.Empty,
+                    District = user.District ?? string.Empty
+                }
             };
 
-            return RedirectToAction("Index", "Profile");
+            return View(model);
         }
         // POST: /Account/Login
         [HttpPost]
