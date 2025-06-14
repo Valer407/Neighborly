@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "gaLUXn9AlKJewndWW2JkvxE+7Se4TiaOnoonr9xy1m8=",
+  "Hash": "oErc3R/XdWPWHqakZXQulrUP0izuR/RiOaQ1dJ3agQg=",
   "Source": "Neighborly",
   "BasePath": "_content/Neighborly",
   "Mode": "Default",
@@ -1309,6 +1309,25 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
     },
     {
+      "Identity": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\wwwroot\\uploads\\listings\\56c44225-d04e-4c8a-aad8-fad7cad02db5.jpg",
+      "SourceId": "Neighborly",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\wwwroot\\",
+      "BasePath": "_content/Neighborly",
+      "RelativePath": "uploads/listings/56c44225-d04e-4c8a-aad8-fad7cad02db5.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\listings\\56c44225-d04e-4c8a-aad8-fad7cad02db5.jpg"
+    },
+    {
       "Identity": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\wwwroot\\uploads\\listings\\648629bd-d39b-4c68-8fb5-d9a90984878e.jpg",
       "SourceId": "Neighborly",
       "SourceType": "Discovered",
@@ -1328,12 +1347,12 @@
       "OriginalItemSpec": "wwwroot\\uploads\\listings\\648629bd-d39b-4c68-8fb5-d9a90984878e.jpg"
     },
     {
-      "Identity": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\wwwroot\\uploads\\listings\\7d0321f3-e033-4aef-8fd2-42d101a1abc8.png",
+      "Identity": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\wwwroot\\uploads\\listings\\914b781d-184f-4965-a646-210b93629e95.png",
       "SourceId": "Neighborly",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\wwwroot\\",
       "BasePath": "_content/Neighborly",
-      "RelativePath": "uploads/listings/7d0321f3-e033-4aef-8fd2-42d101a1abc8.png",
+      "RelativePath": "uploads/listings/914b781d-184f-4965-a646-210b93629e95.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1344,7 +1363,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\listings\\7d0321f3-e033-4aef-8fd2-42d101a1abc8.png"
+      "OriginalItemSpec": "wwwroot\\uploads\\listings\\914b781d-184f-4965-a646-210b93629e95.png"
     },
     {
       "Identity": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\wwwroot\\uploads\\listings\\cdb1ed78-c5ad-4439-b8b2-39336dc2b174.jpeg",

@@ -50,7 +50,7 @@ namespace Neighborly.Controllers
                     }
                 })
                 .ToList();
-
+            
              var favorites = _context.Favourites
                 .Where(f => f.UserId == userId.Value)
                 .Include(f => f.Listing)
@@ -79,7 +79,7 @@ namespace Neighborly.Controllers
                 Listings = listings,
                 Favorites = favorites
             };
-
+            ViewBag.UserId = userId.Value;
             return View(model);
         }
         // POST: /Account/Login
