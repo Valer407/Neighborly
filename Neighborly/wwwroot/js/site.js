@@ -1,4 +1,19 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿document.addEventListener('DOMContentLoaded', function () {
+    var filterButton = document.getElementById('filter-button');
+    var filterPanel = document.getElementById('filter-panel');
+    var closeFilter = document.getElementById('close-filter');
 
-// Write your JavaScript code.
+    if (filterButton && filterPanel) {
+        filterButton.addEventListener('click', function () {
+            filterPanel.classList.toggle('hidden');
+            filterPanel.classList.toggle('flex');
+        });
+    }
+
+    if (closeFilter && filterPanel) {
+        closeFilter.addEventListener('click', function () {
+            filterPanel.classList.add('hidden');
+            filterPanel.classList.remove('flex');
+        });
+    }
+});
