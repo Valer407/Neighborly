@@ -30,6 +30,15 @@ namespace Neighborly.Models.DBModels
         [MaxLength(255)]
         public string AvatarUrl { get; set; }
 
+        [MaxLength(255)]
+        public string? City { get; set; }
+
+        [MaxLength(255)]
+        public string? District { get; set; }
+
+        [MaxLength(1024)]
+        public string? About { get; set; }
+        
         [Range(0, 5)]
         public float RatingAvg { get; set; } = 0;
 

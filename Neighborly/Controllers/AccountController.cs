@@ -5,6 +5,8 @@ using Neighborly.Data;
 using Neighborly.Models.DBModels;
 using Microsoft.AspNetCore.Http;
 using Neighborly.Models;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace Neighborly.Controllers
 {
@@ -12,11 +14,13 @@ namespace Neighborly.Controllers
     public class AccountController : Controller
     {
         private readonly NeighborlyContext _context;
+        private readonly IWebHostEnvironment _env;
         private readonly PasswordHasher<User> _hasher = new PasswordHasher<User>();
 
-        public AccountController(NeighborlyContext context)
+        public AccountController(NeighborlyContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         // GET: /Account/Login
@@ -81,6 +85,111 @@ namespace Neighborly.Controllers
             };
             ViewBag.UserId = userId.Value;
             return View(model);
+        }
+        
+
+        // GET: /Account/EditProfile
+        public IActionResult EditProfile()
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+                return RedirectToAction("Login");
+
+            var user = _context.Users.FirstOrDefault(u => u.UserId == userId.Value);
+            if (user == null)
+                return RedirectToAction("Login");
+
+            var model = new EditProfileViewModel
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                AvatarUrl = string.IsNullOrEmpty(user.AvatarUrl) ? "/assets/default-avatar.png" : user.AvatarUrl,
+                City = user.City,
+                District = user.District,
+                About = user.About
+            };
+
+            return View(model);
+        }
+
+        // POST: /Account/EditProfile
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditProfile(EditProfileViewModel model, IFormFile? avatar)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+                return RedirectToAction("Login");
+
+            var user = _context.Users.FirstOrDefault(u => u.UserId == userId.Value);
+            if (user == null)
+                return RedirectToAction("Login");
+
+            if (!ModelState.IsValid)
+                return View(model);
+
+            user.FirstName = model.FirstName ?? user.FirstName;
+            user.LastName = model.LastName ?? user.LastName;
+            user.Email = model.Email ?? user.Email;
+            user.City = model.City;
+            user.District = model.District;
+            user.About = model.About;
+
+            if (avatar != null && avatar.Length > 0)
+            {
+                var ext = Path.GetExtension(avatar.FileName).ToLowerInvariant();
+                if (ext == ".jpg" || ext == ".jpeg" || ext == ".png" || ext == ".gif")
+                {
+                    if (avatar.Length <= 5 * 1024 * 1024)
+                    {
+                        var uploadPath = Path.Combine(_env.WebRootPath, "uploads", "avatars");
+                        if (!Directory.Exists(uploadPath))
+                            Directory.CreateDirectory(uploadPath);
+
+                        var fileName = $"{Guid.NewGuid()}{ext}";
+                        var filePath = Path.Combine(uploadPath, fileName);
+                        using var stream = new FileStream(filePath, FileMode.Create);
+                        avatar.CopyTo(stream);
+                        user.AvatarUrl = $"/uploads/avatars/{fileName}";
+                    }
+                }
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Profile");
+        }
+
+        // GET: /profil/{id?}
+        [HttpGet]
+        [Route("profil/{id?}")]
+        public IActionResult Profile(int? id)
+        {
+            if (id == null)
+            {
+                id = HttpContext.Session.GetInt32("UserId");
+                if (id == null)
+                    return RedirectToAction("Login");
+            }
+
+            var user = _context.Users.FirstOrDefault(u => u.UserId == id.Value);
+            if (user == null)
+                return NotFound();
+
+            var model = new UserProfileViewModel
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                AvatarUrl = string.IsNullOrEmpty(user.AvatarUrl) ? "/assets/default-avatar.png" : user.AvatarUrl,
+                City = user.City,
+                District = user.District,
+                About = user.About
+            };
+
+            return RedirectToAction("Index", "Profile");
         }
         // POST: /Account/Login
         [HttpPost]
