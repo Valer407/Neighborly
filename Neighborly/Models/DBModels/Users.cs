@@ -30,11 +30,15 @@ namespace Neighborly.Models.DBModels
         [MaxLength(255)]
         public string AvatarUrl { get; set; }
 
-        [MaxLength(255)]
-        public string? City { get; set; }
+        public int? CityId { get; set; }
 
-        [MaxLength(255)]
-        public string? District { get; set; }
+        public int? DistrictId { get; set; }
+
+        [ForeignKey("CityId")]
+        public Cities? City { get; set; }
+
+        [ForeignKey("DistrictId")]
+        public Distircts? District { get; set; }
 
         public string? About { get; set; }
 

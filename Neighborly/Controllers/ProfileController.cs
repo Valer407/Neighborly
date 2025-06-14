@@ -97,8 +97,8 @@ namespace Neighborly.Controllers
                     Rating = user.RatingAvg,
                     MemberSince = user.CreatedAt,
                     About = user.About ?? string.Empty,
-                    City = user.City ?? string.Empty,
-                    District = user.District ?? string.Empty
+                    City = user.City != null ? user.City.Name : string.Empty,
+                    District = user.District != null ? user.District.Name : string.Empty
                 },
                 Listings = listings,
                 Reviews = reviews

@@ -105,8 +105,8 @@ namespace Neighborly.Controllers
                 LastName = user.LastName,
                 Email = user.Email,
                 AvatarUrl = string.IsNullOrEmpty(user.AvatarUrl) ? "/assets/default-avatar.png" : user.AvatarUrl,
-                City = user.City,
-                District = user.District,
+                City = user.City?.Name ?? string.Empty,
+                District = user.District?.Name ?? string.Empty,
                 About = user.About
             };
 
@@ -132,8 +132,30 @@ namespace Neighborly.Controllers
             user.FirstName = model.FirstName ?? user.FirstName;
             user.LastName = model.LastName ?? user.LastName;
             user.Email = model.Email ?? user.Email;
-            user.City = model.City;
-            user.District = model.District;
+            if (!string.IsNullOrWhiteSpace(model.City))
+            {
+                var cityEntity = _context.Cities.FirstOrDefault(c => c.Name == model.City);
+                if (cityEntity == null)
+                {
+                    cityEntity = new Cities { Name = model.City };
+                    _context.Cities.Add(cityEntity);
+                    _context.SaveChanges();
+                }
+                user.City = cityEntity;
+            }
+
+            if (!string.IsNullOrWhiteSpace(model.District))
+            {
+                int? cityId = user.City?.CityId;
+                var districtEntity = _context.Districts.FirstOrDefault(d => d.Name == model.District && d.CityId == cityId);
+                if (districtEntity == null && cityId != null)
+                {
+                    districtEntity = new Distircts { Name = model.District, CityId = cityId.Value };
+                    _context.Districts.Add(districtEntity);
+                    _context.SaveChanges();
+                }
+                user.District = districtEntity;
+            }
             user.About = model.About;
 
             if (avatar != null && avatar.Length > 0)
@@ -188,8 +210,8 @@ namespace Neighborly.Controllers
                     Rating = user.RatingAvg,
                     MemberSince = user.CreatedAt,
                     About = user.About ?? string.Empty,
-                    City = user.City ?? string.Empty,
-                    District = user.District ?? string.Empty
+                    City = user.City?.Name ?? string.Empty,
+                    District = user.District?.Name ?? string.Empty
                 }
             };
 
