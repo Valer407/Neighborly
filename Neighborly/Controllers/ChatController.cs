@@ -87,11 +87,12 @@ namespace Neighborly.Controllers
                     }
                 }
             }
-
+            var categories = _context.Categories.ToList();
             var model = new MessagesIndexViewModel
             {
                 Chats = chatList,
-                ActiveChat = active
+                ActiveChat = active,
+                RatingCategories = categories
             };
             return View(model);
         }
@@ -203,7 +204,7 @@ namespace Neighborly.Controllers
         }
 
         [HttpPost]
-        public IActionResult RateChat(int chatId, int score, string? comment)
+        public IActionResult RateChat(int chatId, int score, int? categoryId, string? comment)
         {
             var userId = HttpContext.Session.GetInt32("UserId");
             if (userId == null)
@@ -227,6 +228,7 @@ namespace Neighborly.Controllers
                 ListingId = chat.ListingId ?? 0,
                 Score = score,
                 Comment = comment ?? string.Empty,
+                CategoryId = categoryId,
                 CreatedAt = DateTime.UtcNow
             };
 

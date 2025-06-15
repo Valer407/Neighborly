@@ -22,6 +22,11 @@ namespace Neighborly.Models.DBModels
 
         public string Comment { get; set; }
 
+        public int? CategoryId { get; set; }
+
+        [ForeignKey("CategoryId")]
+        public Categories? Category { get; set; }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime CreatedAt { get; set; }
     }
