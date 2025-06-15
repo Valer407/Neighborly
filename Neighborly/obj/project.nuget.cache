@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "iYni+Y1lQgfUaqHZxDvKu1/bFz9FU4dji2dM9IWlzEmKSe6TaqyQ0kolG5LPoRCjsFTdqTk5o/nSBAQ5M3OHQg==",
+  "dgSpecHash": "KL5zbBPUTzE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\Neighborly.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\User\\OneDrive\\Pulpit\\Projekt_NET\\Neighborly-1\\Neighborly\\Neighborly.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.14\\microsoft.netcore.app.ref.8.0.14.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.14\\microsoft.windowsdesktop.app.ref.8.0.14.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.14\\microsoft.aspnetcore.app.ref.8.0.14.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.14\\microsoft.netcore.app.host.win-x64.8.0.14.nupkg.sha512"
+  ],
   "logs": []
 }
