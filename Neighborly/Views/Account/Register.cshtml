@@ -27,6 +27,12 @@
         <!-- Karta rejestracji -->
         <div class="rounded-lg border bg-card text-card-foreground shadow">
             <form method="post" class="space-y-6 px-6 pt-6">
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="text-red-600 text-sm">
+                        @Html.ValidationSummary(false)
+                    </div>
+                }
                 <!-- Imię -->
                 <div class="space-y-2">
                     <label for="firstName" class="text-sm font-medium">Imię</label>
@@ -64,8 +70,9 @@
 
                 <!-- Zgody -->
                 <div class="flex items-center space-x-2">
-                    <input id="agreeTerms" name="agreeTerms" type="checkbox" value="1"
+                    <input id="agreeTerms" name="agreeTerms" type="checkbox" value="true"
                            class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50" />
+                    <input type="hidden" name="agreeTerms" value="false" />
                     <label for="agreeTerms" class="text-sm font-medium">
                         Akceptuję
                         <a href="/regulamin" class="text-neighborly-600 hover:text-neighborly-700 hover:underline">regulamin</a>

@@ -1,0 +1,15 @@
+bin/
+obj/
+*.user
+*.lock.json
+*.dll
+*.exe
+*.pdb
+*.cache
+*.json
+.AssemblyInfo.
+*.ref
+*.refint
+appsettings.json
+appsettings.Development.json
+Program.cs

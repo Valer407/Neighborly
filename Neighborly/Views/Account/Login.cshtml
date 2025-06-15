@@ -27,6 +27,12 @@
         <!-- Karta formularza -->
         <div class="rounded-lg border bg-card text-card-foreground shadow">
             <form method="post" class="space-y-4 px-6 pt-6">
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="text-red-600 text-sm">
+                        @Html.ValidationSummary(false)
+                    </div>
+                }
                 <!-- Email -->
                 <div class="space-y-2">
                     <label for="email" class="text-sm font-medium leading-none">Adres email</label>
