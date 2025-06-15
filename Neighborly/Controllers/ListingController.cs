@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using System.Globalization;
+using System.Text.Json;
 
 namespace Neighborly.Controllers
 {
@@ -233,10 +235,11 @@ namespace Neighborly.Controllers
                 return View(listing);
             }
 
+            var coords = GetCoordinates(listing.District.Name, listing.City.Name);
             listing.CreatedAt = DateTime.UtcNow;
             listing.UpdatedAt = DateTime.UtcNow;
-            listing.Latitude = 0;
-            listing.Longitude = 0;
+            listing.Latitude = coords.lat;
+            listing.Longitude = coords.lon;
 
             _context.Listings.Add(listing);
             _context.SaveChanges();
@@ -462,6 +465,25 @@ namespace Neighborly.Controllers
             _context.SaveChanges();
 
             return Json(new { isFavorite = nowFav });
+        }
+        public (float lat, float lon) GetCoordinates(string district, string city)
+        {
+            using var httpClient = new HttpClient();
+            var url = $"https://nominatim.openstreetmap.org/search?q={Uri.EscapeDataString(district + ", " + city + ", Poland")}&format=json";
+            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0");
+
+            var response = httpClient.GetStringAsync(url).GetAwaiter().GetResult();
+            using var json = JsonDocument.Parse(response);
+            var first = json.RootElement.EnumerateArray().FirstOrDefault();
+
+            if (first.ValueKind != JsonValueKind.Undefined)
+            {
+                float lat = float.Parse(first.GetProperty("lat").GetString(), CultureInfo.InvariantCulture);
+                float lon = float.Parse(first.GetProperty("lon").GetString(), CultureInfo.InvariantCulture);
+                return (lat, lon);
+            }
+
+            throw new Exception("Nie znaleziono lokalizacji");
         }
     }
 }
