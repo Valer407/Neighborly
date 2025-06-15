@@ -21,7 +21,7 @@ namespace Neighborly.Controllers
             _context = context;
             _env = env;
         }
-        public IActionResult Index(string search)
+        public IActionResult Index(string search, string type)
         {
             var categories = _context.Categories.ToList();
             foreach (var category in categories)
@@ -42,6 +42,18 @@ namespace Neighborly.Controllers
             if (!string.IsNullOrWhiteSpace(search))
             {
                 listingsQuery = listingsQuery.Where(l => l.Title.Contains(search) || l.Description.Contains(search));
+            }
+
+            if (!string.IsNullOrWhiteSpace(type))
+            {
+                if (type == "offer")
+                {
+                    listingsQuery = listingsQuery.Where(l => l.ListingType.Name == "Oferuję pomoc");
+                }
+                else if (type == "request")
+                {
+                    listingsQuery = listingsQuery.Where(l => l.ListingType.Name == "Szukam pomocy");
+                }
             }
 
             var listings = listingsQuery
@@ -71,6 +83,7 @@ namespace Neighborly.Controllers
                     }
                 })
                 .ToList();
+          ViewBag.SelectedType = type;
 
             var viewModel = new ListingsIndexViewModel
             {
@@ -126,6 +139,7 @@ namespace Neighborly.Controllers
                     },
                     User = new ListingCardUserViewModel
                     {
+                        Id = listing.User.UserId,
                         Name = listing.User.FirstName + " " + listing.User.LastName,
                         Avatar = listing.User.AvatarUrl,
                         Rating = listing.User.RatingAvg
@@ -267,7 +281,160 @@ namespace Neighborly.Controllers
 
             return RedirectToAction("Index", "Listings");
         }
-         [HttpPost]
+
+        [HttpGet]
+        [Route("edytuj-ogloszenie/{id}")]
+        public IActionResult Edit(int id)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var listing = _context.Listings
+                .Include(l => l.City)
+                .Include(l => l.District)
+                .FirstOrDefault(l => l.ListingId == id && l.UserId == userId.Value);
+
+            if (listing == null)
+            {
+                return RedirectToAction("MyAccount", "Account");
+            }
+
+            ViewBag.Categories = _context.Categories.OrderBy(c => c.Name).ToList();
+            ViewBag.ListingTypes = _context.Listing_Types.OrderBy(t => t.Name).ToList();
+
+            return View("Edit", listing);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("edytuj-ogloszenie/{id}")]
+        public IActionResult Edit(int id, Listings listing, string City, string District, List<IFormFile> images)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var existing = _context.Listings.FirstOrDefault(l => l.ListingId == id && l.UserId == userId.Value);
+            if (existing == null)
+            {
+                return RedirectToAction("MyAccount", "Account");
+            }
+
+            ModelState.Remove("CityId");
+            ModelState.Remove("DistrictId");
+            ModelState.Remove("UserId");
+            ModelState.Remove("User");
+            ModelState.Remove("Category");
+            ModelState.Remove("ListingType");
+            ModelState.Remove("City");
+            ModelState.Remove("District");
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Categories = _context.Categories.OrderBy(c => c.Name).ToList();
+                ViewBag.ListingTypes = _context.Listing_Types.OrderBy(t => t.Name).ToList();
+                return View("Edit", listing);
+            }
+
+            bool categoryOk = _context.Categories.Any(c => c.CategoryId == listing.CategoryId);
+            bool typeOk = _context.Listing_Types.Any(t => t.ListingTypeId == listing.ListingTypeId);
+
+            City = City?.Trim();
+            District = District?.Trim();
+
+            if (!categoryOk || !typeOk || string.IsNullOrEmpty(City) || string.IsNullOrEmpty(District))
+            {
+                ModelState.AddModelError(string.Empty, "Niepoprawne dane lokalizacji lub kategorii.");
+                ViewBag.Categories = _context.Categories.OrderBy(c => c.Name).ToList();
+                ViewBag.ListingTypes = _context.Listing_Types.OrderBy(t => t.Name).ToList();
+                return View("Edit", listing);
+            }
+
+            var cityEntity = _context.Cities.FirstOrDefault(c => c.Name == City);
+            if (cityEntity == null)
+            {
+                cityEntity = new Cities { Name = City };
+                _context.Cities.Add(cityEntity);
+                _context.SaveChanges();
+            }
+
+            var districtEntity = _context.Districts.FirstOrDefault(d => d.Name == District && d.CityId == cityEntity.CityId);
+            if (districtEntity == null)
+            {
+                districtEntity = new Distircts { Name = District, CityId = cityEntity.CityId };
+                _context.Districts.Add(districtEntity);
+                _context.SaveChanges();
+            }
+
+            existing.Title = listing.Title;
+            existing.Description = listing.Description;
+            existing.Price = listing.Price;
+            existing.CategoryId = listing.CategoryId;
+            existing.ListingTypeId = listing.ListingTypeId;
+            existing.CityId = cityEntity.CityId;
+            existing.DistrictId = districtEntity.DistrictId;
+            existing.UpdatedAt = DateTime.UtcNow;
+
+            _context.SaveChanges();
+
+            if (images != null && images.Count > 0)
+            {
+                var uploadPath = Path.Combine(_env.WebRootPath, "uploads", "listings");
+                if (!Directory.Exists(uploadPath))
+                {
+                    Directory.CreateDirectory(uploadPath);
+                }
+
+                var existingImages = _context.Listing_Images
+                    .Where(i => i.ListingId == existing.ListingId)
+                    .ToList();
+
+                foreach (var img in existingImages)
+                {
+                    var fullPath = Path.Combine(_env.WebRootPath, img.Url.TrimStart('/'));
+                    if (System.IO.File.Exists(fullPath))
+                    {
+                        System.IO.File.Delete(fullPath);
+                    }
+                    _context.Listing_Images.Remove(img);
+                }
+                _context.SaveChanges();
+
+                int order = 0;
+                foreach (var file in images)
+                {
+                    if (file.Length == 0) continue;
+
+                    var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+                    if (ext != ".jpg" && ext != ".jpeg" && ext != ".png") continue;
+                    if (file.Length > 5 * 1024 * 1024) continue;
+
+                    var fileName = $"{Guid.NewGuid()}{ext}";
+                    var filePath = Path.Combine(uploadPath, fileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+
+                    var imgEntity = new Listing_images
+                    {
+                        ListingId = existing.ListingId,
+                        Url = $"/uploads/listings/{fileName}",
+                        SortOrder = order++
+                    };
+                    _context.Listing_Images.Add(imgEntity);
+                }
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("MyAccount", "Account");
+        }
+        [HttpPost]
         [Route("listings/favorite/{id}")]
         public IActionResult Favorite(int id)
         {

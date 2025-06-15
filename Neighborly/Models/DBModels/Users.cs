@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
-
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 namespace Neighborly.Models.DBModels
 {
     public class User
@@ -29,6 +29,18 @@ namespace Neighborly.Models.DBModels
 
         [MaxLength(255)]
         public string AvatarUrl { get; set; }
+
+        public int? CityId { get; set; }
+
+        public int? DistrictId { get; set; }
+
+        [ForeignKey("CityId")]
+        public Cities? City { get; set; }
+
+        [ForeignKey("DistrictId")]
+        public Distircts? District { get; set; }
+
+        public string? About { get; set; }
 
         [Range(0, 5)]
         public float RatingAvg { get; set; } = 0;
