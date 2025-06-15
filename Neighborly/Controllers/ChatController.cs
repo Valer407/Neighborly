@@ -63,14 +63,15 @@ namespace Neighborly.Controllers
                             IsFromMe = m.SenderId == userId,
                             IsRead = m.ReadAt != null
                         }).ToList();
-
+                    var hasRated = _context.User_Ratings.Any(r => r.RaterId == userId && r.RateeId == otherUser && r.ListingId == (chatEntity.ListingId ?? 0));
                     active = new ChatViewModel
                     {
                         Id = chatEntity.ChatId,
                         ListingTitle = _context.Listings.Where(l => l.ListingId == chatEntity.ListingId).Select(l => l.Title).FirstOrDefault(),
                         IsActive = chatEntity.ClosedAt == null,
                         Participant = user!,
-                        Messages = messages
+                        Messages = messages,
+                        AlreadyRated = hasRated
                     };
 
                     // mark unread messages as read
@@ -87,12 +88,10 @@ namespace Neighborly.Controllers
                     }
                 }
             }
-            var categories = _context.Categories.ToList();
             var model = new MessagesIndexViewModel
             {
                 Chats = chatList,
-                ActiveChat = active,
-                RatingCategories = categories
+                ActiveChat = active
             };
             return View(model);
         }
@@ -144,7 +143,6 @@ namespace Neighborly.Controllers
 
             if (listing.UserId == userId)
             {
-                // User cannot message themselves
                 return RedirectToAction("Details", "Listings", new { id = listingId });
             }
 
@@ -179,6 +177,38 @@ namespace Neighborly.Controllers
         }
 
         [HttpPost]
+        public IActionResult StartWithUser(int userId)
+        {
+            var current = HttpContext.Session.GetInt32("UserId");
+            if (current == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            if (current == userId)
+            {
+                return RedirectToAction("Profile", "Account", new { id = userId });
+            }
+
+            var chat = _context.Chats.FirstOrDefault(c => c.ListingId == null &&
+                ((c.User1Id == current && c.User2Id == userId) ||
+                 (c.User1Id == userId && c.User2Id == current)));
+
+            if (chat == null)
+            {
+                chat = new Chats
+                {
+                    User1Id = current,
+                    User2Id = userId,
+                    CreatedAt = DateTime.UtcNow
+                };
+                _context.Chats.Add(chat);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction(nameof(Index), new { id = chat.ChatId });
+        }
+        [HttpPost]
         public IActionResult CloseChat(int id)
         {
             var userId = HttpContext.Session.GetInt32("UserId");
@@ -202,9 +232,8 @@ namespace Neighborly.Controllers
 
             return RedirectToAction(nameof(Index), new { id });
         }
-
         [HttpPost]
-        public IActionResult RateChat(int chatId, int score, int? categoryId, string? comment)
+        public IActionResult RateChat(int chatId, int score, string? comment)
         {
             var userId = HttpContext.Session.GetInt32("UserId");
             if (userId == null)
@@ -220,7 +249,12 @@ namespace Neighborly.Controllers
             }
 
             var rateeId = chat.User1Id == userId ? chat.User2Id : chat.User1Id;
-
+            var exists = _context.User_Ratings.Any(r => r.RaterId == userId && r.RateeId == rateeId && r.ListingId == (chat.ListingId ?? 0));
+            if (exists)
+            {
+                TempData["ErrorMessage"] = "Już raz oceniłeś tego użytkownika.";
+                return RedirectToAction(nameof(Index), new { id = chatId });
+            }
             var rating = new User_ratings
             {
                 RaterId = userId.Value,
@@ -228,7 +262,6 @@ namespace Neighborly.Controllers
                 ListingId = chat.ListingId ?? 0,
                 Score = score,
                 Comment = comment ?? string.Empty,
-                CategoryId = categoryId,
                 CreatedAt = DateTime.UtcNow
             };
 

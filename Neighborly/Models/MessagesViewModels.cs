@@ -26,6 +26,7 @@ namespace Neighborly.Models
         public string? ListingTitle { get; set; }
         public bool IsActive { get; set; }
         public List<MessageViewModel> Messages { get; set; } = new();
+        public bool AlreadyRated { get; set; }
     }
 
     public class MessagePreview
@@ -33,7 +34,6 @@ namespace Neighborly.Models
         public string Text { get; set; }
         public DateTime Timestamp { get; set; }
         public bool IsRead { get; set; }
-        public List<Categories> RatingCategories { get; set; } = new();
     }
 
     public class MessageViewModel
