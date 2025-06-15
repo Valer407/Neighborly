@@ -30,6 +30,8 @@ namespace Neighborly.Controllers
 
             return View(categories);
         }
+
+        [HttpGet("/polityka-prywatnosci")]
         public IActionResult Privacy()
         {
             return View();
