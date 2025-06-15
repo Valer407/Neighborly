@@ -176,5 +176,73 @@ namespace Neighborly.Controllers
 
             return RedirectToAction(nameof(Index), new { id = chat.ChatId });
         }
+
+        [HttpPost]
+        public IActionResult CloseChat(int id)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var chat = _context.Chats.FirstOrDefault(c => c.ChatId == id &&
+                (c.User1Id == userId || c.User2Id == userId));
+            if (chat == null)
+            {
+                return NotFound();
+            }
+
+            if (chat.ClosedAt == null)
+            {
+                chat.ClosedAt = DateTime.UtcNow;
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction(nameof(Index), new { id });
+        }
+
+        [HttpPost]
+        public IActionResult RateChat(int chatId, int score, string? comment)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var chat = _context.Chats.FirstOrDefault(c => c.ChatId == chatId &&
+                (c.User1Id == userId || c.User2Id == userId));
+            if (chat == null || chat.ClosedAt == null)
+            {
+                return NotFound();
+            }
+
+            var rateeId = chat.User1Id == userId ? chat.User2Id : chat.User1Id;
+
+            var rating = new User_ratings
+            {
+                RaterId = userId.Value,
+                RateeId = rateeId ?? 0,
+                ListingId = chat.ListingId ?? 0,
+                Score = score,
+                Comment = comment ?? string.Empty,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _context.User_Ratings.Add(rating);
+
+            var ratee = _context.Users.FirstOrDefault(u => u.UserId == rateeId);
+            if (ratee != null)
+            {
+                ratee.RatingAvg = (ratee.RatingAvg * ratee.RatingCount + score) /
+                    (ratee.RatingCount + 1);
+                ratee.RatingCount += 1;
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index), new { id = chatId });
+        }
     }
 }

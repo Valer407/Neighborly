@@ -16,4 +16,18 @@
             filterPanel.classList.remove('flex');
         });
     }
+
+    var ratingButton = document.getElementById('open-rating');
+    var ratingDialog = document.getElementById('ratingDialog');
+    var closeRating = document.getElementById('close-rating');
+    if (ratingButton && ratingDialog) {
+        ratingButton.addEventListener('click', function () {
+            ratingDialog.classList.remove('hidden');
+        });
+    }
+    if (closeRating && ratingDialog) {
+        closeRating.addEventListener('click', function () {
+            ratingDialog.classList.add('hidden');
+        });
+    }
 });
