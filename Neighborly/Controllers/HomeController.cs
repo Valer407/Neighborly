@@ -35,6 +35,12 @@ namespace Neighborly.Controllers
             return View();
         }
 
+        [HttpGet("/regulamin")]
+        public IActionResult Regulamin()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

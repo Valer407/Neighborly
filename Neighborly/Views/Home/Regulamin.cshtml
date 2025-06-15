@@ -1,0 +1,102 @@
+@{
+    ViewData["Title"] = "Regulamin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="min-h-screen bg-gray-50">
+    <div class="neighborly-container py-12">
+        <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-sm p-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-8">Regulamin serwisu</h1>
+            <div class="prose max-w-none text-gray-700 space-y-6">
+                <p class="text-lg">
+                    Ostatnia aktualizacja: @DateTime.Now.ToString("d", new System.Globalization.CultureInfo("pl-PL"))
+                </p>
+                <section>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">§1. Postanowienia ogólne</h2>
+                    <ol class="list-decimal pl-6 space-y-2">
+                        <li>Niniejszy Regulamin określa zasady korzystania z platformy Neighborly.</li>
+                        <li>Administratorem serwisu jest Neighborly Sp. z o.o. z siedzibą w Warszawie.</li>
+                        <li>Korzystanie z serwisu oznacza akceptację postanowień niniejszego Regulaminu.</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">§2. Definicje</h2>
+                    <ol class="list-decimal pl-6 space-y-2">
+                        <li><strong>Serwis</strong> - platforma internetowa Neighborly dostępna pod adresem neighborly.pl</li>
+                        <li><strong>Użytkownik</strong> - osoba fizyczna korzystająca z serwisu</li>
+                        <li><strong>Ogłoszenie</strong> - treść publikowana przez użytkownika w serwisie</li>
+                        <li><strong>Konto</strong> - zestaw zasobów i uprawnień przyznanych użytkownikowi</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">§3. Zasady rejestracji</h2>
+                    <ol class="list-decimal pl-6 space-y-2">
+                        <li>Rejestracja w serwisie jest bezpłatna i dobrowolna.</li>
+                        <li>Użytkownik zobowiązuje się podać prawdziwe i aktualne dane.</li>
+                        <li>Użytkownik odpowiada za bezpieczeństwo swojego hasła.</li>
+                        <li>Zabronione jest prowadzenie więcej niż jednego konta przez tę samą osobę.</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">§4. Zasady publikowania ogłoszeń</h2>
+                    <ol class="list-decimal pl-6 space-y-2">
+                        <li>Ogłoszenia muszą być zgodne z prawem polskim.</li>
+                        <li>Zabronione jest publikowanie treści obraźliwych, dyskryminujących lub niezgodnych z dobrymi obyczajami.</li>
+                        <li>Użytkownik odpowiada za treść publikowanych ogłoszeń.</li>
+                        <li>Administrator zastrzega sobie prawo do usuwania nieodpowiednich ogłoszeń.</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">§5. Zakazy</h2>
+                    <p>Użytkownikom zabrania się:</p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>Umieszczania treści niezgodnych z prawem</li>
+                        <li>Naruszania praw autorskich i innych praw własności intelektualnej</li>
+                        <li>Wysyłania spamu i niechcianych wiadomości</li>
+                        <li>Prób włamań i ataków na system</li>
+                        <li>Tworzenia fałszywych kont i profili</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">§6. Odpowiedzialność</h2>
+                    <ol class="list-decimal pl-6 space-y-2">
+                        <li>Administrator nie ponosi odpowiedzialności za treści publikowane przez użytkowników.</li>
+                        <li>Użytkownicy korzystają z serwisu na własne ryzyko.</li>
+                        <li>Administrator nie gwarantuje ciągłości działania serwisu.</li>
+                        <li>Wszelkie transakcje między użytkownikami odbywają się na ich własną odpowiedzialność.</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">§7. Usunięcie konta</h2>
+                    <ol class="list-decimal pl-6 space-y-2">
+                        <li>Użytkownik może w każdej chwili usunąć swoje konto.</li>
+                        <li>Administrator może usunąć konto w przypadku naruszenia regulaminu.</li>
+                        <li>Usunięcie konta powoduje trwałe usunięcie wszystkich danych użytkownika.</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">§8. Zmiany regulaminu</h2>
+                    <ol class="list-decimal pl-6 space-y-2">
+                        <li>Administrator zastrzega sobie prawo do zmiany regulaminu.</li>
+                        <li>O zmianach użytkownicy będą informowani z 7-dniowym wyprzedzeniem.</li>
+                        <li>Dalsze korzystanie z serwisu oznacza akceptację nowych warunków.</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">§9. Postanowienia końcowe</h2>
+                    <ol class="list-decimal pl-6 space-y-2">
+                        <li>W sprawach nieuregulowanych regulaminem stosuje się prawo polskie.</li>
+                        <li>Ewentualne spory będą rozstrzygane przez sąd właściwy dla siedziby administratora.</li>
+                        <li>Regulamin wchodzi w życie z dniem publikacji.</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">§10. Kontakt</h2>
+                    <p>
+                        W sprawach dotyczących regulaminu możesz skontaktować się z nami pod adresem:
+                        <a href="mailto:kontakt@neighborly.pl" class="text-neighborly-600 hover:underline ml-1">kontakt@neighborly.pl</a>
+                    </p>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
