@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "U3n0WKDHGZdR2RTYPHEA2KQi+jG/OOdlEu/DL2PcLnoHd/U1i+gUFyFzT3OJmsxunnWClm8ttIcnqBssq3S1hw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\TestyJednostkowe\\TestyJednostkowe.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\marci\\.nuget\\packages\\nunit\\4.3.2\\nunit.4.3.2.nupkg.sha512"
+  ],
+  "logs": []
+}

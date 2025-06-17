@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{90EDF595-6870-4A02-A0C2-D019093ACDA3}|Neighborly\\Neighborly.csproj|c:\\users\\marci\\documents\\porjekt_dotnet\\neighborly\\neighborly\\controllers\\listingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{90EDF595-6870-4A02-A0C2-D019093ACDA3}|Neighborly\\Neighborly.csproj|solutionrelative:neighborly\\controllers\\listingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{90EDF595-6870-4A02-A0C2-D019093ACDA3}|Neighborly\\Neighborly.csproj|c:\\users\\marci\\documents\\porjekt_dotnet\\neighborly\\neighborly\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90EDF595-6870-4A02-A0C2-D019093ACDA3}|Neighborly\\Neighborly.csproj|solutionrelative:neighborly\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{90EDF595-6870-4A02-A0C2-D019093ACDA3}|Neighborly\\Neighborly.csproj|c:\\users\\marci\\documents\\porjekt_dotnet\\neighborly\\neighborly\\models\\listingdetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{90EDF595-6870-4A02-A0C2-D019093ACDA3}|Neighborly\\Neighborly.csproj|solutionrelative:neighborly\\models\\listingdetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{90EDF595-6870-4A02-A0C2-D019093ACDA3}|Neighborly\\Neighborly.csproj|c:\\users\\marci\\documents\\porjekt_dotnet\\neighborly\\neighborly\\views\\listings\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{90EDF595-6870-4A02-A0C2-D019093ACDA3}|Neighborly\\Neighborly.csproj|solutionrelative:neighborly\\views\\listings\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{AC6A148D-A62F-48CF-9460-FC81C84D3EB8}|TestyJednostkowe\\TestyJednostkowe.csproj|c:\\users\\marci\\documents\\porjekt_dotnet\\neighborly\\testyjednostkowe\\acciuntcontrollertj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC6A148D-A62F-48CF-9460-FC81C84D3EB8}|TestyJednostkowe\\TestyJednostkowe.csproj|solutionrelative:testyjednostkowe\\acciuntcontrollertj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,40 +23,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ListingController.cs",
-              "DocumentMoniker": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\Neighborly\\Controllers\\ListingController.cs",
-              "RelativeDocumentMoniker": "Neighborly\\Controllers\\ListingController.cs",
-              "ToolTip": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\Neighborly\\Controllers\\ListingController.cs",
-              "RelativeToolTip": "Neighborly\\Controllers\\ListingController.cs",
-              "ViewState": "AQIAAMEAAAAAAAAAAAAcwAAAAAAAAAAA",
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\Neighborly\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Neighborly\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\Neighborly\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Neighborly\\Controllers\\AccountController.cs",
+              "ViewState": "AQIAACQBAAAAAAAAAAAYwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-15T11:34:23.528Z",
+              "WhenOpened": "2025-06-17T18:39:53.137Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ListingDetailsViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\Neighborly\\Models\\ListingDetailsViewModel.cs",
-              "RelativeDocumentMoniker": "Neighborly\\Models\\ListingDetailsViewModel.cs",
-              "ToolTip": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\Neighborly\\Models\\ListingDetailsViewModel.cs",
-              "RelativeToolTip": "Neighborly\\Models\\ListingDetailsViewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "AcciuntControllerTJ.cs",
+              "DocumentMoniker": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\TestyJednostkowe\\AcciuntControllerTJ.cs",
+              "RelativeDocumentMoniker": "TestyJednostkowe\\AcciuntControllerTJ.cs",
+              "ToolTip": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\TestyJednostkowe\\AcciuntControllerTJ.cs",
+              "RelativeToolTip": "TestyJednostkowe\\AcciuntControllerTJ.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-15T11:27:02.133Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\Neighborly\\Views\\Listings\\Details.cshtml",
-              "RelativeDocumentMoniker": "Neighborly\\Views\\Listings\\Details.cshtml",
-              "ToolTip": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\Neighborly\\Views\\Listings\\Details.cshtml",
-              "RelativeToolTip": "Neighborly\\Views\\Listings\\Details.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAJwAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-15T10:55:15.523Z",
+              "WhenOpened": "2025-06-17T18:39:25.858Z",
               "EditorCaption": ""
             }
           ]
