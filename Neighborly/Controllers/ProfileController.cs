@@ -60,7 +60,9 @@ namespace Neighborly.Controllers
                     Location = new LocationViewModel
                     {
                         City = l.City.Name,
-                        District = l.District.Name
+                        District = l.District.Name,
+                        Latitude = l.Latitude,
+                        Longitude = l.Longitude
                     },
                     User = new ListingCardUserViewModel
                     {

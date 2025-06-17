@@ -50,7 +50,9 @@ namespace Neighborly.Controllers
                     Location = new LocationViewModel
                     {
                         City = l.City.Name,
-                        District = l.District.Name
+                        District = l.District.Name,
+                        Latitude = l.Latitude,
+                        Longitude = l.Longitude
                     }
                 })
                 .ToList();
@@ -73,7 +75,9 @@ namespace Neighborly.Controllers
                     Location = new LocationViewModel
                     {
                         City = f.Listing.City.Name,
-                        District = f.Listing.District.Name
+                        District = f.Listing.District.Name,
+                        Latitude = f.Listing.Latitude,
+                        Longitude = f.Listing.Longitude
                     }
                 })
                 .ToList();

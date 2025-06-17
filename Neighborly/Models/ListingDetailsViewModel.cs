@@ -19,5 +19,7 @@ namespace Neighborly.Models
         public string ImageUrl { get; set; }
         public LocationViewModel Location { get; set; }
         public ListingCardUserViewModel User { get; set; }
+        public float Latitude { get; set; }
+        public float Longitude { get; set; }
     }
 }

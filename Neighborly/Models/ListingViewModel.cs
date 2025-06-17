@@ -16,5 +16,7 @@ namespace Neighborly.Models
     {
         public string City { get; set; }
         public string District { get; set; }
+        public float Latitude { get; set; }
+        public float Longitude { get; set; }
     }
 }

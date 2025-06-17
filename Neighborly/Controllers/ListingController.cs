@@ -15,11 +15,13 @@ namespace Neighborly.Controllers
     {
         private readonly NeighborlyContext _context;
         private readonly IWebHostEnvironment _env;
+        private readonly IConfiguration _config;
 
-        public ListingsController(NeighborlyContext context, IWebHostEnvironment env)
+        public ListingsController(NeighborlyContext context, IWebHostEnvironment env, IConfiguration config)
         {
             _context = context;
             _env = env;
+            _config = config;
         }
         public IActionResult Index(string search, string type)
         {
@@ -72,7 +74,9 @@ namespace Neighborly.Controllers
                     Location = new LocationViewModel
                     {
                         City = l.City.Name,
-                        District = l.District.Name
+                        District = l.District.Name,
+                        Latitude = l.Latitude,
+                        Longitude = l.Longitude
                     },
                     User = new ListingCardUserViewModel
                     {
@@ -143,11 +147,13 @@ namespace Neighborly.Controllers
                         Name = listing.User.FirstName + " " + listing.User.LastName,
                         Avatar = listing.User.AvatarUrl,
                         Rating = listing.User.RatingAvg
-                    }
+                },
+                    Latitude = listing.Latitude,
+                    Longitude = listing.Longitude
                 },
                 IsFavorite = isFav
             };
-
+            ViewBag.GoogleApiKey = _config["GoogleMaps:ApiKey"];
             return View(viewModel);
         }
 
@@ -157,6 +163,7 @@ namespace Neighborly.Controllers
         {
             ViewBag.Categories = _context.Categories.OrderBy(c => c.Name).ToList();
             ViewBag.ListingTypes = _context.Listing_Types.OrderBy(t => t.Name).ToList();
+            ViewBag.GoogleApiKey = _config["GoogleMaps:ApiKey"];
             return View();
         }
 
@@ -235,11 +242,14 @@ namespace Neighborly.Controllers
                 return View(listing);
             }
 
-            var coords = GetCoordinates(listing.District.Name, listing.City.Name);
+            if (listing.Latitude == 0 && listing.Longitude == 0)
+            {
+                var coords = GetCoordinates(districtEntity.Name, cityEntity.Name);
+                listing.Latitude = coords.lat;
+                listing.Longitude = coords.lon;
+            }
             listing.CreatedAt = DateTime.UtcNow;
             listing.UpdatedAt = DateTime.UtcNow;
-            listing.Latitude = coords.lat;
-            listing.Longitude = coords.lon;
 
             _context.Listings.Add(listing);
             _context.SaveChanges();
@@ -304,7 +314,7 @@ namespace Neighborly.Controllers
 
             ViewBag.Categories = _context.Categories.OrderBy(c => c.Name).ToList();
             ViewBag.ListingTypes = _context.Listing_Types.OrderBy(t => t.Name).ToList();
-
+            ViewBag.GoogleApiKey = _config["GoogleMaps:ApiKey"];
             return View("Edit", listing);
         }
 
@@ -378,6 +388,17 @@ namespace Neighborly.Controllers
             existing.ListingTypeId = listing.ListingTypeId;
             existing.CityId = cityEntity.CityId;
             existing.DistrictId = districtEntity.DistrictId;
+            if (listing.Latitude == 0 && listing.Longitude == 0)
+            {
+                var coordsUpdate = GetCoordinates(districtEntity.Name, cityEntity.Name);
+                existing.Latitude = coordsUpdate.lat;
+                existing.Longitude = coordsUpdate.lon;
+            }
+            else
+            {
+                existing.Latitude = listing.Latitude;
+                existing.Longitude = listing.Longitude;
+            }
             existing.UpdatedAt = DateTime.UtcNow;
 
             _context.SaveChanges();
@@ -469,21 +490,22 @@ namespace Neighborly.Controllers
         public (float lat, float lon) GetCoordinates(string district, string city)
         {
             using var httpClient = new HttpClient();
-            var url = $"https://nominatim.openstreetmap.org/search?q={Uri.EscapeDataString(district + ", " + city + ", Poland")}&format=json";
-            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0");
-
+            var apiKey = _config["GoogleMaps:ApiKey"];
+            var address = $"{district}, {city}, Poland";
+            var url = $"https://maps.googleapis.com/maps/api/geocode/json?address={Uri.EscapeDataString(address)}&key={apiKey}";
             var response = httpClient.GetStringAsync(url).GetAwaiter().GetResult();
             using var json = JsonDocument.Parse(response);
-            var first = json.RootElement.EnumerateArray().FirstOrDefault();
+            var first = json.RootElement.GetProperty("results").EnumerateArray().FirstOrDefault();
 
             if (first.ValueKind != JsonValueKind.Undefined)
             {
-                float lat = float.Parse(first.GetProperty("lat").GetString(), CultureInfo.InvariantCulture);
-                float lon = float.Parse(first.GetProperty("lon").GetString(), CultureInfo.InvariantCulture);
+                var location = first.GetProperty("geometry").GetProperty("location");
+                float lat = location.GetProperty("lat").GetSingle();
+                float lon = location.GetProperty("lng").GetSingle();
                 return (lat, lon);
             }
 
-            throw new Exception("Nie znaleziono lokalizacji");
+            throw new Exception("Nie znaleziono lokalizacji w Google");
         }
     }
 }
