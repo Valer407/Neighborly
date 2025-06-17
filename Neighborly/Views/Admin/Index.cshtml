@@ -1,3 +1,4 @@
+@model Neighborly.Models.AdminPanelViewModel
 @{
     ViewBag.Title = "Panel administratora";
     Layout = "~/Views/Shared/Listings_layout.cshtml";
@@ -31,28 +32,30 @@
                                     </tr>
                                 </thead>
                                 <tbody class="border-t">
-                                    <tr class="border-b transition-colors hover:bg-muted/50">
-                                        <td class="p-4">Zakupy</td>
-                                        <td class="p-4">Jan Kowalski</td>
-                                        <td class="p-4">Pomoc sąsiedzka</td>
-                                        <td class="p-4">
-                                            <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80">
-                                                Aktywne
-                                            </div>
-                                        </td>
-                                        <td class="p-4">2024-01-01</td>
-                                        <td class="p-4">
-                                            <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium hover:bg-destructive/90 bg-destructive text-destructive-foreground">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash">
-                                                    <path d="M3 6h18"/>
-                                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
-                                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
-                                                    <line x1="10" x2="10" y1="11" y2="17"/>
-                                                    <line x1="14" x2="14" y1="11" y2="17"/>
-                                                </svg>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                    @foreach (var l in Model.Listings)
+                                    {
+                                        <tr class="border-b transition-colors hover:bg-muted/50">
+                                            <td class="p-4">@l.Title</td>
+                                            <td class="p-4">@l.Author</td>
+                                            <td class="p-4">@l.Category</td>
+                                            <td class="p-4">@l.Status</td>
+                                            <td class="p-4">@l.Date.ToString("yyyy-MM-dd")</td>
+                                            <td class="p-4">
+                                                <form asp-action="DeleteListing" method="post" class="inline">
+                                                    <input type="hidden" name="id" value="@l.Id" />
+                                                        <button type="submit" class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-destructive text-destructive-foreground hover:bg-destructive/90 h-9 rounded-md px-3">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash">
+                                                            <path d="M3 6h18"/>
+                                                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                                                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                                                            <line x1="10" x2="10" y1="11" y2="17"/>
+                                                            <line x1="14" x2="14" y1="11" y2="17"/>
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        }
                                 </tbody>
                             </table>
                         </div>
@@ -77,48 +80,31 @@
                                     </tr>
                                 </thead>
                                 <tbody class="border-t">
-                                    <!-- Użytkownik aktywny -->
-                                    <tr class="border-b transition-colors hover:bg-muted/50">
-                                        <td class="p-4">Jan Kowalski</td>
-                                        <td class="p-4">jan@example.com</td>
-                                        <td class="p-4">
-                                            <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80">
-                                                Aktywny
-                                            </div>
-                                        </td>
-                                        <td class="p-4">2024-01-03</td>
-                                        <td class="p-4">
-                                            <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-destructive text-destructive-foreground hover:bg-destructive/90 h-9 rounded-md px-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-minus h-4 w-4">
-                                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                                    <circle cx="9" cy="7" r="4" />
-                                                    <line x1="22" x2="16" y1="11" y2="11" />
-                                                </svg>
-                                            </button>
-                                        </td>
-                                    </tr>
-
-                                    <!-- Użytkownik zablokowany -->
-                                    <tr class="border-b transition-colors hover:bg-muted/50">
-                                        <td class="p-4">Piotr Wiśniewski</td>
-                                        <td class="p-4">piotr@example.com</td>
-                                        <td class="p-4">
-                                            <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80">
-                                                Zablokowany
-                                            </div>
-                                        </td>
-                                        <td class="p-4">2024-01-04</td>
-                                        <td class="p-4">
-                                            <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-destructive text-destructive-foreground hover:bg-destructive/90 h-9 rounded-md px-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus h-4 w-4">
-                                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                                    <circle cx="9" cy="7" r="4" />
-                                                    <line x1="19" x2="19" y1="8" y2="14" />
-                                                    <line x1="22" x2="16" y1="11" y2="11" />
-                                                </svg>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                    @foreach (var u in Model.Users)
+                                    {
+                                        <tr class="border-b transition-colors hover:bg-muted/50">
+                                            <td class="p-4">@u.Name</td>
+                                            <td class="p-4">@u.Email</td>
+                                            <td class="p-4">
+                                                <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 @(u.IsActive ? "bg-primary text-primary-foreground" : "bg-destructive text-destructive-foreground")">
+                                                    @(u.IsActive ? "Aktywny" : "Zablokowany")
+                                                </div>
+                                            </td>
+                                            <td class="p-4">@u.Joined.ToString("yyyy-MM-dd")</td>
+                                            <td class="p-4">
+                                                <form asp-action="ToggleUser" method="post" class="inline">
+                                                    <input type="hidden" name="id" value="@u.Id" />
+                                                     <button type="submit" class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 @(u.IsActive ? "bg-destructive text-destructive-foreground hover:bg-destructive/90" : "bg-primary text-primary-foreground hover:bg-primary/90") h-9 rounded-md px-3">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide @(u.IsActive ? "lucide-user-minus" : "lucide-user-plus") h-4 w-4">
+                                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                                            <circle cx="9" cy="7" r="4" />
+                                                            @if(u.IsActive){<line x1="22" x2="16" y1="11" y2="11" />}else{<line x1="19" x2="19" y1="8" y2="14" /><line x1="22" x2="16" y1="11" y2="11" />}
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -146,29 +132,78 @@
                                     </tr>
                                 </thead>
                                 <tbody class="border-t">
-                                    <tr class="border-b transition-colors hover:bg-muted/50">
-                                        <td class="p-4 align-middle">zakupy</td>
-                                        <td class="p-4 align-middle">
-                                            <div class="flex items-center">
-                                            <svg class="lucide lucide-shopping-bag h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M6 2l1.5 4h9L18 2z" />
-                                                <path d="M3 6h18v14H3z" />
-                                            </svg>
-                                            Zakupy
-                                            </div>
-                                        </td>
-                                        <td class="p-4 align-middle">
-                                            <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-destructive text-destructive-foreground hover:bg-destructive/90 h-9 rounded-md px-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash">
-                                                    <path d="M3 6h18"/>
-                                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
-                                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
-                                                    <line x1="10" x2="10" y1="11" y2="17"/>
-                                                    <line x1="14" x2="14" y1="11" y2="17"/>
-                                                </svg>
-                                            </button>
-                                        </td>
+                                    @foreach (var c in Model.Categories)
+                                    {
+                                        <tr class="border-b transition-colors hover:bg-muted/50">
+                                            <td class="p-4 align-middle">@c.Icon</td>
+                                            <td class="p-4 align-middle">
+                                                <div class="flex items-center">
+                                                    @Html.Raw(c.IconSvg)
+                                                    @c.Name
+                                                </div>
+                                            </td>
+                                            <td class="p-4 align-middle">
+                                                 <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-destructive text-destructive-foreground hover:bg-destructive/90 h-9 rounded-md px-3">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash">
+                                                        <path d="M3 6h18"/>
+                                                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                                                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                                                        <line x1="10" x2="10" y1="11" y2="17"/>
+                                                        <line x1="14" x2="14" y1="11" y2="17"/>
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabela zgłoszeń -->
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+                    <div class="flex flex-col space-y-1.5 p-6">
+                        <h3 class="text-2xl font-semibold leading-none tracking-tight">Zgłoszenia</h3>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <div class="relative w-full overflow-auto">
+                            <table class="w-full caption-bottom text-sm">
+                                <thead class="border-b">
+                                    <tr>
+                                        <th class="h-12 px-4 text-left font-medium text-muted-foreground">Ogłoszenie</th>
+                                        <th class="h-12 px-4 text-left font-medium text-muted-foreground">Zgłaszający</th>
+                                        <th class="h-12 px-4 text-left font-medium text-muted-foreground">Powód</th>
+                                        <th class="h-12 px-4 text-left font-medium text-muted-foreground">Status</th>
+                                        <th class="h-12 px-4 text-left font-medium text-muted-foreground">Data</th>
+                                        <th class="h-12 px-4 text-left font-medium text-muted-foreground">Akcje</th>
                                     </tr>
+                                </thead>
+                                <tbody class="border-t">
+                                    @foreach (var r in Model.Reports)
+                                    {
+                                        <tr class="border-b transition-colors hover:bg-muted/50">
+                                            <td class="p-4">@r.ListingTitle</td>
+                                            <td class="p-4">@r.ReporterName</td>
+                                            <td class="p-4">@r.Reason</td>
+                                            <td class="p-4">@r.Status</td>
+                                            <td class="p-4">@r.Date.ToString("yyyy-MM-dd")</td>
+                                            <td class="p-4">
+                                                <form asp-action="DeleteReport" method="post" class="inline">
+                                                    <input type="hidden" name="id" value="@r.Id" />
+                                                    <button type="submit" class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-destructive text-destructive-foreground hover:bg-destructive/90 h-9 rounded-md px-3">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash">
+                                                            <path d="M3 6h18"/>
+                                                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                                                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                                                            <line x1="10" x2="10" y1="11" y2="17"/>
+                                                            <line x1="14" x2="14" y1="11" y2="17"/>
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>

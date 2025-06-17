@@ -5,18 +5,17 @@
 }
 <div class="neighborly-container">
     <div class="flex flex-col md:flex-row py-6 gap-6">
-        <!-- Sidebar -->
         <aside class="w-full md:w-64 shrink-0">
             <div class="space-y-4">
-                <!-- Kategorie -->
                 <div class="bg-white rounded-xl shadow border">
                     <div class="p-4">
                         <h3 class="text-lg font-semibold mb-3">Kategorie</h3>
                         <div class="space-y-1">
                             @foreach (var category in Model.Categories)
                             {
-                                <a class="inline-flex items-center gap-2 whitespace-nowrap rounded-md h-10 px-4 py-2 w-full justify-start flex items-center hover:bg-accent hover:text-accent-foreground transition-colors"
-                                   href="@Url.Action("Szczegoly", "Kategorie", new { id = category.CategoryId })">
+                                var isActive = ViewBag.SelectedCategory != null && (int)ViewBag.SelectedCategory == category.CategoryId;
+                                <a class="inline-flex items-center gap-2 whitespace-nowrap rounded-md h-10 px-4 py-2 w-full justify-start flex items-center hover:bg-accent hover:text-accent-foreground transition-colors @(isActive ? "bg-accent text-accent-foreground" : "")"
+                                   href="@Url.Action("Index", "Listings", new { search = Model.SearchQuery, type = ViewBag.SelectedType, category = category.CategoryId })">
                                     <span class="mr-2 h-4 w-4 text-neighborly-500">
                                         @Html.Raw(category.IconSvg.Replace("h-8 w-8", "h-4 w-4").Replace("text-neighborly-600", "text-neighborly-500"))
                                     </span>
@@ -26,28 +25,10 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Lokalizacja -->
-                <div class="bg-white rounded-xl shadow border">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold mb-3">Lokalizacja</h3>
-                        <div class="space-y-3">
-                            <div class="flex items-center text-sm text-muted-foreground">
-                                <i class="lucide lucide-map-pin mr-2 h-4 w-4 text-neighborly-500"></i>
-                                <span>Warszawa, Mokotów</span>
-                            </div>
-                            <hr class="border-t" />
-                            <button class="w-full px-3 py-2 border rounded-md text-sm hover:bg-accent hover:text-accent-foreground transition-colors">
-                                Zmień lokalizację
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </aside>
 
 <main class="flex-1 space-y-6">
-        <!-- Nawigacja -->
         <div class="flex flex-col md:flex-row items-center gap-4">
             <div class="flex items-center gap-1">
                 <a href="/" class="text-neighborly-600 hover:text-neighborly-700 flex items-center">
@@ -60,7 +41,6 @@
             </div>
         </div>
 
-        <!-- Nagłówek + Wyszukiwanie + Filtry -->
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
                 <h1 class="text-2xl font-bold text-gray-900">Sąsiedzka pomoc</h1>
@@ -137,21 +117,22 @@
             </div>
         </div>
 
-        <!-- Tabs -->
         <div class="w-full" dir="ltr" data-orientation="horizontal">
             <div class="h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground grid w-full grid-cols-3 mb-6" role="tablist" aria-orientation="horizontal">
-                <button class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[state=active]:bg-white data-[state=active]:text-foreground shadow-sm"
-                        type="button" role="tab" aria-selected="true">
+                @{
+                    string allClasses = "inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
+                    string activeClasses = "bg-white text-foreground shadow-sm";
+                    string inactiveClasses = "bg-muted text-muted-foreground";
+                }
+                <a class="@allClasses @(ViewBag.SelectedType == null ? activeClasses : inactiveClasses)" href="@Url.Action("Index", "Listings", new { search = Model.SearchQuery, category = ViewBag.SelectedCategory })" role="tab" aria-selected="@(ViewBag.SelectedType == null)">
                     🏠 Wszystkie
-                </button>
-                <button class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[state=inactive]:bg-muted data-[state=inactive]:text-muted-foreground"
-                        type="button" role="tab" aria-selected="false">
+                </a>
+                <a class="@allClasses @(ViewBag.SelectedType == "offer" ? activeClasses : inactiveClasses)" href="@Url.Action("Index", "Listings", new { search = Model.SearchQuery, type = "offer", category = ViewBag.SelectedCategory })" role="tab" aria-selected="@(ViewBag.SelectedType == "offer")">
                     📢 Oferty pomocy
-                </button>
-                <button class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[state=inactive]:bg-muted data-[state=inactive]:text-muted-foreground"
-                        type="button" role="tab" aria-selected="false">
+                </a>
+                <a class="@allClasses @(ViewBag.SelectedType == "request" ? activeClasses : inactiveClasses)" href="@Url.Action("Index", "Listings", new { search = Model.SearchQuery, type = "request", category = ViewBag.SelectedCategory })" role="tab" aria-selected="@(ViewBag.SelectedType == "request")">
                     🙋‍♂️ Prośby o pomoc
-                </button>
+                </a>
             </div>
 
             <!-- Treść zakładki -->

@@ -15,20 +15,22 @@ namespace Neighborly.Controllers
     {
         private readonly NeighborlyContext _context;
         private readonly IWebHostEnvironment _env;
+        private readonly IConfiguration _config;
 
-        public ListingsController(NeighborlyContext context, IWebHostEnvironment env)
+        public ListingsController(NeighborlyContext context, IWebHostEnvironment env, IConfiguration config)
         {
             _context = context;
             _env = env;
+            _config = config;
         }
-        public IActionResult Index(string search, string type)
+        public IActionResult Index(string search, string type, int? category)
         {
             var categories = _context.Categories.ToList();
-            foreach (var category in categories)
+            foreach (var c in categories)
             {
-                if (string.IsNullOrEmpty(category.IconSvg))
+               if (string.IsNullOrEmpty(c.IconSvg))
                 {
-                    category.IconSvg = Icons.GetIcon(category.Icon);
+                    c.IconSvg = Icons.GetIcon(c.Icon);
                 }
             }
 
@@ -55,7 +57,10 @@ namespace Neighborly.Controllers
                     listingsQuery = listingsQuery.Where(l => l.ListingType.Name == "Szukam pomocy");
                 }
             }
-
+            if (category.HasValue)
+            {
+                listingsQuery = listingsQuery.Where(l => l.CategoryId == category.Value);
+            }
             var listings = listingsQuery
                 .Select(l => new ListingCardViewModel
                 {
@@ -72,7 +77,9 @@ namespace Neighborly.Controllers
                     Location = new LocationViewModel
                     {
                         City = l.City.Name,
-                        District = l.District.Name
+                        District = l.District.Name,
+                        Latitude = l.Latitude,
+                        Longitude = l.Longitude
                     },
                     User = new ListingCardUserViewModel
                     {
@@ -83,8 +90,8 @@ namespace Neighborly.Controllers
                     }
                 })
                 .ToList();
-          ViewBag.SelectedType = type;
-
+            ViewBag.SelectedType = type;
+            ViewBag.SelectedCategory = category;
             var viewModel = new ListingsIndexViewModel
             {
                 Categories = categories,
@@ -143,11 +150,13 @@ namespace Neighborly.Controllers
                         Name = listing.User.FirstName + " " + listing.User.LastName,
                         Avatar = listing.User.AvatarUrl,
                         Rating = listing.User.RatingAvg
-                    }
+                    },
+                    Latitude = listing.Latitude,
+                    Longitude = listing.Longitude
                 },
                 IsFavorite = isFav
             };
-
+            ViewBag.GoogleApiKey = _config["GoogleMaps:ApiKey"];
             return View(viewModel);
         }
 
@@ -157,6 +166,7 @@ namespace Neighborly.Controllers
         {
             ViewBag.Categories = _context.Categories.OrderBy(c => c.Name).ToList();
             ViewBag.ListingTypes = _context.Listing_Types.OrderBy(t => t.Name).ToList();
+            ViewBag.GoogleApiKey = _config["GoogleMaps:ApiKey"];
             return View();
         }
 
@@ -235,11 +245,14 @@ namespace Neighborly.Controllers
                 return View(listing);
             }
 
-            var coords = GetCoordinates(listing.District.Name, listing.City.Name);
+            if (listing.Latitude == 0 && listing.Longitude == 0)
+            {
+                var coords = GetCoordinates(districtEntity.Name, cityEntity.Name);
+                listing.Latitude = coords.lat;
+                listing.Longitude = coords.lon;
+            }
             listing.CreatedAt = DateTime.UtcNow;
             listing.UpdatedAt = DateTime.UtcNow;
-            listing.Latitude = coords.lat;
-            listing.Longitude = coords.lon;
 
             _context.Listings.Add(listing);
             _context.SaveChanges();
@@ -304,7 +317,7 @@ namespace Neighborly.Controllers
 
             ViewBag.Categories = _context.Categories.OrderBy(c => c.Name).ToList();
             ViewBag.ListingTypes = _context.Listing_Types.OrderBy(t => t.Name).ToList();
-
+            ViewBag.GoogleApiKey = _config["GoogleMaps:ApiKey"];
             return View("Edit", listing);
         }
 
@@ -378,6 +391,17 @@ namespace Neighborly.Controllers
             existing.ListingTypeId = listing.ListingTypeId;
             existing.CityId = cityEntity.CityId;
             existing.DistrictId = districtEntity.DistrictId;
+            if (listing.Latitude == 0 && listing.Longitude == 0)
+            {
+                var coordsUpdate = GetCoordinates(districtEntity.Name, cityEntity.Name);
+                existing.Latitude = coordsUpdate.lat;
+                existing.Longitude = coordsUpdate.lon;
+            }
+            else
+            {
+                existing.Latitude = listing.Latitude;
+                existing.Longitude = listing.Longitude;
+            }
             existing.UpdatedAt = DateTime.UtcNow;
 
             _context.SaveChanges();
@@ -466,24 +490,101 @@ namespace Neighborly.Controllers
 
             return Json(new { isFavorite = nowFav });
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("usun-ogloszenie/{id}")]
+        public IActionResult Delete(int id)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var listing = _context.Listings
+                .FirstOrDefault(l => l.ListingId == id && l.UserId == userId.Value);
+
+            if (listing == null)
+            {
+                return RedirectToAction("MyAccount", "Account");
+            }
+
+            var images = _context.Listing_Images
+                .Where(i => i.ListingId == listing.ListingId)
+                .ToList();
+            foreach (var img in images)
+            {
+                var fullPath = Path.Combine(_env.WebRootPath, img.Url.TrimStart('/'));
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+                _context.Listing_Images.Remove(img);
+            }
+
+            var favs = _context.Favourites
+                .Where(f => f.ListingId == listing.ListingId)
+                .ToList();
+            if (favs.Count > 0)
+            {
+                _context.Favourites.RemoveRange(favs);
+            }
+
+            _context.Listings.Remove(listing);
+            _context.SaveChanges();
+
+            return RedirectToAction("MyAccount", "Account");
+        }
         public (float lat, float lon) GetCoordinates(string district, string city)
         {
             using var httpClient = new HttpClient();
-            var url = $"https://nominatim.openstreetmap.org/search?q={Uri.EscapeDataString(district + ", " + city + ", Poland")}&format=json";
-            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0");
-
+            var apiKey = _config["GoogleMaps:ApiKey"];
+            var address = $"{district}, {city}, Poland";
+            var url = $"https://maps.googleapis.com/maps/api/geocode/json?address={Uri.EscapeDataString(address)}&key={apiKey}";
             var response = httpClient.GetStringAsync(url).GetAwaiter().GetResult();
             using var json = JsonDocument.Parse(response);
-            var first = json.RootElement.EnumerateArray().FirstOrDefault();
+            var first = json.RootElement.GetProperty("results").EnumerateArray().FirstOrDefault();
 
             if (first.ValueKind != JsonValueKind.Undefined)
             {
-                float lat = float.Parse(first.GetProperty("lat").GetString(), CultureInfo.InvariantCulture);
-                float lon = float.Parse(first.GetProperty("lon").GetString(), CultureInfo.InvariantCulture);
+                var location = first.GetProperty("geometry").GetProperty("location");
+                float lat = location.GetProperty("lat").GetSingle();
+                float lon = location.GetProperty("lng").GetSingle();
                 return (lat, lon);
             }
 
-            throw new Exception("Nie znaleziono lokalizacji");
+            throw new Exception("Nie znaleziono lokalizacji w Google");
+        }
+        [HttpGet]
+        public IActionResult GetReportModal(int listingId)
+        {
+            var model = new ReportViewModel { ListingId = listingId };
+            return PartialView("_ReportModal", model);
+        }
+
+        [HttpPost]
+        public IActionResult Report(ReportViewModel model)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+                return Unauthorized();
+
+            if (!ModelState.IsValid)
+                return PartialView("_ReportModal", model);
+
+            var report = new Reports
+            {
+                ListingId = model.ListingId,
+                ReporterId = userId.Value,
+                Reason = model.Reason,
+                Description = model.Description,
+                CreatedAt = DateTime.UtcNow,
+                Status = "open"
+            };
+            _context.Reports.Add(report);
+            _context.SaveChanges();
+
+            return RedirectToAction("Details", new { id = model.ListingId });
         }
     }
 }

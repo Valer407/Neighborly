@@ -101,8 +101,10 @@
                 <div class="card-header flex flex-col gap-1 p-6">
                     <h2 class="text-lg font-semibold">Lokalizacja na mapie</h2>
                 </div>
-                <div class="card-content px-6 pb-6">
-                    <p class="text-sm text-muted-foreground">Mapa zostanie zintegrowana z Google Maps API</p>
+                <div class="card-content px-6 pb-6 space-y-4">
+                    <div id="map" class="h-64 rounded-md"></div>
+                    <input type="hidden" id="Latitude" name="Latitude" />
+                    <input type="hidden" id="Longitude" name="Longitude" />
                 </div>
             </div>
 
@@ -127,4 +129,6 @@
             </div>
         </form>
     </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleApiKey&callback=initMap" async defer></script>
+    <script src="~/js/map.js"></script>
 </main>

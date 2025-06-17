@@ -60,7 +60,9 @@ namespace Neighborly.Controllers
                     Location = new LocationViewModel
                     {
                         City = l.City.Name,
-                        District = l.District.Name
+                        District = l.District.Name,
+                        Latitude = l.Latitude,
+                        Longitude = l.Longitude
                     },
                     User = new ListingCardUserViewModel
                     {
@@ -72,19 +74,23 @@ namespace Neighborly.Controllers
                 })
                 .ToList();
 
-            var reviews = _context.User_Ratings
-                .Where(r => r.RateeId == user.UserId)
-                .Join(_context.Users, r => r.RaterId, u => u.UserId, (r, ru) => new ProfileReviewViewModel
-                {
-                    Author = new ReviewAuthorViewModel
-                    {
-                        Name = ru.FirstName + " " + ru.LastName,
-                        Avatar = ru.AvatarUrl
-                    },
-                    Rating = r.Score,
-                    Comment = r.Comment,
-                    Date = r.CreatedAt
-                })
+                       var reviews = (from r in _context.User_Ratings
+                            where r.RateeId == user.UserId
+                            join ru in _context.Users on r.RaterId equals ru.UserId
+                            join c in _context.Categories on r.CategoryId equals c.CategoryId into cat
+                            from c in cat.DefaultIfEmpty()
+                            select new ProfileReviewViewModel
+                            {
+                                Author = new ReviewAuthorViewModel
+                                {
+                                    Name = ru.FirstName + " " + ru.LastName,
+                                    Avatar = ru.AvatarUrl
+                                },
+                                Rating = r.Score,
+                                Comment = r.Comment,
+                                CategoryName = c != null ? c.Name : null,
+                                Date = r.CreatedAt
+                            })
                 .OrderByDescending(r => r.Date)
                 .ToList();
 

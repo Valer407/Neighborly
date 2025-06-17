@@ -30,6 +30,7 @@ namespace Neighborly.Models
         public ReviewAuthorViewModel Author { get; set; }
         public int Rating { get; set; }
         public string Comment { get; set; }
+        public string? CategoryName { get; set; }
         public DateTime Date { get; set; }
     }
 

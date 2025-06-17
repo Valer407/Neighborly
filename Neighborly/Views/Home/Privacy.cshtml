@@ -1,6 +1,93 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Polityka prywatności";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1>@ViewData["Title"]</h1>
+<div class="min-h-screen bg-gray-50">
+    <div class="neighborly-container py-12">
+        <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-sm p-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-8">Polityka prywatności</h1>
+            <div class="prose max-w-none text-gray-700 space-y-6">
+                <p class="text-lg">
+                    Ostatnia aktualizacja: @DateTime.Now.ToString("d", System.Globalization.CultureInfo.GetCultureInfo("pl-PL"))
+                </p>
+                <section>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">1. Informacje ogólne</h2>
+                    <p>
+                        Niniejsza Polityka prywatności określa zasady przetwarzania i ochrony danych osobowych
+                        użytkowników platformy Neighborly. Administratorem danych osobowych jest Neighborly Sp. z o.o.
+                        z siedzibą w Warszawie.
+                    </p>
+                </section>
 
-<p>Use this page to detail your site's privacy policy.</p>
+                <section>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">2. Jakie dane zbieramy</h2>
+                    <p>Zbieramy następujące kategorie danych osobowych:</p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>Dane rejestracyjne: imię, nazwisko, adres email, numer telefonu</li>
+                        <li>Dane profilowe: zdjęcie profilowe, opis, lokalizacja</li>
+                        <li>Dane dotyczące aktywności: ogłoszenia, wiadomości, oceny</li>
+                        <li>Dane techniczne: adres IP, informacje o przeglądarce, dane o aktywności na stronie</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">3. Cele przetwarzania danych</h2>
+                    <p>Przetwarzamy Twoje dane osobowe w następujących celach:</p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>Świadczenie usług platformy i zarządzanie kontem użytkownika</li>
+                        <li>Umożliwienie komunikacji między użytkownikami</li>
+                        <li>Poprawa jakości usług i personalizacja treści</li>
+                        <li>Zapewnienie bezpieczeństwa i przeciwdziałanie nadużyciom</li>
+                        <li>Marketing bezpośredni (za zgodą)</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">4. Udostępnianie danych</h2>
+                    <p>
+                        Twoje dane osobowe mogą być udostępniane innym użytkownikom w zakresie niezbędnym
+                        do korzystania z platformy (np. informacje profilowe w ogłoszeniach).
+                        Nie sprzedajemy danych osobowych podmiotom trzecim.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">5. Twoje prawa</h2>
+                    <p>Zgodnie z RODO przysługują Ci następujące prawa:</p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>Prawo dostępu do danych</li>
+                        <li>Prawo do sprostowania danych</li>
+                        <li>Prawo do usunięcia danych</li>
+                        <li>Prawo do ograniczenia przetwarzania</li>
+                        <li>Prawo do przenoszenia danych</li>
+                        <li>Prawo sprzeciwu wobec przetwarzania</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">6. Bezpieczeństwo danych</h2>
+                    <p>
+                        Stosujemy odpowiednie środki techniczne i organizacyjne w celu ochrony
+                        Twoich danych osobowych przed nieuprawnionym dostępem, utratą lub zniszczeniem.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">7. Pliki cookies</h2>
+                    <p>
+                        Nasza strona wykorzystuje pliki cookies w celu poprawy funkcjonalności
+                        i analizy ruchu. Możesz zarządzać ustawieniami cookies w swojej przeglądarce.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">8. Kontakt</h2>
+                    <p>
+                        W sprawach dotyczących ochrony danych osobowych możesz skontaktować się z nami
+                        pod adresem: <a href="mailto:privacy@neighborly.pl" class="text-neighborly-600 hover:underline">privacy@neighborly.pl</a>
+                    </p>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

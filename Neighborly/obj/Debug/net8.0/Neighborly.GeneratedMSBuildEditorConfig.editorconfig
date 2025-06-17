@@ -17,87 +17,103 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Neighborly
 build_property.RootNamespace = Neighborly
-build_property.ProjectDir = C:\Users\marci\Documents\Porjekt_Dotnet\Neighborly\Neighborly\
+build_property.ProjectDir = C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\marci\Documents\Porjekt_Dotnet\Neighborly\Neighborly
+build_property.MSBuildProjectDirectory = C:\Users\Valer407\Documents\neighbor\Neighborly\Neighborly
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/marci/Documents/Porjekt_Dotnet/Neighborly/Neighborly/Views/Account/EditProfile.cshtml]
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Account/EditProfile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxFZGl0UHJvZmlsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/marci/Documents/Porjekt_Dotnet/Neighborly/Neighborly/Views/Account/Login.cshtml]
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/marci/Documents/Porjekt_Dotnet/Neighborly/Neighborly/Views/Account/Myaccount.cshtml]
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Account/Myaccount.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxNeWFjY291bnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/marci/Documents/Porjekt_Dotnet/Neighborly/Neighborly/Views/Account/Register.cshtml]
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/marci/Documents/Porjekt_Dotnet/Neighborly/Neighborly/Views/Admin/Index.cshtml]
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/marci/Documents/Porjekt_Dotnet/Neighborly/Neighborly/Views/Admin/_AddCategoryModal.cshtml]
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Admin/_AddCategoryModal.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX0FkZENhdGVnb3J5TW9kYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/marci/Documents/Porjekt_Dotnet/Neighborly/Neighborly/Views/Home/Index.cshtml]
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Chat/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Home/Contact.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb250YWN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/marci/Documents/Porjekt_Dotnet/Neighborly/Neighborly/Views/Home/Privacy.cshtml]
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/marci/Documents/Porjekt_Dotnet/Neighborly/Neighborly/Views/Listings/Details.cshtml]
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Home/Regulamin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWd1bGFtaW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Listings/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlzdGluZ3NcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/marci/Documents/Porjekt_Dotnet/Neighborly/Neighborly/Views/Listings/Edit.cshtml]
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Listings/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlzdGluZ3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/marci/Documents/Porjekt_Dotnet/Neighborly/Neighborly/Views/Listings/Index.cshtml]
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Listings/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlzdGluZ3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/marci/Documents/Porjekt_Dotnet/Neighborly/Neighborly/Views/Listings/Newlisting.cshtml]
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Listings/Newlisting.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlzdGluZ3NcTmV3bGlzdGluZy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/marci/Documents/Porjekt_Dotnet/Neighborly/Neighborly/Views/Profile/Index.cshtml]
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Listings/_ReportModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlzdGluZ3NcX1JlcG9ydE1vZGFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Profile/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/marci/Documents/Porjekt_Dotnet/Neighborly/Neighborly/Views/Shared/Error.cshtml]
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/marci/Documents/Porjekt_Dotnet/Neighborly/Neighborly/Views/Shared/Listings_layout.cshtml]
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Shared/Listings_layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXExpc3RpbmdzX2xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/marci/Documents/Porjekt_Dotnet/Neighborly/Neighborly/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/marci/Documents/Porjekt_Dotnet/Neighborly/Neighborly/Views/_ViewImports.cshtml]
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/marci/Documents/Porjekt_Dotnet/Neighborly/Neighborly/Views/_ViewStart.cshtml]
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/marci/Documents/Porjekt_Dotnet/Neighborly/Neighborly/Views/Shared/_Layout.cshtml]
+[C:/Users/Valer407/Documents/neighbor/Neighborly/Neighborly/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-qrzo1hwip9

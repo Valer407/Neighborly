@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\Neighborly\\Neighborly.csproj": {}
+    "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\Neighborly.csproj": {}
   },
   "projects": {
-    "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\Neighborly\\Neighborly.csproj": {
+    "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\Neighborly.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\Neighborly\\Neighborly.csproj",
+        "projectUniqueName": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\Neighborly.csproj",
         "projectName": "Neighborly",
-        "projectPath": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\Neighborly\\Neighborly.csproj",
-        "packagesPath": "C:\\Users\\marci\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\Neighborly\\obj\\",
+        "projectPath": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\Neighborly.csproj",
+        "packagesPath": "C:\\Users\\Valer407\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Valer407\\Documents\\neighbor\\Neighborly\\Neighborly\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\marci\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Valer407\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -83,7 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

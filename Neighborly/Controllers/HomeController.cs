@@ -30,11 +30,25 @@ namespace Neighborly.Controllers
 
             return View(categories);
         }
+
+        [HttpGet("/polityka-prywatnosci")]  
         public IActionResult Privacy()
         {
             return View();
         }
 
+        [HttpGet("/regulamin")]
+        public IActionResult Regulamin()
+        {
+            return View();
+        }
+
+        [HttpGet("/kontakt")]
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
