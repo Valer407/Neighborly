@@ -5,7 +5,7 @@
 //
 //     Zmiany w tym pliku mogą spowodować nieprawidłowe zachowanie i zostaną utracone, jeśli
 //     kod zostanie ponownie wygenerowany.
-// </auto-generated>
+// </auto-generated>   
 //------------------------------------------------------------------------------
 
 using System;
