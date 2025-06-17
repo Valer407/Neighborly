@@ -31,7 +31,7 @@ namespace Neighborly.Controllers
             return View(categories);
         }
 
-        [HttpGet("/polityka-prywatnosci")]
+        [HttpGet("/polityka-prywatnosci")]  
         public IActionResult Privacy()
         {
             return View();
@@ -43,6 +43,12 @@ namespace Neighborly.Controllers
             return View();
         }
 
+        [HttpGet("/kontakt")]
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
