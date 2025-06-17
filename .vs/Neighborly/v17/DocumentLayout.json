@@ -1,12 +1,37 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{AC6A148D-A62F-48CF-9460-FC81C84D3EB8}|TestyJednostkowe\\TestyJednostkowe.csproj|c:\\users\\marci\\documents\\porjekt_dotnet\\neighborly\\testyjednostkowe\\chatcontrollertj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC6A148D-A62F-48CF-9460-FC81C84D3EB8}|TestyJednostkowe\\TestyJednostkowe.csproj|solutionrelative:testyjednostkowe\\chatcontrollertj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ChatControllerTJ.cs",
+              "DocumentMoniker": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\TestyJednostkowe\\ChatControllerTJ.cs",
+              "RelativeDocumentMoniker": "TestyJednostkowe\\ChatControllerTJ.cs",
+              "ToolTip": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\TestyJednostkowe\\ChatControllerTJ.cs",
+              "RelativeToolTip": "TestyJednostkowe\\ChatControllerTJ.cs",
+              "ViewState": "AQIAAO0AAAAAAAAAAAAmwC8BAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-17T21:08:49.491Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
