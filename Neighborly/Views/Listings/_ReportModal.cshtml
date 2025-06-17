@@ -1,0 +1,32 @@
+@model Neighborly.Models.ReportViewModel
+<div id="reportModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
+    <div class="relative bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+        <button type="button" onclick="closeReportModal()" class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18" />
+                <path d="M6 6l12 12" />
+            </svg>
+            <span class="sr-only">Zamknij</span>
+        </button>
+        <h2 class="text-lg font-semibold leading-none tracking-tight mb-4">Zgłoś ogłoszenie</h2>
+        <form asp-action="Report" asp-controller="Listings" method="post" class="space-y-4">
+            <input type="hidden" asp-for="ListingId" />
+            <div>
+                <label asp-for="Reason" class="text-sm font-medium leading-none">Powód</label>
+                <input asp-for="Reason" class="flex h-10 w-full rounded-md border border-gray-300 px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary" required />
+                <span asp-validation-for="Reason" class="text-sm text-red-600"></span>
+            </div>
+            <div>
+                <label asp-for="Description" class="text-sm font-medium leading-none">Opis</label>
+                <textarea asp-for="Description" rows="4" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+                <span asp-validation-for="Description" class="text-sm text-red-600"></span>
+            </div>
+            <div class="pt-2">
+                <button type="submit" class="w-full inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2">Wyślij zgłoszenie</button>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

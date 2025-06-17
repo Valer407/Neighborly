@@ -1,83 +1,109 @@
 using Microsoft.AspNetCore.Mvc;
 using Neighborly.Models;
+using Neighborly.Data;
+using Neighborly.Models.DBModels;
+using Microsoft.EntityFrameworkCore;
 namespace Neighborly.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly NeighborlyContext _context;
+
+        public AdminController(NeighborlyContext context)
+        {
+            _context = context;
+        }
+
         // Panel administratora
         public IActionResult Index()
         {
-            // TODO: Pobierz wszystkie ogłoszenia z bazy danych ok
-            /*var sampleListings = new List<AdminListingViewModel>
-            {
-                new AdminListingViewModel
-                {
-                    Id = 1,
-                    Title = "Zakupy",
-                    Author = "Jan Kowalski",
-                    Category = "Zakupy",
-                    Status = "Aktywne",
-                    Date = DateTime.Parse("2024-01-14")
-                },
-                new AdminListingViewModel
-                {
-                    Id = 2,
-                    Title = "Wyprowadzenie psa",
-                    Author = "Anna Nowak",
-                    Category = "Zwierzęta",
-                    Status = "Aktywne",
-                    Date = DateTime.Parse("2024-01-10")
-                },
-                new AdminListingViewModel
-                {
-                    Id = 3,
-                    Title = "Naprawa kranu",
-                    Author = "Piotr Wiśniewski",
-                    Category = "Naprawy",
-                    Status = "Zablokowane",
-                    Date = DateTime.Parse("2024-01-03")
-                }
-            };
-
-            // TODO: Pobierz wszystkich użytkowników z bazy danych
-            // var users = dbContext.Users.ToList();
-
-            // TODO: Pobierz wszystkie kategorie z bazy danych
-            // var categories = dbContext.Categories.ToList();
-
-            // TODO: Można przekazać wszystko do widoku np. przez ViewModel z trzema listami
-
-            return View(sampleListings);*/
-            return View(); // docelowo return View(listings);
+        var model = new AdminPanelViewModel
+        {
+                Listings = _context.Listings
+                    .Include(l => l.User)
+                    .Include(l => l.Category)
+                    .Select(l => new AdminListingItem
+                    {
+                        Id = l.ListingId,
+                        Title = l.Title,
+                        Author = l.User.FirstName + " " + l.User.LastName,
+                        Category = l.Category.Name,
+                        Status = l.Status,
+                        Date = l.CreatedAt
+                    }).ToList(),
+                Users = _context.Users
+                    .Select(u => new AdminUserItem
+                    {
+                        Id = u.UserId,
+                        Name = u.FirstName + " " + u.LastName,
+                        Email = u.Email,
+                        IsActive = u.IsActive,
+                        Joined = u.CreatedAt
+                    }).ToList(),
+                Categories = _context.Categories.ToList(),
+                Reports = _context.Reports
+                    .Select(r => new AdminReportItem
+                    {
+                        Id = r.ReportId,
+                        ListingTitle = _context.Listings.Where(l => l.ListingId == r.ListingId).Select(l => l.Title).FirstOrDefault(),
+                        ReporterName = _context.Users.Where(u => u.UserId == r.ReporterId).Select(u => u.FirstName + " " + u.LastName).FirstOrDefault(),
+                        Reason = r.Reason,
+                        Status = r.Status,
+                        Date = r.CreatedAt
+                    }).ToList()
+        };
+            return View(model); // docelowo return View(listings);
         }
 
         // Usuwanie ogłoszenia
         [HttpPost]
-        public IActionResult Delete(int id)
+        public IActionResult DeleteListing(int id)
         {
-            // TODO: Usuń ogłoszenie z bazy danych na podstawie id
+            var listing = _context.Listings.Find(id);
+            if (listing != null)
+            {
+                _context.Listings.Remove(listing);
+                _context.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
 
-        // TODO: Akcja do pobrania użytkowników (jeśli osobna strona/podstrona)
-        public IActionResult Users()
+        [HttpPost]
+        public IActionResult ToggleUser(int id)
         {
-            // TODO: Pobierz użytkowników z bazy danych
-            return View(); // docelowo return View(users);
+            var user = _context.Users.Find(id);
+            if (user != null)
+            {
+                user.IsActive = !user.IsActive;
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
-
-        // TODO: Akcja do zarządzania kategoriami
-        public IActionResult Categories()
+        [HttpPost]
+        public IActionResult DeleteReport(int id)
         {
-            // TODO: Pobierz kategorie z bazy danych
-            return View(); // docelowo return View(categories);
+            var report = _context.Reports.Find(id);
+            if (report != null)
+            {
+                _context.Reports.Remove(report);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
         public IActionResult AddCategory(CategoryViewModel model)
         {
             if (!ModelState.IsValid)
                 return PartialView("_AddCategoryModal", model);
 
-            // TODO: Zapisz kategorię do bazy danych
+            var category = new Categories
+            {
+                Name = model.Name,
+                IconSvg = model.IconSvg,
+                Icon = model.Id
+            };
+
+            _context.Categories.Add(category);
+            _context.SaveChanges();
 
             return RedirectToAction("Index");
         }

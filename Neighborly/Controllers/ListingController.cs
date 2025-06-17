@@ -87,7 +87,7 @@ namespace Neighborly.Controllers
                     }
                 })
                 .ToList();
-          ViewBag.SelectedType = type;
+            ViewBag.SelectedType = type;
 
             var viewModel = new ListingsIndexViewModel
             {
@@ -147,7 +147,7 @@ namespace Neighborly.Controllers
                         Name = listing.User.FirstName + " " + listing.User.LastName,
                         Avatar = listing.User.AvatarUrl,
                         Rating = listing.User.RatingAvg
-                },
+                    },
                     Latitude = listing.Latitude,
                     Longitude = listing.Longitude
                 },
@@ -487,6 +487,51 @@ namespace Neighborly.Controllers
 
             return Json(new { isFavorite = nowFav });
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("usun-ogloszenie/{id}")]
+        public IActionResult Delete(int id)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var listing = _context.Listings
+                .FirstOrDefault(l => l.ListingId == id && l.UserId == userId.Value);
+
+            if (listing == null)
+            {
+                return RedirectToAction("MyAccount", "Account");
+            }
+
+            var images = _context.Listing_Images
+                .Where(i => i.ListingId == listing.ListingId)
+                .ToList();
+            foreach (var img in images)
+            {
+                var fullPath = Path.Combine(_env.WebRootPath, img.Url.TrimStart('/'));
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+                _context.Listing_Images.Remove(img);
+            }
+
+            var favs = _context.Favourites
+                .Where(f => f.ListingId == listing.ListingId)
+                .ToList();
+            if (favs.Count > 0)
+            {
+                _context.Favourites.RemoveRange(favs);
+            }
+
+            _context.Listings.Remove(listing);
+            _context.SaveChanges();
+
+            return RedirectToAction("MyAccount", "Account");
+        }
         public (float lat, float lon) GetCoordinates(string district, string city)
         {
             using var httpClient = new HttpClient();
@@ -506,6 +551,37 @@ namespace Neighborly.Controllers
             }
 
             throw new Exception("Nie znaleziono lokalizacji w Google");
+        }
+        [HttpGet]
+        public IActionResult GetReportModal(int listingId)
+        {
+            var model = new ReportViewModel { ListingId = listingId };
+            return PartialView("_ReportModal", model);
+        }
+
+        [HttpPost]
+        public IActionResult Report(ReportViewModel model)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+                return Unauthorized();
+
+            if (!ModelState.IsValid)
+                return PartialView("_ReportModal", model);
+
+            var report = new Reports
+            {
+                ListingId = model.ListingId,
+                ReporterId = userId.Value,
+                Reason = model.Reason,
+                Description = model.Description,
+                CreatedAt = DateTime.UtcNow,
+                Status = "open"
+            };
+            _context.Reports.Add(report);
+            _context.SaveChanges();
+
+            return RedirectToAction("Details", new { id = model.ListingId });
         }
     }
 }
