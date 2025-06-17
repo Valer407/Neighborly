@@ -20,7 +20,7 @@ namespace TestyJednostkowe
         [Fact]
         public void MyAccount_ReturnsViewWithModel_WhenUserIsLoggedIn() //test jednostokwy dla metody MyAccount
         {
-            var context = DbContextHelper.GetInMemoryDbContext(); 
+            var context = DbContextHelper.GetInMemoryDbContext();
             var envMock = new Mock<IWebHostEnvironment>();
             var controller = new AccountController(context, envMock.Object);
             var userId = 1;
@@ -40,7 +40,7 @@ namespace TestyJednostkowe
                 ListingId = 1,
                 UserId = userId,
                 Title = "Test listing",
-                Description = "Opis testowej oferty",  
+                Description = "Opis testowej oferty",
                 CreatedAt = DateTime.UtcNow,
                 City = new Cities { Name = "Białystok" },
                 District = new Distircts { Name = "Centrum" },
@@ -49,7 +49,7 @@ namespace TestyJednostkowe
             context.SaveChanges();
 
             var httpContext = new DefaultHttpContext();
-            httpContext.Session = new DummySession(); 
+            httpContext.Session = new DummySession();
             httpContext.Session.SetInt32("UserId", userId);
             controller.ControllerContext.HttpContext = httpContext;
 

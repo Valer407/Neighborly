@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="AcciuntControllerTJ.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
   <PackageReference Include="Azure.Core" Version="1.38.0" />
   <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.3.0" />
   <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.6" />
