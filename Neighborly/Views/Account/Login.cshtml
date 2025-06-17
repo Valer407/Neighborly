@@ -13,7 +13,6 @@
 <body class="bg-gray-100">
 <div class="min-h-screen flex items-center justify-center bg-gray-50 p-4">
     <div class="w-full max-w-md">
-        <!-- Logo + tekst powitalny -->
         <div class="text-center mb-8">
             <a class="inline-flex items-center justify-center" href="/">
                 <div class="h-12 w-12 text-neighborly-600">
@@ -24,7 +23,6 @@
             <p class="mt-2 text-gray-600">Witaj z powrotem! Zaloguj się, aby kontynuować.</p>
         </div>
 
-        <!-- Karta formularza -->
         <div class="rounded-lg border bg-card text-card-foreground shadow">
             <form method="post" class="space-y-4 px-6 pt-6">
                 @if (!ViewData.ModelState.IsValid)
@@ -33,7 +31,6 @@
                         @Html.ValidationSummary(false)
                     </div>
                 }
-                <!-- Email -->
                 <div class="space-y-2">
                     <label for="email" class="text-sm font-medium leading-none">Adres email</label>
                     <input id="email" name="email" type="email" autocomplete="email" required
@@ -41,11 +38,10 @@
                            class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
                 </div>
 
-                <!-- Hasło -->
                 <div class="space-y-2">
                     <div class="flex items-center justify-between">
                         <label for="password" class="text-sm font-medium leading-none">Hasło</label>
-                        <a href="/Account/ResetPassword" class="text-sm text-neighborly-600 hover:text-neighborly-700">
+                        <a href="/kontakt" class="text-sm text-neighborly-600 hover:text-neighborly-700">
                             Zapomniałeś hasła?
                         </a>
                     </div>
@@ -54,21 +50,18 @@
                            class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
                 </div>
 
-                <!-- Checkbox zapamiętaj -->
                 <div class="flex items-center space-x-2">
                     <input id="remember" name="remember" type="checkbox"
                            class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
                     <label for="remember" class="text-sm">Zapamiętaj mnie</label>
                 </div>
 
-                <!-- Przycisk -->
                 <button type="submit"
                         class="w-full h-10 bg-neighborly-500 hover:bg-neighborly-600 text-white font-medium rounded-md transition">
                     Zaloguj się
                 </button>
             </form>
 
-            <!-- Dolny pasek -->
             <div class="px-6 py-6 text-center text-sm text-muted-foreground">
                 Nie masz konta?
                 <a href="/Account/Register" class="text-neighborly-600 hover:text-neighborly-700 font-medium">
