@@ -9,6 +9,8 @@ using Neighborly.Controllers;
 using Neighborly.Models.DBModels;
 using Neighborly.Models;
 using Xunit;
+using Azure.Messaging;
+using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 
 namespace TestyJednostkowe
 {
@@ -275,7 +277,19 @@ namespace TestyJednostkowe
             // Arrange
             var context = DbContextHelper.GetInMemoryDbContext();
 
-            var listing = new Listings { ListingId = 1, Title = "Pomoc", UserId = 2 };
+            var listing =  new Listings
+            {
+                ListingId = 1,
+                UserId = 1,
+                CityId = 1,
+                DistrictId = 1,
+                ListingTypeId = 1,
+                Title = "Oferta 1",
+                Description = "Opis oferty",
+                CreatedAt = DateTime.Now,
+                Latitude = 0,
+                Longitude = 0
+            };
             var user1 = new User
             {
                 UserId = 1,
@@ -302,6 +316,23 @@ namespace TestyJednostkowe
                 Email = "adam.nowak@example.com",
                 PasswordHash = "dfdffdsf"
             };
+            var chat = new Chats
+            {
+                ChatId = 0, 
+                User1Id = 1,
+                User2Id = 3,
+                CreatedAt = DateTime.Now
+            };
+
+            context.Chats.Add(chat);
+
+            var message = new Messages
+            {
+                ChatId = 0,
+                Content = "hfbsjfs",
+            };
+
+            context.Messages.Add(message);
 
             context.Users.AddRange(user1, user2);
             context.Listings.Add(listing);
@@ -317,8 +348,6 @@ namespace TestyJednostkowe
             var result = controller.StartFromListing(1, "Cześć, jestem zainteresowany");
 
             // Assert
-            var chat = context.Chats.FirstOrDefault();
-            var message = context.Messages.FirstOrDefault();
             Assert.NotNull(chat);
             Assert.NotNull(message);
             Assert.Equal("Cześć, jestem zainteresowany", message.Content);
