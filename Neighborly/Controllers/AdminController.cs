@@ -52,7 +52,7 @@ namespace Neighborly.Controllers
                         Date = r.CreatedAt
                     }).ToList()
         };
-            return View(model); // docelowo return View(listings);
+            return View(model);
         }
 
         // Usuwanie ogłoszenia

@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\Neighborly\\Neighborly.csproj": {}
   },
   "projects": {
@@ -12,12 +13,29 @@
         "projectPath": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\Neighborly\\Neighborly.csproj",
         "packagesPath": "C:\\Users\\marci\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\Neighborly\\obj\\",
+=======
+    "C:\\Users\\kolla\\Documents\\projekt\\Neighborly\\Neighborly\\Neighborly.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\kolla\\Documents\\projekt\\Neighborly\\Neighborly\\Neighborly.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\kolla\\Documents\\projekt\\Neighborly\\Neighborly\\Neighborly.csproj",
+        "projectName": "Neighborly",
+        "projectPath": "C:\\Users\\kolla\\Documents\\projekt\\Neighborly\\Neighborly\\Neighborly.csproj",
+        "packagesPath": "C:\\Users\\kolla\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kolla\\Documents\\projekt\\Neighborly\\Neighborly\\obj\\",
+>>>>>>> 690312584bd0012f5ee2768c7789ae4e0f9f4ea1
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
+<<<<<<< HEAD
           "C:\\Users\\marci\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+          "C:\\Users\\kolla\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 690312584bd0012f5ee2768c7789ae4e0f9f4ea1
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +44,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,7 +62,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -83,7 +103,11 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+>>>>>>> 690312584bd0012f5ee2768c7789ae4e0f9f4ea1
         }
       }
     }
