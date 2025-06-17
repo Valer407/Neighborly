@@ -1,63 +1,63 @@
 # Neighborly
 
-Neighborly to platforma społecznościowa, która pomaga sąsiadom wspierać się w codziennych obowiązkach, takich jak zakupy, opieka nad zwierzętami czy drobne naprawy. Projekt został stworzony w oparciu o ASP.NET Core MVC, Entity Framework Core oraz Tailwind CSS.
+Neighborly to platforma społecznościowa ułatwiająca sąsiadom wymianę pomocy w codziennych obowiązkach. Projekt oparty jest o ASP.NET Core i Tailwind CSS.
 
-## Funkcje
-- Konta użytkowników i profile
-- Tworzenie oraz przeglądanie ogłoszeń pomocy sąsiedzkiej
-- Wiadomości między użytkownikami
-- Oceny, ulubione i zgłaszanie naruszeń
+## Wykorzystane biblioteki
 
-## Wymagania
-- [.NET SDK 8.0](https://dotnet.microsoft.com/download)
-- [Node.js](https://nodejs.org/) w wersji 18 lub nowszej
-- Serwer SQL Server lub lokalna instancja LocalDB
+### Backend (.NET)
+- **Microsoft.EntityFrameworkCore** 9.0.6
+- **Microsoft.EntityFrameworkCore.Design** 9.0.6
+- **Microsoft.EntityFrameworkCore.SqlServer** 9.0.6
 
-## Konfiguracja projektu
-1. **Sklonuj repozytorium**
+### Testy jednostkowe
+- **Azure.Core** 1.38.0
+- **Microsoft.AspNetCore.Mvc** 2.3.0
+- **Microsoft.EntityFrameworkCore** 9.0.6
+- **Microsoft.EntityFrameworkCore.InMemory** 9.0.6
+- **Moq** 4.20.72
+- **xunit** 2.9.3
+- **xunit.runner.visualstudio** 2.5.4
+- **Microsoft.NET.Test.Sdk** 17.10.0
+
+### Frontend (Node.js)
+- **autoprefixer** 10.4.21
+- **postcss** 8.5.3
+- **postcss-cli** 11.0.1
+- **tailwindcss** 3.4.17
+- **tailwindcss-animate** 1.0.7
+
+## Instalacja i konfiguracja
+
+1. Zainstaluj **.NET SDK 8.0** oraz **Node.js 18+**.
+2. Sklonuj repozytorium:
    ```bash
    git clone <adres-repozytorium>
    cd Neighborly
    ```
-2. **Przywróć zależności**
+3. Przywróć zależności projektu:
    ```bash
    dotnet restore
    cd Neighborly
    npm install
    ```
-3. **Ustaw plik konfiguracyjny**
-   Skopiuj `appsettings.json` lub utwórz nowy na podstawie poniższego przykładu. Uaktualnij łańcuch połączenia `DefaultConnection` podając dane swojego serwera SQL.
-   ```json
-   {
-     "ConnectionStrings": {
-       "DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=NeighborlyDb;Trusted_Connection=True;"
-     },
-     "GoogleMaps": {
-       "ApiKey": ""
-     }
-   }
-   ```
-4. **Zastosuj migracje bazy danych**
+4. Skonfiguruj plik `appsettings.json` (lub `appsettings.Development.json`):
+   - ustaw łańcuch połączenia `ConnectionStrings:DefaultConnection`
+   - wprowadź klucz `GoogleMaps:ApiKey`
+5. Zastosuj migracje bazy danych:
    ```bash
    dotnet ef database update
    ```
-   (W razie potrzeby zainstaluj narzędzie EF Core CLI poleceniem `dotnet tool install --global dotnet-ef`.)
-5. **Zbuduj zasoby Tailwind CSS**
+   Jeśli narzędzie `dotnet-ef` nie jest zainstalowane:
+   ```bash
+   dotnet tool install --global dotnet-ef
+   ```
+6. Zbuduj zasoby Tailwind CSS:
    ```bash
    npm run build-css       # jednorazowa kompilacja
    npm run watch-css       # obserwowanie zmian podczas pracy
    ```
-6. **Uruchom aplikację**
+7. Uruchom aplikację:
    ```bash
    dotnet run --project Neighborly
    ```
-   Do automatycznej rekompilacji możesz użyć `dotnet watch run`.
-
-## Struktura projektu
-- `Neighborly/` – główny projekt ASP.NET Core MVC
-  - `Controllers/` – kontrolery MVC
-  - `Data/` – kontekst EF Core i migracje
-  - `Models/` – modele domenowe
-  - `Views/` – widoki Razor
-  - `wwwroot/` – pliki statyczne i skompilowane zasoby CSS/JS
-  - `package.json` oraz `tailwind.config.js` – konfiguracja narzędzi frontendowych
+   Podczas tworzenia można używać `dotnet watch run`.
