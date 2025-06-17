@@ -13,3 +13,4 @@ obj/
 appsettings.json
 appsettings.Development.json
 Program.cs
+**/obj/*
