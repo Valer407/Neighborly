@@ -23,14 +23,14 @@ namespace Neighborly.Controllers
             _env = env;
             _config = config;
         }
-        public IActionResult Index(string search, string type)
+        public IActionResult Index(string search, string type, int? category)
         {
             var categories = _context.Categories.ToList();
-            foreach (var category in categories)
+            foreach (var c in categories)
             {
-                if (string.IsNullOrEmpty(category.IconSvg))
+               if (string.IsNullOrEmpty(c.IconSvg))
                 {
-                    category.IconSvg = Icons.GetIcon(category.Icon);
+                    c.IconSvg = Icons.GetIcon(c.Icon);
                 }
             }
 
@@ -57,7 +57,10 @@ namespace Neighborly.Controllers
                     listingsQuery = listingsQuery.Where(l => l.ListingType.Name == "Szukam pomocy");
                 }
             }
-
+            if (category.HasValue)
+            {
+                listingsQuery = listingsQuery.Where(l => l.CategoryId == category.Value);
+            }
             var listings = listingsQuery
                 .Select(l => new ListingCardViewModel
                 {
@@ -88,7 +91,7 @@ namespace Neighborly.Controllers
                 })
                 .ToList();
             ViewBag.SelectedType = type;
-
+            ViewBag.SelectedCategory = category;
             var viewModel = new ListingsIndexViewModel
             {
                 Categories = categories,
