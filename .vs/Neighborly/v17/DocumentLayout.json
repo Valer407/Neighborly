@@ -1,54 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{90EDF595-6870-4A02-A0C2-D019093ACDA3}|Neighborly\\Neighborly.csproj|c:\\users\\marci\\documents\\porjekt_dotnet\\neighborly\\neighborly\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{90EDF595-6870-4A02-A0C2-D019093ACDA3}|Neighborly\\Neighborly.csproj|solutionrelative:neighborly\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AC6A148D-A62F-48CF-9460-FC81C84D3EB8}|TestyJednostkowe\\TestyJednostkowe.csproj|c:\\users\\marci\\documents\\porjekt_dotnet\\neighborly\\testyjednostkowe\\acciuntcontrollertj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AC6A148D-A62F-48CF-9460-FC81C84D3EB8}|TestyJednostkowe\\TestyJednostkowe.csproj|solutionrelative:testyjednostkowe\\acciuntcontrollertj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\Neighborly\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "Neighborly\\Controllers\\AccountController.cs",
-              "ToolTip": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\Neighborly\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "Neighborly\\Controllers\\AccountController.cs",
-              "ViewState": "AQIAACQBAAAAAAAAAAAYwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T18:39:53.137Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AcciuntControllerTJ.cs",
-              "DocumentMoniker": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\TestyJednostkowe\\AcciuntControllerTJ.cs",
-              "RelativeDocumentMoniker": "TestyJednostkowe\\AcciuntControllerTJ.cs",
-              "ToolTip": "C:\\Users\\marci\\Documents\\Porjekt_Dotnet\\Neighborly\\TestyJednostkowe\\AcciuntControllerTJ.cs",
-              "RelativeToolTip": "TestyJednostkowe\\AcciuntControllerTJ.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T18:39:25.858Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }

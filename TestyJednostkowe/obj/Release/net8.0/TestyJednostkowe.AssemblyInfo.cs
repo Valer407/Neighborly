@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TestyJednostkowe")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6e21511839eb53a615ce5d4c50071bc84c5a18e8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c4cfa8167b66985953cd5f00ac8832d9f804cb1e")]
 [assembly: System.Reflection.AssemblyProductAttribute("TestyJednostkowe")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TestyJednostkowe")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
