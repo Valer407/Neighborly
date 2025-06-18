@@ -60,4 +60,13 @@ Neighborly to platforma społecznościowa ułatwiająca sąsiadom wymianę pomoc
    ```bash
    dotnet run --project Neighborly
    ```
-   Podczas tworzenia można używać `dotnet watch run`.
+   Do automatycznej rekompilacji możesz użyć `dotnet watch run`.
+
+## Struktura projektu
+- `Neighborly/` – główny projekt ASP.NET Core MVC
+  - `Controllers/` – kontrolery MVC
+  - `Data/` – kontekst EF Core i migracje
+  - `Models/` – modele domenowe
+  - `Views/` – widoki Razor
+  - `wwwroot/` – pliki statyczne i skompilowane zasoby CSS/JS
+  - `package.json` oraz `tailwind.config.js` – konfiguracja narzędzi frontendowych

@@ -13,9 +13,13 @@ obj/
 appsettings.json
 appsettings.Development.json
 Program.cs
+<<<<<<< HEAD
 **/obj/*
 **/bin/
 **/obj/
 *.cache
 *.exe
 *.dll
+=======
+.vs/
+>>>>>>> 58db8835d62332c1bac1f690dfd9b504147cbf3b
