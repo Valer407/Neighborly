@@ -19,7 +19,7 @@ Neighborly to platforma społecznościowa ułatwiająca sąsiadom wymianę pomoc
 - **xunit.runner.visualstudio** 2.5.4
 - **Microsoft.NET.Test.Sdk** 17.10.0
 
-### Frontend (Node.js)
+### Frontend 
 - **autoprefixer** 10.4.21
 - **postcss** 8.5.3
 - **postcss-cli** 11.0.1
